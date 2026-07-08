@@ -5,7 +5,7 @@ class BOMItem(BaseModel):
     """
     Represents one row of a Bill of Materials.
     """
-    item: int = Field(
+    item: str = Field(
         ...,
         description="Item number shown in catalogue"
     )

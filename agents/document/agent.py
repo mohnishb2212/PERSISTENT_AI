@@ -13,6 +13,8 @@ class DocumentAgent:
 
             "assembly_name": "",
 
+            "pdf_document": None,
+
             "page_index": {},
             "relevant_pages": [],
 
@@ -20,8 +22,9 @@ class DocumentAgent:
             "extracted_tables": [],
 
             "bom": {},
+            "output_file": "",
 
             "status": "",
-            "error": ""
-        }
+            "error": "",
+}
         return self.graph.invoke(state)

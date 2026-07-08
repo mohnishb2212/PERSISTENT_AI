@@ -56,45 +56,6 @@ def validate_input(state: DocumentState) -> DocumentState:
     return state
 
 
-def normalize_query(state: DocumentState) -> DocumentState:
-    """
-    Convert user query into a standard assembly name.
-    """
-    query = state.get("normalized_query", state["user_query"]).lower()
-
-    catalogue_sections = [
-        "engine",
-        "transmission",
-        "clutch",
-        "steering",
-        "front axle",
-        "rear axle",
-        "suspension",
-        "brake",
-        "electrical",
-        "cooling",
-        "fuel system",
-        "body",
-        "air conditioning",
-        "dashboard",
-        "radiator",
-    ]
-
-    matches = get_close_matches(
-        query,
-        catalogue_sections,
-        n=1,
-        cutoff=0.35,
-    )
-
-    if matches:
-        state["normalized_query"] = matches[0]
-    else:
-        state["normalized_query"] = query
-
-    state["status"] = "query_normalized"
-    return state
-
 
 def load_pdf(state: DocumentState) -> DocumentState:
     """
@@ -111,59 +72,6 @@ def load_pdf(state: DocumentState) -> DocumentState:
         state["error"] = str(e)
         return state
 
-
-def check_pdf_type(state: DocumentState) -> DocumentState:
-    """
-    Check whether the PDF is searchable or scanned.
-    """
-
-    pdf = state["pdf_document"]
-
-    searchable = False
-
-    # Check first few pages
-    pages_to_check = min(10, len(pdf))
-
-    for i in range(pages_to_check):
-        page = pdf.load_page(i)
-        text = page.get_text().strip()
-
-        if len(text) > 100:
-            searchable = True
-            break
-
-    if searchable:
-        state["pdf_type"] = "searchable"
-    else:
-        state["pdf_type"] = "scanned"
-
-    state["status"] = "pdf_checked"
-    print("=" * 50)
-    print("PDF TYPE:", state["pdf_type"])
-    print("=" * 50)
-    return state
-
-
-def locate_relevant_pages(state: DocumentState) -> DocumentState:
-    """
-    Find pages relevant to the user's query.
-    """
-    pdf = state["pdf_document"]
-    query = state["user_query"].lower()
-
-    pages = []
-
-    for page_number in range(len(pdf)):
-        page = pdf.load_page(page_number)
-        text = page.get_text().lower()
-
-        if query in text:
-            pages.append(page_number + 1)
-
-    state["relevant_pages"] = pages
-    state["status"] = "pages_located"
-
-    return state
 
 
 def build_page_index(state: DocumentState) -> DocumentState:
@@ -185,130 +93,180 @@ def build_page_index(state: DocumentState) -> DocumentState:
     return state
 
 from PIL import ImageOps, ImageEnhance, Image
+import re
+from difflib import get_close_matches
 
-def ocr_pdf(state: DocumentState) -> DocumentState:
-    """
-    Perform OCR on scanned PDF pages and build page index.
-    """
+TOP_K = 5
 
-    pdf = state["pdf_document"]
-    page_index = {}
-
-    for page_number in range(len(pdf)):
-
-        page = pdf.load_page(page_number)
-
-        pix = page.get_pixmap(dpi=300)
-
-        # Create PIL image first
-        image = Image.frombytes(
-            "RGB",
-            (pix.width, pix.height),
-            pix.samples
-        )
-
-        # Preprocess
-        image = ImageOps.grayscale(image)
-        image = ImageEnhance.Contrast(image).enhance(2.5)
-        image = image.point(lambda x: 255 if x > 170 else 0)
-
-        text = pytesseract.image_to_string(
-            image,
-            config="--oem 3 --psm 6"
-        )
-
-        page_index[page_number + 1] = text.strip()
-
-    state["page_index"] = page_index
-    state["status"] = "ocr_completed"
-
-    print("OCR pages:", len(page_index))
-
-    return state
 
 def retrieve_relevant_pages(state: DocumentState) -> DocumentState:
     """
-    Rank pages according to how well they match the query.
+    Retrieve the pages most relevant to the user's query.
+
+    Strategy:
+    1. Exact phrase match
+    2. Keyword scoring
+    3. Fuzzy matching (fallback)
     """
-    query = state["user_query"].lower()
+
+    query = state["user_query"].strip().lower()
     query_words = re.findall(r"\w+", query)
 
-    scores = []
+    page_index = state["page_index"]
 
-    for page_number, text in state["page_index"].items():
+    # -------------------------------------------------
+    # Stage 1 : Exact phrase match
+    # -------------------------------------------------
+
+    exact_pages = []
+
+    for page_number, text in page_index.items():
+
         page_text = text.lower()
-        score = 0
 
-        for word in query_words:
-            score += page_text.count(word)
+        if len(page_text) < 100:
+            continue
 
-        if score > 0:
-            scores.append((page_number, score))
+        if query in page_text:
+            exact_pages.append(page_number)
 
-    scores.sort(key=lambda x: x[1], reverse=True)
+    if exact_pages:
 
-    state["relevant_pages"] = [page for page, _ in scores[:5]]
+        # Remove the smallest page number (usually the index page)
+        if len(exact_pages) > 1:
+            exact_pages.remove(min(exact_pages))
 
-    # -----------------------------
-    # Check if any relevant pages were found
-    # -----------------------------
-    if not state["relevant_pages"]:
-        state["status"] = "failed"
-        state["error"] = "No relevant pages found for the given query."
+        state["relevant_pages"] = exact_pages
+        state["status"] = "pages_retrieved"
+
+        print("Exact Match:", exact_pages)
+
         return state
 
-    state["status"] = "pages_retrieved"
-    print("Relevant pages:", state["relevant_pages"])
+    # -------------------------------------------------
+    # Stage 2 : Keyword scoring
+    # -------------------------------------------------
+
+    scored_pages = []
+
+    for page_number, text in page_index.items():
+
+        page_text = text.lower()
+
+        if len(page_text) < 100:
+            continue
+
+        score = 0
+
+        # Give a bonus if multiple keywords occur together
+        if query in page_text:
+            score += 20
+
+        for word in query_words:
+
+            occurrences = page_text.count(word)
+
+            if occurrences:
+                score += occurrences * 5
+
+        if score > 0:
+            scored_pages.append((page_number, score))
+
+    if scored_pages:
+
+        scored_pages.sort(key=lambda x: x[1], reverse=True)
+
+        state["relevant_pages"] = [
+            page for page, _ in scored_pages[:TOP_K]
+        ]
+
+        state["status"] = "pages_retrieved"
+
+        print("Keyword Match:", state["relevant_pages"])
+
+        return state
+
+    # -------------------------------------------------
+    # Stage 3 : Fuzzy Matching
+    # -------------------------------------------------
+
+    fuzzy_pages = []
+
+    for page_number, text in page_index.items():
+
+        page_text = text.lower()
+
+        if len(page_text) < 100:
+            continue
+
+        words = set(re.findall(r"\w+", page_text))
+
+        score = 0
+
+        for query_word in query_words:
+
+            match = get_close_matches(
+                query_word,
+                words,
+                n=1,
+                cutoff=0.80
+            )
+
+            if match:
+                score += 1
+
+        if score > 0:
+            fuzzy_pages.append((page_number, score))
+
+    if fuzzy_pages:
+
+        fuzzy_pages.sort(key=lambda x: x[1], reverse=True)
+
+        state["relevant_pages"] = [
+            page for page, _ in fuzzy_pages[:TOP_K]
+        ]
+
+        state["status"] = "pages_retrieved"
+
+        print("Fuzzy Match:", state["relevant_pages"])
+
+        return state
+
+    # -------------------------------------------------
+    # Nothing found
+    # -------------------------------------------------
+
+    state["status"] = "failed"
+    state["error"] = f"No pages found matching '{state['user_query']}'."
 
     return state
-
-
 ...
 import pdfplumber
 
-def extract_relevant_content(state: DocumentState) -> DocumentState:
+def extract_relevant_content(state):
 
     extracted_text = []
     extracted_tables = []
 
-    # ------------------------
-    # Searchable PDF
-    # ------------------------
-    if state["pdf_type"] == "searchable":
-
-        with pdfplumber.open(state["pdf_path"]) as pdf:
-
-            for page_number in state["relevant_pages"]:
-
-                page = pdf.pages[page_number - 1]
-
-                text = page.extract_text()
-
-                if text:
-                    extracted_text.append(text)
-
-                tables = page.extract_tables()
-
-                if tables:
-                    extracted_tables.extend(tables)
-
-    # ------------------------
-    # OCR PDF
-    # ------------------------
-    else:
+    with pdfplumber.open(state["pdf_path"]) as pdf:
 
         for page_number in state["relevant_pages"]:
 
-            extracted_text.append(
-                state["page_index"][page_number]
-            )
+            page = pdf.pages[page_number - 1]
+
+            text = page.extract_text()
+
+            if text:
+                extracted_text.append(text)
+
+            tables = page.extract_tables()
+
+            if tables:
+                extracted_tables.extend(tables)
 
     state["extracted_text"] = "\n\n".join(extracted_text)
     state["extracted_tables"] = extracted_tables
     state["status"] = "content_extracted"
-
-    print("="*60)
-    print(state["extracted_text"][:1000])
 
     return state
 
@@ -322,9 +280,12 @@ llm = get_llm()
 import re
 
 def clean_text(text: str) -> str:
-    text = text.replace("*", "")
-    text = text.replace(")", "")
+    text = re.sub(r"[|]", " ", text)
     text = re.sub(r"\s+", " ", text)
+    text = text.replace("(", "")
+    text = text.replace(")", "")
+    text = text.replace("*", "")
+    text = text.replace("**", "")
 
     replacements = {
         "ASSY": "ASSEMBLY",
@@ -362,9 +323,9 @@ Tables:
 
     response = llm.invoke(prompt)
 
-    print("=" * 80)
-    print(response.content)
-    print("=" * 80)
+    #print("=" * 80)
+    #print(response.content)
+    #print("=" * 80)
     bom = json.loads(response.content)
 
     state["bom"] = bom
@@ -377,19 +338,59 @@ def validate_bom(state: DocumentState) -> DocumentState:
     """
     Validate the generated BOM against the schema.
     """
-    validated = BOM.model_validate(state["bom"])
+
+    bom = state["bom"]
+
+    # Convert item numbers to strings
+    for part in bom.get("parts", []):
+        part["item"] = str(part.get("item", ""))
+
+    validated = BOM.model_validate(bom)
 
     state["bom"] = validated.model_dump()
     state["status"] = "completed"
 
     return state
 
-def route_pdf(state: DocumentState) -> str:
+
+from pathlib import Path
+import json
+
+def save_bom(state: DocumentState) -> DocumentState:
     """
-    Decide which extraction pipeline to use.
+    Save the validated BOM as a JSON file.
     """
 
-    if state["pdf_type"] == "searchable":
-        return "searchable"
+    # Create output folder if it doesn't exist
+    output_dir = Path("output")
+    output_dir.mkdir(exist_ok=True)
 
-    return "scanned"
+    # Get catalogue name from PDF
+    catalogue = Path(state["pdf_path"]).stem
+
+    # Clean query for filename
+    query = (
+        state["user_query"]
+        .lower()
+        .replace(" ", "_")
+        .replace("/", "_")
+    )
+
+    # Final filename
+    filepath = output_dir / f"{catalogue}_{query}.json"
+
+    # Save JSON
+    with open(filepath, "w", encoding="utf-8") as f:
+        json.dump(
+            state["bom"],
+            f,
+            indent=4,
+            ensure_ascii=False
+        )
+
+    state["output_file"] = str(filepath)
+    state["status"] = "saved"
+
+    print(f"BOM saved to: {filepath}")
+
+    return state

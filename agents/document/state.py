@@ -2,30 +2,28 @@ from typing import TypedDict, List, Dict, Any
 
 
 class DocumentState(TypedDict):
-    # -------- Input --------
+    # ---------- Input ----------
     pdf_path: str
     user_query: str
 
-    # -------- Query Processing --------
+    # ---------- Query ----------
     assembly_name: str
 
-    # -------- Retrieval --------
+    # ---------- PDF ----------
+    pdf_document: Any
+    
+    # ---------- Retrieval ----------
     page_index: Dict[int, str]
     relevant_pages: List[int]
 
-    # -------- Extraction --------
+    # ---------- Extraction ----------
     extracted_text: str
     extracted_tables: List[Dict[str, Any]]
 
-    # -------- Final Output --------
+    # ---------- Output ----------
     bom: Dict[str, Any]
+    output_file: str
 
-    # -------- Status --------
+    # ---------- Status ----------
     status: str
     error: str
-
-    normalized_query: str
-
-    pdf_document: Any
-
-    pdf_type: str
