@@ -1,53 +1,7 @@
-from agents.document.nodes import (
-    validate_input,
-    normalize_query,
-    load_pdf,
-    build_page_index,
-    retrieve_relevant_pages,
-    extract_relevant_content,
-)
+from agents.document.llm import get_llm
 
-state = {
-    "pdf_path": "CATALOGUES/MS_NEXA_CIAZ.pdf",
-    "user_query": "Steering Assembly",
+llm = get_llm()
 
-    "assembly_name": "",
-    "normalized_query": "",
+response = llm.invoke("What is LangGraph? Explain in short about 40 words")
 
-    "page_index": {},
-    "relevant_pages": [],
-
-    "extracted_text": "",
-    "extracted_tables": [],
-
-    "bom": {},
-
-    "status": "",
-    "error": ""
-}
-
-functions = [
-    validate_input,
-    normalize_query,
-    load_pdf,
-    build_page_index,
-    retrieve_relevant_pages,
-    extract_relevant_content,
-]
-
-for fn in functions:
-    print(f"\nRunning: {fn.__name__}")
-
-    state = fn(state)
-
-    print("Status:", state["status"])
-
-    if state["error"]:
-        print("Error:", state["error"])
-        break
-
-print("\nRelevant Pages:")
-print(state["relevant_pages"])
-
-print("\nExtracted Text Length:")
-print(len(state["extracted_text"]))
+print(response.content)

@@ -27,3 +27,5 @@ class DocumentState(TypedDict):
     normalized_query: str
 
     pdf_document: Any
+
+    pdf_type: str
