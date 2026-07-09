@@ -1,0 +1,91 @@
+{
+    "assembly": "INTAKE AND EXHAUST VALVE",
+    "catalogue": "661111448822",
+    "total_parts": 12,
+    "parts": [
+        {
+            "item": "1",
+            "part_number": "570305129907",
+            "description": "VALVE INLET",
+            "quantity": 8,
+            "remarks": ""
+        },
+        {
+            "item": "2",
+            "part_number": "570305129908",
+            "description": "VALVE EXHAUST",
+            "quantity": 8,
+            "remarks": ""
+        },
+        {
+            "item": "3",
+            "part_number": "570305159905",
+            "description": "VALVE GUIDE +0.05",
+            "quantity": 16,
+            "remarks": ""
+        },
+        {
+            "item": "3",
+            "part_number": "570305159906",
+            "description": "VALVE GUIDE +0.10",
+            "quantity": 16,
+            "remarks": ""
+        },
+        {
+            "item": "3",
+            "part_number": "570305159907",
+            "description": "VALVE GUIDE +0.20",
+            "quantity": 16,
+            "remarks": ""
+        },
+        {
+            "item": "4",
+            "part_number": "570305159908",
+            "description": "SEAL",
+            "quantity": 16,
+            "remarks": ""
+        },
+        {
+            "item": "5",
+            "part_number": "570305129909",
+            "description": "CUP LOWER",
+            "quantity": 16,
+            "remarks": ""
+        },
+        {
+            "item": "6",
+            "part_number": "570305129910",
+            "description": "SPRING",
+            "quantity": 16,
+            "remarks": ""
+        },
+        {
+            "item": "7",
+            "part_number": "570305129911",
+            "description": "CUP UPPER",
+            "quantity": 16,
+            "remarks": ""
+        },
+        {
+            "item": "8",
+            "part_number": "570305129906",
+            "description": "PROT.SEMI CONE VALVE",
+            "quantity": 32,
+            "remarks": ""
+        },
+        {
+            "item": "9",
+            "part_number": "570305149903",
+            "description": "ROCKER",
+            "quantity": 16,
+            "remarks": ""
+        },
+        {
+            "item": "10",
+            "part_number": "570305149904",
+            "description": "TAPPET HYD. PUSH ROD",
+            "quantity": 16,
+            "remarks": ""
+        }
+    ]
+}

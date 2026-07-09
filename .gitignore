@@ -17,5 +17,4 @@ __pycache__/
 # Logs
 logs/
 
-# Output
-output/
+document_graph.jpeg
