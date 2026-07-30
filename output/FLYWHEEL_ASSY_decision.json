@@ -1,0 +1,81 @@
+{
+    "assembly": "FLYWHEEL ASSY",
+    "catalogue": "",
+    "total_parts": 5,
+    "parts": [
+        {
+            "item": "1",
+            "part_number": "0302EC0030N",
+            "description": "FLYWHEEL ASSEMBLY",
+            "required_quantity": 1,
+            "available_quantity": 4,
+            "remaining_quantity": 3,
+            "minimum_threshold": 2,
+            "status": "AVAILABLE",
+            "procurement_required": 0,
+            "rack_location": "D-10",
+            "supplier": "Mahindra"
+        },
+        {
+            "item": "2",
+            "part_number": "9350115680",
+            "description": "RING GEAR 2.1167 MODULE.(LEFT HAND.ST",
+            "required_quantity": 1,
+            "available_quantity": 0,
+            "remaining_quantity": 0,
+            "minimum_threshold": 2,
+            "status": "OUT_OF_STOCK",
+            "procurement_required": 1,
+            "rack_location": "E-01",
+            "supplier": "Mahindra"
+        },
+        {
+            "item": "3",
+            "part_number": "0023135",
+            "description": "BOLT HEX M14 x 1.5 - 30",
+            "required_quantity": 6,
+            "available_quantity": 0,
+            "remaining_quantity": 0,
+            "minimum_threshold": 6,
+            "status": "OUT_OF_STOCK",
+            "procurement_required": 6,
+            "rack_location": "E-02",
+            "supplier": "Mahindra"
+        },
+        {
+            "item": "4",
+            "part_number": "0022817",
+            "description": "WASHER M14",
+            "required_quantity": 6,
+            "available_quantity": 15,
+            "remaining_quantity": 9,
+            "minimum_threshold": 6,
+            "status": "AVAILABLE",
+            "procurement_required": 0,
+            "rack_location": "E-03",
+            "supplier": "Mahindra"
+        },
+        {
+            "item": "5",
+            "part_number": "9420000528",
+            "description": "PIN DOWEL",
+            "required_quantity": 3,
+            "available_quantity": 4,
+            "remaining_quantity": 1,
+            "minimum_threshold": 3,
+            "status": "LOW_STOCK_AFTER_ASSEMBLY",
+            "procurement_required": 0,
+            "rack_location": "E-04",
+            "supplier": "Mahindra"
+        }
+    ],
+    "assembly_status": "ASSEMBLY NOT READY",
+    "summary": {
+        "total_parts": 5,
+        "available": 2,
+        "low_stock": 1,
+        "shortage": 0,
+        "out_of_stock": 2,
+        "total_procurement_required": 7
+    }
+}
