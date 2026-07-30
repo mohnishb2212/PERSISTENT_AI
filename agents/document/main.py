@@ -18,8 +18,8 @@ print("Workflow graph saved as document_graph_2.png")
 # Run the agent
 # -----------------------------
 result = agent.invoke(
-    pdf_path="CATALOGUES/APOLLO_TRACTORS.pdf",
-    query= "WHEEL DRIVE"
+    pdf_path="CATALOGUES/TATA_INDICA.pdf",
+    query= "intake and exhaust valve"
 )
 
 # -----------------------------
