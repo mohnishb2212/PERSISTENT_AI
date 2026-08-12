@@ -4,7 +4,7 @@ from typing import Any
 import re
 import json
 from urllib import response
-import fitz
+import fitz     # pyMuPDF
 from numpy import rint
 import pdfplumber
 from langchain_google_genai import ChatGoogleGenerativeAI

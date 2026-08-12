@@ -1,0 +1,17 @@
+{
+    "assembly_name": "COOLANT TEMP GAUGE UNIT",
+    "components": [
+        {
+            "callout": 1,
+            "predicted_category": "Connector",
+            "visual_description": "Threaded cylindrical body with hexagonal nut",
+            "confidence": 0.9
+        },
+        {
+            "callout": 2,
+            "predicted_category": "O-Ring",
+            "visual_description": "Circular ring with smooth surface",
+            "confidence": 0.8
+        }
+    ]
+}

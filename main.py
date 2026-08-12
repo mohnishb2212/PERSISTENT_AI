@@ -4,6 +4,7 @@ from agents.document import DocumentAgent
 from agents.inventory import InventoryAgent
 from agents.decision import DecisionAgent
 from agents.report import ReportAgent
+from agents.document.human_review import human_review
 
 # The above code is valid for only 4 assemblies 
 # 1) apollo tractors wheel drive
@@ -23,8 +24,31 @@ def main():
     # User Input
     # --------------------------------------------------
 
-    pdf_path = input("Enter PDF path: ").strip()
+    # Available catalogues
+    pdf_options = {
+        "1": ("Apollo Tractors", "CATALOGUES/APOLLO_TRACTORS.pdf"),
+        "2": ("Mahindra Scorpio", "CATALOGUES/MAHINDRA_SCORPIO.pdf"),
+        "3": ("Mahindra Thar", "CATALOGUES/MAHINDRA_THAR.pdf"),
+        "4": ("Tata Indica", "CATALOGUES/TATA_INDICA.pdf"),
+    }
 
+    print("\nAvailable Catalogues:")
+    for number, (name, path) in pdf_options.items():
+        print(f"{number}. {name}")
+
+    while True:
+        choice = input("\nSelect catalogue (1-4): ").strip()
+
+        if choice in pdf_options:
+            pdf_name, pdf_path = pdf_options[choice]
+            break
+
+        print("Invalid choice. Please select 1, 2, 3, or 4.")
+
+    print(f"\nSelected Catalogue: {pdf_name}")
+    print(f"PDF: {pdf_path}")
+
+    # Assembly name is still entered manually
     query = input("Enter Assembly Name: ").strip()
 
     start_time = time.time()
@@ -58,13 +82,40 @@ def main():
 
     bom = document_result["bom"]
 
+    from pathlib import Path
+
+    bom["assembly"] = query
+    bom["catalogue"] = Path(pdf_path).stem
+    bom["total_parts"] = len(bom.get("parts", []))
+
     print("✓ BOM extracted successfully.")
+
+    # --------------------------------------------------
+    # HUMAN-IN-THE-LOOP
+    # --------------------------------------------------
+
+    print_step(2, "Human BOM Review")
+
+    review_result = human_review(bom)
+
+    # If human rejects the BOM, stop the pipeline
+    if review_result["status"] == "rejected":
+
+        print("\n✗ BOM rejected by human reviewer.")
+        print("Pipeline stopped.")
+        return
+
+    # Use the human-approved / edited BOM
+    bom = review_result["bom"]
+
+    print("\n✓ BOM approved by human reviewer.")
+
 
     # --------------------------------------------------
     # Inventory Agent
     # --------------------------------------------------
 
-    print_step(2, "Running Inventory Agent")
+    print_step(3, "Running Inventory Agent")
 
     inventory_result = inventory_agent.invoke(bom)
 

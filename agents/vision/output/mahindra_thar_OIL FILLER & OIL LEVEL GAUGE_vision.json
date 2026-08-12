@@ -1,0 +1,29 @@
+{
+    "assembly_name": "Oil Filler & Oil Level Gauge",
+    "components": [
+        {
+            "callout": 1,
+            "predicted_category": "Pipe",
+            "visual_description": "Long, curved tube with a rounded end and a small hole at the top",
+            "confidence": 0.9
+        },
+        {
+            "callout": 2,
+            "predicted_category": "Bracket",
+            "visual_description": "L-shaped metal piece with a hole in the middle",
+            "confidence": 0.8
+        },
+        {
+            "callout": 3,
+            "predicted_category": "Fastener",
+            "visual_description": "Small, cylindrical object with a threaded end",
+            "confidence": 0.7
+        },
+        {
+            "callout": 4,
+            "predicted_category": "Sensor",
+            "visual_description": "Small, rectangular device with a wire attached to it",
+            "confidence": 0.6
+        }
+    ]
+}

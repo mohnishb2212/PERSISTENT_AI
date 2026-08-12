@@ -1,0 +1,53 @@
+{
+    "assembly_name": "CAMSHAFT",
+    "components": [
+        {
+            "callout": 1,
+            "predicted_category": "Shaft",
+            "visual_description": "Long cylindrical body with multiple lobes and a rounded end",
+            "confidence": 0.9
+        },
+        {
+            "callout": 2,
+            "predicted_category": "Gear",
+            "visual_description": "Circular toothed wheel with a central hole",
+            "confidence": 0.8
+        },
+        {
+            "callout": 3,
+            "predicted_category": "Housing",
+            "visual_description": "Cylindrical body with a flange and a central hole",
+            "confidence": 0.7
+        },
+        {
+            "callout": 4,
+            "predicted_category": "Bolt",
+            "visual_description": "Threaded cylindrical body with a hexagonal head",
+            "confidence": 0.6
+        },
+        {
+            "callout": 5,
+            "predicted_category": "Bolt",
+            "visual_description": "Threaded cylindrical body with a hexagonal head",
+            "confidence": 0.6
+        },
+        {
+            "callout": 6,
+            "predicted_category": "Bolt",
+            "visual_description": "Threaded cylindrical body with a hexagonal head",
+            "confidence": 0.6
+        },
+        {
+            "callout": 7,
+            "predicted_category": "Bolt",
+            "visual_description": "Threaded cylindrical body with a hexagonal head",
+            "confidence": 0.6
+        },
+        {
+            "callout": 8,
+            "predicted_category": "Bolt",
+            "visual_description": "Threaded cylindrical body with a hexagonal head",
+            "confidence": 0.6
+        }
+    ]
+}

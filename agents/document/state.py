@@ -13,11 +13,11 @@ class DocumentState(TypedDict):
     pdf_document: Any
     
     # ---------- Retrieval ----------
-    page_index: Dict[int, str]
+    page_index: Dict[int, str]        # extracted using pymupdf(just index and content)
     relevant_pages: List[int]
 
     # ---------- Extraction ----------
-    extracted_text: str
+    extracted_text: str               # extracted using pdfplumber(high level - includes tables)
     extracted_tables: List[Dict[str, Any]]
 
     # ---------- Output ----------
