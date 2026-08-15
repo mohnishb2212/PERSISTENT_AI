@@ -1,5 +1,4 @@
 from typing import List
-
 from pydantic import BaseModel, Field
 
 
@@ -10,17 +9,32 @@ class VisionComponent(BaseModel):
     )
 
     predicted_category: str = Field(
-        description="Predicted category of the detected component."
+        description="Predicted category of the component."
     )
 
     visual_description: str = Field(
-        description="Visual description of the component."
+        description="Short visual description of the component."
+    )
+
+    quantity: int = Field(
+        ge=1,
+        description="Estimated number of physical instances of this component."
+    )
+
+    quantity_confidence: float = Field(
+        ge=0.0,
+        le=1.0,
+        description="Confidence in the estimated physical quantity."
+    )
+
+    quantity_reason: str = Field(
+        description="Brief explanation for the estimated quantity."
     )
 
     confidence: float = Field(
         ge=0.0,
         le=1.0,
-        description="Confidence score between 0 and 1."
+        description="Overall confidence in the component identification."
     )
 
 

@@ -129,21 +129,24 @@ NOT
 QUANTITY
 ========================
 
-Quantity must always be an integer.
+Quantity should be extracted exactly as shown.
 
-If quantity is unreadable return
+If the catalogue contains an integer quantity:
+return that integer.
 
-0
+If the quantity cell is blank:
+return null.
 
-If the catalogue contains
+Do NOT convert a blank quantity into 0.
 
-RF
+Important:
+0 means the catalogue explicitly specifies quantity zero.
+null means the quantity field is blank or not specified.
 
-do NOT convert it into a quantity.
+If the catalogue contains RF:
+return
 
-Instead return
-
-"quantity": 0
+"quantity": null,
 "remarks": "RF"
 
 Never guess quantities.

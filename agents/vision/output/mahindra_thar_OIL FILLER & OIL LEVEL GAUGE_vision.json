@@ -1,29 +1,41 @@
 {
-    "assembly_name": "Oil Filler & Oil Level Gauge",
+    "assembly_name": "GROUP M11B25 - OIL FILLER & OIL LEVEL GAUGE",
     "components": [
         {
             "callout": 1,
-            "predicted_category": "Pipe",
-            "visual_description": "Long, curved tube with a rounded end and a small hole at the top",
-            "confidence": 0.9
+            "predicted_category": "Handle",
+            "visual_description": "Loop-shaped handle at the top end of the assembly",
+            "quantity": 1,
+            "quantity_confidence": 1.0,
+            "quantity_reason": "Only one instance of the top loop component is visible with no symmetry or repetition.",
+            "confidence": 0.95
         },
         {
             "callout": 2,
-            "predicted_category": "Bracket",
-            "visual_description": "L-shaped metal piece with a hole in the middle",
-            "confidence": 0.8
+            "predicted_category": "Tube",
+            "visual_description": "Long, curved metal tube extending downwards from the handle",
+            "quantity": 1,
+            "quantity_confidence": 1.0,
+            "quantity_reason": "Only one instance of the elongated tube is visible with no symmetry or repetition.",
+            "confidence": 0.95
         },
         {
             "callout": 3,
-            "predicted_category": "Fastener",
-            "visual_description": "Small, cylindrical object with a threaded end",
-            "confidence": 0.7
+            "predicted_category": "Mounting Nut",
+            "visual_description": "Threaded, hexagonal nut-like component at the bottom end of the tube",
+            "quantity": 1,
+            "quantity_confidence": 1.0,
+            "quantity_reason": "Only one instance of the bottom hex nut component is visible with no symmetry or repetition.",
+            "confidence": 0.95
         },
         {
             "callout": 4,
-            "predicted_category": "Sensor",
-            "visual_description": "Small, rectangular device with a wire attached to it",
-            "confidence": 0.6
+            "predicted_category": "Bolt",
+            "visual_description": "Hexagonal bolt head with a U-shaped mounting bracket",
+            "quantity": 1,
+            "quantity_confidence": 1.0,
+            "quantity_reason": "Only one instance of the small fastener is visible with no symmetry or repetition.",
+            "confidence": 0.9
         }
     ]
 }

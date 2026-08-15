@@ -1,65 +1,95 @@
 {
-    "assembly_name": "Alternator",
+    "assembly_name": "GROUP M11E01A - ALTERNATOR",
     "components": [
         {
             "callout": 1,
-            "predicted_category": "Bolt",
-            "visual_description": "Threaded cylindrical body with hexagonal nut",
-            "confidence": 0.9
+            "predicted_category": "alternator",
+            "visual_description": "large cylindrical alternator with cooling fins and a front pulley",
+            "quantity": 1,
+            "quantity_confidence": 0.95,
+            "quantity_reason": "The alternator (callout 1) is shown as a single unit with no visible repetition or symmetry indicating multiple instances.",
+            "confidence": 0.98
         },
         {
             "callout": 2,
-            "predicted_category": "Bracket",
-            "visual_description": "L-shaped metal piece with holes for bolts",
-            "confidence": 0.8
+            "predicted_category": "bracket",
+            "visual_description": "metal mounting bracket with multiple bolt holes and a rectangular cutout",
+            "quantity": 1,
+            "quantity_confidence": 0.95,
+            "quantity_reason": "The bracket (callout 2) is depicted as a single component with no repeated instances or symmetry suggesting additional copies.",
+            "confidence": 0.96
         },
         {
             "callout": 3,
-            "predicted_category": "Bolt",
-            "visual_description": "Threaded cylindrical body with hexagonal nut",
-            "confidence": 0.9
+            "predicted_category": "bolt",
+            "visual_description": "bolt with hexagonal head and threaded shaft",
+            "quantity": 1,
+            "quantity_confidence": 0.95,
+            "quantity_reason": "The bolt (callout 3) is shown as a single instance with no other identical bolts visible in the diagram.",
+            "confidence": 0.97
         },
         {
             "callout": 4,
-            "predicted_category": "Bracket",
-            "visual_description": "L-shaped metal piece with holes for bolts",
-            "confidence": 0.8
+            "predicted_category": "bracket",
+            "visual_description": "curved metal mounting bracket with cutouts and mounting holes",
+            "quantity": 1,
+            "quantity_confidence": 0.95,
+            "quantity_reason": "The curved bracket (callout 4) is a single component with no visible repetition or symmetry indicating multiple units.",
+            "confidence": 0.97
         },
         {
             "callout": 5,
-            "predicted_category": "Bolt",
-            "visual_description": "Threaded cylindrical body with hexagonal nut",
-            "confidence": 0.9
+            "predicted_category": "bolt",
+            "visual_description": "bolt with hexagonal head",
+            "quantity": 1,
+            "quantity_confidence": 0.95,
+            "quantity_reason": "The bolt (callout 5) is shown as a single instance with no other identical bolts visible in the diagram.",
+            "confidence": 0.97
         },
         {
             "callout": 6,
-            "predicted_category": "Bolt",
-            "visual_description": "Threaded cylindrical body with hexagonal nut",
-            "confidence": 0.9
+            "predicted_category": "washer",
+            "visual_description": "flat circular washer",
+            "quantity": 1,
+            "quantity_confidence": 0.95,
+            "quantity_reason": "The washer (callout 6) is depicted as a single component with no repeated instances.",
+            "confidence": 0.98
         },
         {
             "callout": 7,
-            "predicted_category": "Bolt",
-            "visual_description": "Threaded cylindrical body with hexagonal nut",
-            "confidence": 0.9
+            "predicted_category": "bolt",
+            "visual_description": "bolt with hexagonal head inserted into the alternator",
+            "quantity": 1,
+            "quantity_confidence": 0.95,
+            "quantity_reason": "The bolt (callout 7) is shown as a single unit with no visible symmetry or repetition indicating multiple instances.",
+            "confidence": 0.97
         },
         {
             "callout": 8,
-            "predicted_category": "Bolt",
-            "visual_description": "Threaded cylindrical body with hexagonal nut",
-            "confidence": 0.9
+            "predicted_category": "washer",
+            "visual_description": "small flat washer",
+            "quantity": 1,
+            "quantity_confidence": 0.95,
+            "quantity_reason": "The washer (callout 8) is a single component with no evidence of multiple identical instances.",
+            "confidence": 0.96
         },
         {
             "callout": 9,
-            "predicted_category": "Bolt",
-            "visual_description": "Threaded cylindrical body with hexagonal nut",
-            "confidence": 0.9
+            "predicted_category": "nut",
+            "visual_description": "small hexagonal nut",
+            "quantity": 1,
+            "quantity_confidence": 0.95,
+            "quantity_reason": "The nut (callout 9) is shown as a single unit with no repeated components visible.",
+            "confidence": 0.96
         },
         {
             "callout": 10,
-            "predicted_category": "Bolt",
-            "visual_description": "Threaded cylindrical body with hexagonal nut",
-            "confidence": 0.9
+            "predicted_category": "bolt",
+            "visual_description": "bolt with hexagonal head attached to the curved bracket",
+            "quantity": 1,
+            "quantity_confidence": 0.95,
+            "quantity_reason": "The bolt (callout 10) is depicted as a single component with no symmetry or repetition indicating multiple units.",
+            "confidence": 0.97
         }
     ]
 }

@@ -1,5 +1,6 @@
 from typing import List
 from pydantic import BaseModel, Field
+from typing import Optional
 
 class BOMItem(BaseModel):
     """
@@ -17,9 +18,9 @@ class BOMItem(BaseModel):
         ...,
         description="Part description"
     )
-    quantity: int = Field(
-        default=0,
-        description="Quantity required"
+    quantity: Optional[int] = Field(
+        default=None,
+        description="Quantity required; None if blank or not specified"
     )
     remarks: str = Field(
         default="",

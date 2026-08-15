@@ -3,51 +3,75 @@
     "components": [
         {
             "callout": 1,
-            "predicted_category": "Shaft",
-            "visual_description": "Long cylindrical body with multiple lobes and a rounded end",
+            "predicted_category": "Camshaft",
+            "visual_description": "A long, cylindrical metal shaft with multiple cam lobes machined along its length, resting on a surface.",
+            "quantity": 1,
+            "quantity_confidence": 1.0,
+            "quantity_reason": "The camshaft (callout 1) is a single physical instance shown in the diagram with no visible repetition or symmetry indicating multiple units.",
+            "confidence": 1.0
+        },
+        {
+            "callout": 4,
+            "predicted_category": "Shim",
+            "visual_description": "A small, flat, rectangular metal piece, likely used as a spacer or shim.",
+            "quantity": 1,
+            "quantity_confidence": 1.0,
+            "quantity_reason": "The small clip (callout 4) is a single physical instance with no visible repetition or symmetry suggesting multiple units.",
+            "confidence": 0.9
+        },
+        {
+            "callout": 3,
+            "predicted_category": "Bearing Cap",
+            "visual_description": "A flat, irregularly shaped metal plate with mounting holes, appearing to be a cover or cap for the camshaft bearings.",
+            "quantity": 1,
+            "quantity_confidence": 1.0,
+            "quantity_reason": "The gasket (callout 3) is a single physical instance shown without any visual evidence of multiple copies or repeated mounting positions.",
+            "confidence": 0.9
+        },
+        {
+            "callout": 8,
+            "predicted_category": "Bolt",
+            "visual_description": "A small threaded fastener or screw.",
+            "quantity": 1,
+            "quantity_confidence": 1.0,
+            "quantity_reason": "The small bolt (callout 8) is a single physical instance shown without evidence of multiple copies or symmetry.",
+            "confidence": 0.9
+        },
+        {
+            "callout": 7,
+            "predicted_category": "Washer",
+            "visual_description": "A thin, circular metal ring, likely a washer used with a bolt.",
+            "quantity": 1,
+            "quantity_confidence": 1.0,
+            "quantity_reason": "The bolt (callout 7) is a single physical instance with no visual repetition or symmetry requiring multiple units.",
             "confidence": 0.9
         },
         {
             "callout": 2,
             "predicted_category": "Gear",
-            "visual_description": "Circular toothed wheel with a central hole",
-            "confidence": 0.8
-        },
-        {
-            "callout": 3,
-            "predicted_category": "Housing",
-            "visual_description": "Cylindrical body with a flange and a central hole",
-            "confidence": 0.7
-        },
-        {
-            "callout": 4,
-            "predicted_category": "Bolt",
-            "visual_description": "Threaded cylindrical body with a hexagonal head",
-            "confidence": 0.6
-        },
-        {
-            "callout": 5,
-            "predicted_category": "Bolt",
-            "visual_description": "Threaded cylindrical body with a hexagonal head",
-            "confidence": 0.6
+            "visual_description": "A large, toothed wheel or sprocket, likely a timing gear attached to the end of the camshaft.",
+            "quantity": 1,
+            "quantity_confidence": 1.0,
+            "quantity_reason": "The large gear (callout 2) is a single physical instance with no indication of multiple identical components or symmetry requiring duplication.",
+            "confidence": 1.0
         },
         {
             "callout": 6,
             "predicted_category": "Bolt",
-            "visual_description": "Threaded cylindrical body with a hexagonal head",
-            "confidence": 0.6
+            "visual_description": "A threaded fastener with a hexagonal head, resembling a standard bolt.",
+            "quantity": 1,
+            "quantity_confidence": 1.0,
+            "quantity_reason": "The bolt with washer (callout 6) is a single physical instance shown without any indication of multiple identical components.",
+            "confidence": 1.0
         },
         {
-            "callout": 7,
-            "predicted_category": "Bolt",
-            "visual_description": "Threaded cylindrical body with a hexagonal head",
-            "confidence": 0.6
-        },
-        {
-            "callout": 8,
-            "predicted_category": "Bolt",
-            "visual_description": "Threaded cylindrical body with a hexagonal head",
-            "confidence": 0.6
+            "callout": 5,
+            "predicted_category": "Nut",
+            "visual_description": "A hexagonal nut, used to fasten with a bolt.",
+            "quantity": 1,
+            "quantity_confidence": 1.0,
+            "quantity_reason": "The bolt (callout 5) is a single physical instance as depicted, with no evidence of additional identical bolts at symmetric positions.",
+            "confidence": 1.0
         }
     ]
 }

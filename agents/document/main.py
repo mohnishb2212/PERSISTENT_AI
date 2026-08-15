@@ -1,6 +1,16 @@
+from pathlib import Path
+from tabulate import tabulate
+
 from agents.document import DocumentAgent
 from agents.document.human_review import human_review
-from tabulate import tabulate
+
+
+# -------------------------------------------------
+# Configuration
+# -------------------------------------------------
+
+pdf_path = "CATALOGUES/APOLLO_TRACTORS.pdf"
+query = "AUXILLIARY DRIVE (AP600) "
 
 
 # -------------------------------------------------
@@ -27,8 +37,8 @@ print("Workflow graph saved as document_graph.png")
 # -------------------------------------------------
 
 result = agent.invoke(
-    pdf_path="CATALOGUES/TATA_INDICA.pdf",
-    query="intake and exhaust valve"
+    pdf_path=pdf_path,
+    query=query
 )
 
 
@@ -45,14 +55,17 @@ if result.get("status") == "failed":
 
 document_bom = result["bom"]
 
-from pathlib import Path
 
-pdf_path = "CATALOGUES/TATA_INDICA.pdf"
-query = "intake and exhaust valve"
+# -------------------------------------------------
+# Ensure metadata is present
+# -------------------------------------------------
 
 document_bom["assembly"] = query
 document_bom["catalogue"] = Path(pdf_path).stem
-document_bom["total_parts"] = len(document_bom.get("parts", []))
+document_bom["total_parts"] = len(
+    document_bom.get("parts", [])
+)
+
 
 # -------------------------------------------------
 # HUMAN-IN-THE-LOOP
@@ -101,16 +114,26 @@ print("\n✓ BOM approved.")
 print("\nFinal approved BOM:\n")
 
 
+# -------------------------------------------------
+# Display final BOM
+# -------------------------------------------------
+
 rows = []
 
 for part in approved_bom["parts"]:
 
+    quantity = part.get("quantity")
+
+    # Display blank instead of None
+    if quantity is None:
+        quantity = ""
+
     rows.append([
-        part["item"],
-        part["part_number"],
-        part["description"],
-        part["quantity"],
-        part["remarks"]
+        part.get("item", ""),
+        part.get("part_number", ""),
+        part.get("description", ""),
+        quantity,
+        part.get("remarks", "")
     ])
 
 

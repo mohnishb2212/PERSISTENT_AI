@@ -96,7 +96,151 @@ from PIL import ImageOps, ImageEnhance, Image
 import re
 from difflib import get_close_matches
 
-TOP_K = 5
+
+
+def remove_index_page_with_llm(
+    state: DocumentState,
+    candidate_pages: list[int]
+) -> list[int]:
+    """
+    Use the LLM to identify and remove the index/contents page
+    from the retrieved candidate pages.
+
+    The LLM decides which page is actually an index page.
+    All other candidate pages are retained.
+    """
+
+    if not candidate_pages:
+        return candidate_pages
+
+    page_index = state["page_index"]
+
+    page_blocks = []
+
+    for page_number in candidate_pages:
+
+        text = page_index.get(page_number, "").strip()
+
+        # Prevent an unnecessarily large LLM prompt
+        if len(text) > 4000:
+            text = text[:4000]
+
+        page_blocks.append(
+            f"""
+PAGE {page_number}
+----------------
+{text}
+"""
+        )
+
+    pages_text = "\n".join(page_blocks)
+
+    prompt = f"""
+You are analyzing pages from a mechanical parts catalogue.
+
+The user is looking for this assembly:
+
+"{state["user_query"]}"
+
+Your task is to identify which of the candidate pages is the
+INDEX / CONTENTS page, if one exists.
+
+An INDEX / CONTENTS page usually:
+- lists multiple assembly names, sections, or components
+- contains page numbers or references to other pages
+- acts as a navigation page
+- does not contain the actual detailed BOM/parts table for the assembly
+
+An ACTUAL ASSEMBLY/BOM page usually:
+- contains the assembly name or title
+- contains an exploded-view diagram and/or parts table
+- contains part numbers, descriptions, quantities, item numbers, etc.
+- contains the actual information needed to construct the BOM
+
+IMPORTANT RULES:
+
+1. Do NOT assume that the first or smallest page number is the index.
+2. Decide based on the actual content of the page.
+3. If a page contains the actual BOM/parts information, DO NOT classify it
+   as the index just because the assembly name also appears elsewhere.
+4. There can be only one index page among these candidates.
+5. If none of the candidate pages is an index/contents page, return null.
+6. We want to REMOVE ONLY the actual index page.
+7. KEEP EVERY OTHER CANDIDATE PAGE.
+
+Candidate pages:
+
+{pages_text}
+
+Return ONLY valid JSON in exactly this format:
+
+{{
+    "index_page": null
+}}
+
+or:
+
+{{
+    "index_page": 12
+}}
+
+where 12 must be the actual page number of the INDEX / CONTENTS page.
+"""
+
+    try:
+        response = llm.invoke(prompt)
+
+        content = response.content.strip()
+
+        # Handle accidental markdown code fences
+        if content.startswith("```"):
+            content = content.replace("```json", "")
+            content = content.replace("```", "")
+            content = content.strip()
+
+        result = json.loads(content)
+
+        index_page = result.get("index_page")
+
+        if index_page is not None:
+            try:
+                index_page = int(index_page)
+            except (ValueError, TypeError):
+                index_page = None
+
+        # Remove the page only if the LLM selected
+        # a page that actually exists in the candidate list.
+        if index_page in candidate_pages:
+
+            candidate_pages = [
+                page
+                for page in candidate_pages
+                if page != index_page
+            ]
+
+            print(
+                f"LLM identified page {index_page} as the index page."
+            )
+
+        else:
+            print(
+                "LLM found no index page among candidate pages."
+            )
+
+        return candidate_pages
+
+    except Exception as e:
+
+        print(
+            f"Warning: Index-page detection failed: {e}"
+        )
+
+        # Important:
+        # If the LLM fails, keep all pages.
+        # This is safer than accidentally deleting a real BOM page.
+        return candidate_pages
+
+TOP_K = 7
 
 
 def retrieve_relevant_pages(state: DocumentState) -> DocumentState:
@@ -107,6 +251,9 @@ def retrieve_relevant_pages(state: DocumentState) -> DocumentState:
     1. Exact phrase match
     2. Keyword scoring
     3. Fuzzy matching (fallback)
+
+    After retrieval, an LLM identifies the actual
+    index/contents page and removes only that page.
     """
 
     query = state["user_query"].strip().lower()
@@ -132,9 +279,12 @@ def retrieve_relevant_pages(state: DocumentState) -> DocumentState:
 
     if exact_pages:
 
-        # Remove the smallest page number (usually the index page)
-        if len(exact_pages) > 1:
-            exact_pages.remove(min(exact_pages))
+        # Let the LLM decide which page is the index.
+        # Do NOT assume the smallest page number is the index.
+        exact_pages = remove_index_page_with_llm(
+            state,
+            exact_pages
+        )
 
         state["relevant_pages"] = exact_pages
         state["status"] = "pages_retrieved"
@@ -170,19 +320,35 @@ def retrieve_relevant_pages(state: DocumentState) -> DocumentState:
                 score += occurrences * 5
 
         if score > 0:
-            scored_pages.append((page_number, score))
+            scored_pages.append(
+                (page_number, score)
+            )
 
     if scored_pages:
 
-        scored_pages.sort(key=lambda x: x[1], reverse=True)
+        scored_pages.sort(
+            key=lambda x: x[1],
+            reverse=True
+        )
 
-        state["relevant_pages"] = [
-            page for page, _ in scored_pages[:TOP_K]
+        candidate_pages = [
+            page
+            for page, _ in scored_pages[:TOP_K]
         ]
 
+        # Let the LLM identify the index page.
+        candidate_pages = remove_index_page_with_llm(
+            state,
+            candidate_pages
+        )
+
+        state["relevant_pages"] = candidate_pages
         state["status"] = "pages_retrieved"
 
-        print("Keyword Match:", state["relevant_pages"])
+        print(
+            "Keyword Match:",
+            state["relevant_pages"]
+        )
 
         return state
 
@@ -199,7 +365,9 @@ def retrieve_relevant_pages(state: DocumentState) -> DocumentState:
         if len(page_text) < 100:
             continue
 
-        words = set(re.findall(r"\w+", page_text))
+        words = set(
+            re.findall(r"\w+", page_text)
+        )
 
         score = 0
 
@@ -216,19 +384,35 @@ def retrieve_relevant_pages(state: DocumentState) -> DocumentState:
                 score += 1
 
         if score > 0:
-            fuzzy_pages.append((page_number, score))
+            fuzzy_pages.append(
+                (page_number, score)
+            )
 
     if fuzzy_pages:
 
-        fuzzy_pages.sort(key=lambda x: x[1], reverse=True)
+        fuzzy_pages.sort(
+            key=lambda x: x[1],
+            reverse=True
+        )
 
-        state["relevant_pages"] = [
-            page for page, _ in fuzzy_pages[:TOP_K]
+        candidate_pages = [
+            page
+            for page, _ in fuzzy_pages[:TOP_K]
         ]
 
+        # Let the LLM identify the index page.
+        candidate_pages = remove_index_page_with_llm(
+            state,
+            candidate_pages
+        )
+
+        state["relevant_pages"] = candidate_pages
         state["status"] = "pages_retrieved"
 
-        print("Fuzzy Match:", state["relevant_pages"])
+        print(
+            "Fuzzy Match:",
+            state["relevant_pages"]
+        )
 
         return state
 
@@ -237,7 +421,10 @@ def retrieve_relevant_pages(state: DocumentState) -> DocumentState:
     # -------------------------------------------------
 
     state["status"] = "failed"
-    state["error"] = f"No pages found matching '{state['user_query']}'."
+    state["error"] = (
+        f"No pages found matching "
+        f"'{state['user_query']}'."
+    )
 
     return state
 ...

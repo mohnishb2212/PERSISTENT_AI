@@ -8,13 +8,19 @@ def display_bom(bom):
 
     rows = []
 
+
     for i, part in enumerate(bom.get("parts", []), start=1):
+
+        quantity = part.get("quantity")
+        if quantity is None:
+                quantity = ""
+
         rows.append([
             i,
             part.get("item", ""),
             part.get("part_number", ""),
             part.get("description", ""),
-            part.get("quantity", 0),
+            quantity,
             part.get("remarks", "")
         ])
 
@@ -89,18 +95,25 @@ def edit_part(bom):
             part["description"] = input("New description: ").strip()
 
         elif field == "4":
-            try:
-                quantity = int(input("New quantity: "))
 
-                if quantity < 0:
-                    print("Quantity cannot be negative.")
+            value = input("New quantity (blank if unspecified): ").strip()
+
+            if value == "":
+                part["quantity"] = None
+
+            else:
+                try:
+                    quantity = int(value)
+
+                    if quantity < 0:
+                        print("Quantity cannot be negative.")
+                        return
+
+                    part["quantity"] = quantity
+
+                except ValueError:
+                    print("Quantity must be an integer.")
                     return
-
-                part["quantity"] = quantity
-
-            except ValueError:
-                print("Quantity must be an integer.")
-                return
 
         elif field == "5":
             part["remarks"] = input("New remarks: ").strip()
@@ -126,16 +139,25 @@ def add_part(bom):
     part_number = input("Part number: ").strip()
     description = input("Description: ").strip()
 
-    try:
-        quantity = int(input("Quantity: "))
+    # Allow quantity to be left blank
+    quantity_input = input(
+        "Quantity (press Enter if unspecified): "
+    ).strip()
 
-        if quantity < 0:
-            print("Quantity cannot be negative.")
+    if quantity_input == "":
+        quantity = None
+
+    else:
+        try:
+            quantity = int(quantity_input)
+
+            if quantity < 0:
+                print("Quantity cannot be negative.")
+                return
+
+        except ValueError:
+            print("Quantity must be an integer.")
             return
-
-    except ValueError:
-        print("Quantity must be an integer.")
-        return
 
     remarks = input("Remarks: ").strip()
 
@@ -153,7 +175,6 @@ def add_part(bom):
     bom["total_parts"] = len(bom["parts"])
 
     print("\n✓ New part added successfully.")
-
 
 def delete_part(bom):
     """Delete a part from the BOM."""
@@ -206,7 +227,7 @@ def validate_reviewed_bom(bom):
             if not part.description.strip():
                 return False, f"Row {index}: Description cannot be empty."
 
-            if part.quantity < 0:
+            if part.quantity is not None and part.quantity < 0:
                 return False, f"Row {index}: Quantity cannot be negative."
 
         return True, ""
