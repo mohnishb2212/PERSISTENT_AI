@@ -1,10 +1,12 @@
 from pathlib import Path
+import base64
 import json
 import sqlite3
 import time
 
 import pandas as pd
 import streamlit as st
+from PIL import Image
 
 from agents.document import DocumentAgent
 from agents.inventory import InventoryAgent
@@ -48,6 +50,38 @@ UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 INVENTORY_DB = BASE_DIR / "inventory" / "inventory.db"
 
+ASSETS_DIR = BASE_DIR / "assets"
+LOGO_ICON_PATH = ASSETS_DIR / "persistent_icon.png"
+
+
+# ============================================================
+# BRAND ASSETS
+# ============================================================
+
+def _load_logo_base64():
+    """Load the Persistent icon as a base64 data-URI for inline HTML use."""
+
+    if not LOGO_ICON_PATH.exists():
+        return None
+
+    encoded = base64.b64encode(
+        LOGO_ICON_PATH.read_bytes()
+    ).decode("utf-8")
+
+    return f"data:image/png;base64,{encoded}"
+
+
+LOGO_DATA_URI = _load_logo_base64()
+
+_page_icon = "⚙️"
+
+if LOGO_ICON_PATH.exists():
+
+    try:
+        _page_icon = Image.open(LOGO_ICON_PATH)
+    except Exception:
+        _page_icon = "⚙️"
+
 
 # ============================================================
 # PAGE CONFIG
@@ -55,28 +89,346 @@ INVENTORY_DB = BASE_DIR / "inventory" / "inventory.db"
 
 st.set_page_config(
     page_title="PERSISTENT AI",
-    page_icon="⚙️",
+    page_icon=_page_icon,
     layout="wide",
 )
 
 
 # ============================================================
-# CSS
+# CSS (SUPERCHARGED FOR MODERN UI)
 # ============================================================
 
 st.markdown(
     """
     <style>
 
-    .main-title {
-        font-size: 2.2rem;
-        font-weight: 700;
-        margin-bottom: 0.1rem;
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+
+    :root {
+        --persistent-orange: #EC632B;
+        --persistent-orange-dark: #D6541F;
+        --persistent-orange-light: #FFF0EB;
+        --persistent-navy: #14213D;
+        --persistent-navy-soft: #2C3B5C;
+        --persistent-bg: #F8FAFC; 
+        --persistent-surface: #FFFFFF;
+        --persistent-border: #E2E8F0;
+        --text-main: #0F172A;
+        --text-muted: #64748B;
+        
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
     }
 
-    .subtitle {
-        color: #6b7280;
-        font-size: 1rem;
+    /* ---------------------------------------------------- */
+    /* Global Typography & Body                             */
+    /* ---------------------------------------------------- */
+    html, body, [class*="css"] {
+        font-family: 'Inter', sans-serif;
+        color: var(--text-main);
+    }
+
+    [data-testid="stAppViewContainer"] {
+        background-color: var(--persistent-bg);
+    }
+
+    [data-testid="stHeader"] {
+        background-color: rgba(248, 250, 252, 0.7);
+        backdrop-filter: blur(10px);
+    }
+
+    /* ---------------------------------------------------- */
+    /* Sidebar styling                                      */
+    /* ---------------------------------------------------- */
+    [data-testid="stSidebar"] {
+        background-color: var(--persistent-surface);
+        border-right: 1px solid var(--persistent-border);
+        box-shadow: var(--shadow-sm);
+    }
+
+    [data-testid="stSidebar"] .stSelectbox label,
+    [data-testid="stSidebar"] .stTextInput label,
+    [data-testid="stSidebar"] .stRadio label,
+    [data-testid="stSidebar"] .stFileUploader label {
+        color: var(--text-main);
+        font-weight: 600;
+        font-size: 0.85rem;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+    }
+
+    [data-testid="stSidebar"] h2 {
+        color: var(--persistent-navy);
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border-left: 4px solid var(--persistent-orange);
+        padding-left: 0.75rem;
+        margin-top: 1rem;
+        background: linear-gradient(90deg, var(--persistent-orange-light) 0%, transparent 100%);
+        padding-top: 4px;
+        padding-bottom: 4px;
+        border-radius: 0 4px 4px 0;
+    }
+
+    /* Sidebar brand header */
+    .persistent-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--persistent-border);
+    }
+
+    .persistent-brand img {
+        height: 35px;
+        width: auto;
+        filter: drop-shadow(0px 2px 4px rgba(236, 99, 43, 0.3));
+    }
+
+    .persistent-brand span {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--persistent-navy);
+        letter-spacing: -0.02em;
+    }
+
+    /* ---------------------------------------------------- */
+    /* Headings                                             */
+    /* ---------------------------------------------------- */
+    h1, h2, h3 {
+        color: var(--persistent-navy);
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+    }
+
+    .main-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--persistent-navy);
+        margin-bottom: 0.2rem;
+        letter-spacing: -0.02em;
+        text-shadow: 0px 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .main-title-underline {
+        width: 80px;
+        height: 6px;
+        background: linear-gradient(90deg, var(--persistent-orange), #FFB885);
+        border-radius: 6px;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 4px rgba(236, 99, 43, 0.3);
+    }
+
+    /* ---------------------------------------------------- */
+    /* Buttons                                              */
+    /* ---------------------------------------------------- */
+    .stButton > button {
+        border-radius: var(--radius-md);
+        font-weight: 600;
+        font-size: 0.95rem;
+        border: 1px solid var(--persistent-border);
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: var(--shadow-sm);
+        padding: 0.5rem 1rem;
+    }
+
+    .stButton > button:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .stButton > button[kind="primary"] {
+        background: linear-gradient(135deg, var(--persistent-orange) 0%, var(--persistent-orange-dark) 100%);
+        border: none;
+        color: #FFFFFF;
+        box-shadow: 0 4px 10px rgba(236, 99, 43, 0.3);
+    }
+
+    .stButton > button[kind="primary"]:hover {
+        background: linear-gradient(135deg, #F07643 0%, var(--persistent-orange) 100%);
+        box-shadow: 0 6px 15px rgba(236, 99, 43, 0.4);
+    }
+
+    .stButton > button[kind="secondary"] {
+        background-color: var(--persistent-surface);
+        color: var(--persistent-navy);
+    }
+
+    .stButton > button[kind="secondary"]:hover {
+        border-color: var(--persistent-orange);
+        color: var(--persistent-orange);
+    }
+
+    .stDownloadButton > button {
+        border-radius: var(--radius-md);
+        font-weight: 600;
+        background: linear-gradient(135deg, var(--persistent-navy) 0%, var(--persistent-navy-soft) 100%);
+        color: #FFFFFF;
+        border: none;
+        box-shadow: 0 4px 10px rgba(20, 33, 61, 0.2);
+        transition: all 0.2s ease;
+    }
+
+    .stDownloadButton > button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(20, 33, 61, 0.3);
+    }
+
+    /* ---------------------------------------------------- */
+    /* Inputs                                               */
+    /* ---------------------------------------------------- */
+    .stTextInput input,
+    .stSelectbox div[data-baseweb="select"] > div,
+    .stFileUploader section {
+        border-radius: var(--radius-sm) !important;
+        border: 1px solid var(--persistent-border);
+        background-color: var(--persistent-surface);
+        transition: all 0.2s ease;
+    }
+
+    .stTextInput input:focus,
+    .stSelectbox div[data-baseweb="select"] > div:focus-within {
+        border-color: var(--persistent-orange) !important;
+        box-shadow: 0 0 0 3px var(--persistent-orange-light) !important;
+    }
+
+    /* Radio buttons accent */
+    .stRadio input[type="radio"] {
+        accent-color: var(--persistent-orange);
+    }
+    
+    .stRadio div[role="radiogroup"] > label {
+        background: var(--persistent-surface);
+        padding: 0.5rem 1rem;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--persistent-border);
+        margin-bottom: 0.25rem;
+        transition: all 0.2s ease;
+    }
+    
+    .stRadio div[role="radiogroup"] > label:hover {
+        border-color: var(--persistent-orange);
+        background-color: var(--persistent-orange-light);
+    }
+
+    /* ---------------------------------------------------- */
+    /* Status / alert boxes                                 */
+    /* ---------------------------------------------------- */
+    [data-testid="stAlertContentSuccess"] {
+        color: #1E7A3E;
+    }
+    
+    div[data-baseweb="notification"] {
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--persistent-border);
+    }
+
+    /* ---------------------------------------------------- */
+    /* Metrics as Dashboard Cards                           */
+    /* ---------------------------------------------------- */
+    [data-testid="stMetric"] {
+        background-color: var(--persistent-surface);
+        border: 1px solid var(--persistent-border);
+        border-radius: var(--radius-md);
+        padding: 1.25rem;
+        box-shadow: var(--shadow-md);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        text-align: center;
+    }
+    
+    [data-testid="stMetric"]:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-hover);
+        border-color: var(--persistent-orange-light);
+    }
+
+    [data-testid="stMetricValue"] {
+        color: var(--persistent-orange);
+        font-family: 'Poppins', sans-serif;
+        font-weight: 800;
+        font-size: 2.2rem;
+    }
+
+    [data-testid="stMetricLabel"] {
+        color: var(--text-muted);
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    /* ---------------------------------------------------- */
+    /* Expanders                                            */
+    /* ---------------------------------------------------- */
+    details {
+        border: 1px solid var(--persistent-border) !important;
+        border-radius: var(--radius-md) !important;
+        background-color: var(--persistent-surface);
+        box-shadow: var(--shadow-sm);
+        transition: all 0.2s ease;
+        margin-bottom: 1rem;
+    }
+    
+    details:hover {
+        box-shadow: var(--shadow-md);
+    }
+
+    summary {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        color: var(--persistent-navy);
+        padding: 1rem !important;
+        background-color: var(--persistent-surface);
+        border-radius: var(--radius-md);
+    }
+
+    /* ---------------------------------------------------- */
+    /* Dataframes / tables                                  */
+    /* ---------------------------------------------------- */
+    [data-testid="stDataFrame"] {
+        border: 1px solid var(--persistent-border);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        background: var(--persistent-surface);
+    }
+
+    /* ---------------------------------------------------- */
+    /* Dividers                                             */
+    /* ---------------------------------------------------- */
+    hr {
+        border-top: 1px solid var(--persistent-border);
+        margin: 2.5rem 0;
+    }
+
+    /* ---------------------------------------------------- */
+    /* Chat elements (Diagnostic Assistant)                 */
+    /* ---------------------------------------------------- */
+    [data-testid="stChatInput"] {
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--persistent-border);
+    }
+
+    [data-testid="stChatMessage"] {
+        border-radius: var(--radius-md);
+        background-color: var(--persistent-surface);
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--persistent-border);
+        padding: 1rem;
         margin-bottom: 1rem;
     }
 
@@ -1140,18 +1492,28 @@ def select_diagnostic_assembly(assembly):
 
 with st.sidebar:
 
-    st.markdown(
-        """
-        <div style="
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        ">
-            Persistent Systems
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    if LOGO_DATA_URI:
+
+        st.markdown(
+            f"""
+            <div class="persistent-brand">
+                <img src="{LOGO_DATA_URI}" alt="Persistent logo" />
+                <span>Persistent</span>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    else:
+
+        st.markdown(
+            """
+            <div class="persistent-brand">
+                <span>Persistent</span>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
     st.header(
         "Analysis"
@@ -1282,7 +1644,8 @@ with st.sidebar:
 st.markdown(
     '<div class="main-title">'
     'SPARE PARTS MANAGEMENT SYSTEM'
-    '</div>',
+    '</div>'
+    '<div class="main-title-underline"></div>',
     unsafe_allow_html=True,
 )
 
