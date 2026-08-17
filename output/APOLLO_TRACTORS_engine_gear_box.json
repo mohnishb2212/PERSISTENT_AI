@@ -1,0 +1,203 @@
+{
+    "assembly": "ENGINE GEAR BOX ASSLY",
+    "catalogue": "Parts Manual",
+    "total_parts": 28,
+    "parts": [
+        {
+            "item": "1",
+            "part_number": "G30100AA",
+            "description": "Gear Box Complete",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "2",
+            "part_number": "G30121AA",
+            "description": "Gear Box Case",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "3",
+            "part_number": "G30390AA",
+            "description": "Center Shaft",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "4",
+            "part_number": "G30212AA",
+            "description": "Helical Gear",
+            "quantity": 3,
+            "remarks": ""
+        },
+        {
+            "item": "5",
+            "part_number": "G30215AA",
+            "description": "Helical Gear",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "6",
+            "part_number": "B10260AA",
+            "description": "Ball Bearing",
+            "quantity": 8,
+            "remarks": ""
+        },
+        {
+            "item": "7",
+            "part_number": "G30375AA",
+            "description": "Sleeve Traction Pump",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "8",
+            "part_number": "G30380AA",
+            "description": "Sleeve Feeder Pump",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "9",
+            "part_number": "G30385AA",
+            "description": "Sleeve SBS Pump",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "10",
+            "part_number": "G30370AA",
+            "description": "Traction Pump Mounting Flange",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "11",
+            "part_number": "G30365AA",
+            "description": "SBS Pump Mounting Flange",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "12",
+            "part_number": "G30360AA",
+            "description": "Feeder Pump Mounting Flange",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "13",
+            "part_number": "G30290AA",
+            "description": "Engine Mounting Plate",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "14",
+            "part_number": "G30401AA",
+            "description": "Input Coupling Half",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "1",
+            "part_number": "G30100AA",
+            "description": "Gear Box Complete",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "2",
+            "part_number": "G30121AA",
+            "description": "Gear Box Case",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "3",
+            "part_number": "G30395AA",
+            "description": "Center Shaft",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "4",
+            "part_number": "G30211AA",
+            "description": "Helical Gear",
+            "quantity": 3,
+            "remarks": ""
+        },
+        {
+            "item": "5",
+            "part_number": "G30214AA",
+            "description": "Helical Gear",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "6",
+            "part_number": "B10260AA",
+            "description": "Ball Bearing",
+            "quantity": 8,
+            "remarks": ""
+        },
+        {
+            "item": "7",
+            "part_number": "G30376AA",
+            "description": "Sleeve Traction Pump",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "8",
+            "part_number": "G30381AA",
+            "description": "Sleeve Feeder Pump",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "9",
+            "part_number": "G30387AA",
+            "description": "Sleeve SBS Pump",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "10",
+            "part_number": "G30370AA",
+            "description": "Traction Pump Mounting Flange",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "11",
+            "part_number": "G30365AA",
+            "description": "SBS Pump Mounting Flange",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "12",
+            "part_number": "G30360AA",
+            "description": "Feeder Pump Mounting Flange",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "13",
+            "part_number": "G30290AA",
+            "description": "Input Flange",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "14",
+            "part_number": "G30400AA",
+            "description": "Input Coupling Half",
+            "quantity": 1,
+            "remarks": ""
+        }
+    ]
+}

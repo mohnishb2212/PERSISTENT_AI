@@ -98,40 +98,33 @@ from difflib import get_close_matches
 
 
 
-def remove_index_page_with_llm(
+def select_assembly_pages_with_llm(
     state: DocumentState,
     candidate_pages: list[int]
 ) -> list[int]:
     """
-    Use the LLM to identify and remove the index/contents page
-    from the retrieved candidate pages.
+    Classify every candidate page and keep only pages containing the
+    actual requested assembly/BOM.
 
-    The LLM decides which page is actually an index page.
-    All other candidate pages are retained.
+    A catalogue can contain multiple index pages, so this function does not
+    try to remove a single index page. It also supports assemblies whose BOM
+    spans multiple pages.
     """
-
     if not candidate_pages:
-        return candidate_pages
+        return []
 
     page_index = state["page_index"]
-
     page_blocks = []
 
     for page_number in candidate_pages:
-
         text = page_index.get(page_number, "").strip()
-
-        # Prevent an unnecessarily large LLM prompt
-        if len(text) > 4000:
-            text = text[:4000]
-
-        page_blocks.append(
-            f"""
+        if len(text) > 6000:
+            text = text[:6000]
+        page_blocks.append(f"""
 PAGE {page_number}
 ----------------
 {text}
-"""
-        )
+""")
 
     pages_text = "\n".join(page_blocks)
 
@@ -139,106 +132,128 @@ PAGE {page_number}
 You are analyzing pages from a mechanical parts catalogue.
 
 The user is looking for this assembly:
+"{state['user_query']}"
 
-"{state["user_query"]}"
+Classify EACH candidate page into exactly one category:
 
-Your task is to identify which of the candidate pages is the
-INDEX / CONTENTS page, if one exists.
+1. ASSEMBLY
+   The page contains the actual requested assembly/BOM data. Evidence may
+   include the assembly/group title, exploded-view diagram, FIG. NO., ITEM NO.,
+   PART NO., DESCRIPTION, QUANTITY, actual part numbers, or BOM tables.
+   A continuation page of the same assembly is also ASSEMBLY.
 
-An INDEX / CONTENTS page usually:
-- lists multiple assembly names, sections, or components
-- contains page numbers or references to other pages
-- acts as a navigation page
-- does not contain the actual detailed BOM/parts table for the assembly
+2. INDEX
+   The page is an index, system index, contents, or navigation page. It may
+   list many assemblies/groups and page numbers, but does not contain the
+   detailed BOM for the requested assembly.
 
-An ACTUAL ASSEMBLY/BOM page usually:
-- contains the assembly name or title
-- contains an exploded-view diagram and/or parts table
-- contains part numbers, descriptions, quantities, item numbers, etc.
-- contains the actual information needed to construct the BOM
+3. OTHER
+   The page is neither the requested assembly BOM page nor a relevant index.
 
-IMPORTANT RULES:
-
-1. Do NOT assume that the first or smallest page number is the index.
-2. Decide based on the actual content of the page.
-3. If a page contains the actual BOM/parts information, DO NOT classify it
-   as the index just because the assembly name also appears elsewhere.
-4. There can be only one index page among these candidates.
-5. If none of the candidate pages is an index/contents page, return null.
-6. We want to REMOVE ONLY the actual index page.
-7. KEEP EVERY OTHER CANDIDATE PAGE.
+CRITICAL RULES:
+- There may be MULTIPLE index pages. Do not assume there is only one.
+- Never choose the smallest or largest page number by rule.
+- The assembly name appearing on a page is NOT sufficient to call it ASSEMBLY.
+  Index pages often contain the same assembly name.
+- A page containing the actual parts table/BOM is ASSEMBLY even if it also has
+  the assembly name in a header.
+- If the assembly spans multiple pages, classify ALL relevant pages as ASSEMBLY.
+- Return only pages genuinely useful for constructing the requested BOM.
 
 Candidate pages:
-
 {pages_text}
 
 Return ONLY valid JSON in exactly this format:
-
 {{
-    "index_page": null
+  "pages": [
+    {{"page": 8, "type": "ASSEMBLY"}},
+    {{"page": 5, "type": "INDEX"}}
+  ]
 }}
 
-or:
-
-{{
-    "index_page": 12
-}}
-
-where 12 must be the actual page number of the INDEX / CONTENTS page.
+Use only the supplied page numbers and only these types:
+ASSEMBLY, INDEX, OTHER.
 """
 
     try:
         response = llm.invoke(prompt)
-
         content = response.content.strip()
-
-        # Handle accidental markdown code fences
         if content.startswith("```"):
             content = content.replace("```json", "")
             content = content.replace("```", "")
             content = content.strip()
 
         result = json.loads(content)
+        classifications = result.get("pages", [])
 
-        index_page = result.get("index_page")
-
-        if index_page is not None:
+        assembly_pages = []
+        for item in classifications:
+            if not isinstance(item, dict):
+                continue
             try:
-                index_page = int(index_page)
+                page = int(item.get("page"))
             except (ValueError, TypeError):
-                index_page = None
+                continue
+            page_type = str(item.get("type", "")).upper().strip()
+            if page in candidate_pages and page_type == "ASSEMBLY":
+                assembly_pages.append(page)
 
-        # Remove the page only if the LLM selected
-        # a page that actually exists in the candidate list.
-        if index_page in candidate_pages:
-
-            candidate_pages = [
-                page
-                for page in candidate_pages
-                if page != index_page
-            ]
-
+        assembly_pages = sorted(set(assembly_pages))
+        if assembly_pages:
             print(
-                f"LLM identified page {index_page} as the index page."
+                f"Assembly page classification: candidates={candidate_pages}, "
+                f"assembly_pages={assembly_pages}"
             )
+            return assembly_pages
 
-        else:
-            print(
-                "LLM found no index page among candidate pages."
-            )
-
-        return candidate_pages
+        print("LLM found no ASSEMBLY page; using deterministic fallback.")
 
     except Exception as e:
+        print(f"Warning: Assembly-page classification failed: {e}")
 
-        print(
-            f"Warning: Index-page detection failed: {e}"
+    # Deterministic fallback: actual BOM pages contain strong structural
+    # markers that index pages normally do not.
+    scored_pages = []
+    for page_number in candidate_pages:
+        text = page_index.get(page_number, "").lower()
+        if not text:
+            continue
+
+        score = 0
+        for marker in (
+            "part no", "part number", "fig. no", "fig no",
+            "quantity per vehicle", "qty per vehicle", "quantity"
+        ):
+            if marker in text:
+                score += 4
+
+        for marker in (
+            "index sheet", "system index", "index -", "page no.", "page no"
+        ):
+            if marker in text:
+                score -= 5
+
+        part_number_hits = len(
+            re.findall(r"\b\d{5,}[A-Z0-9./-]*\b", text, flags=re.I)
         )
+        score += min(part_number_hits, 10)
 
-        # Important:
-        # If the LLM fails, keep all pages.
-        # This is safer than accidentally deleting a real BOM page.
-        return candidate_pages
+        if score > 0:
+            scored_pages.append((page_number, score))
+
+    scored_pages.sort(key=lambda x: x[1], reverse=True)
+    if scored_pages:
+        best_score = scored_pages[0][1]
+        fallback_pages = [
+            page for page, score in scored_pages
+            if score >= max(1, best_score - 2)
+        ]
+        print(f"Fallback assembly pages: {fallback_pages}")
+        return sorted(set(fallback_pages))
+
+    print("Fallback could not classify pages; keeping candidate pages.")
+    return sorted(set(candidate_pages))
+
 
 TOP_K = 7
 
@@ -252,8 +267,8 @@ def retrieve_relevant_pages(state: DocumentState) -> DocumentState:
     2. Keyword scoring
     3. Fuzzy matching (fallback)
 
-    After retrieval, an LLM identifies the actual
-    index/contents page and removes only that page.
+    After retrieval, an LLM classifies every candidate and keeps only
+    pages containing the actual requested assembly/BOM.
     """
 
     query = state["user_query"].strip().lower()
@@ -281,7 +296,7 @@ def retrieve_relevant_pages(state: DocumentState) -> DocumentState:
 
         # Let the LLM decide which page is the index.
         # Do NOT assume the smallest page number is the index.
-        exact_pages = remove_index_page_with_llm(
+        exact_pages = select_assembly_pages_with_llm(
             state,
             exact_pages
         )
@@ -337,7 +352,7 @@ def retrieve_relevant_pages(state: DocumentState) -> DocumentState:
         ]
 
         # Let the LLM identify the index page.
-        candidate_pages = remove_index_page_with_llm(
+        candidate_pages = select_assembly_pages_with_llm(
             state,
             candidate_pages
         )
@@ -401,7 +416,7 @@ def retrieve_relevant_pages(state: DocumentState) -> DocumentState:
         ]
 
         # Let the LLM identify the index page.
-        candidate_pages = remove_index_page_with_llm(
+        candidate_pages = select_assembly_pages_with_llm(
             state,
             candidate_pages
         )

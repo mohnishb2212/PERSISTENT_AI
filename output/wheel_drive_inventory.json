@@ -1,0 +1,271 @@
+{
+    "assembly": "wheel drive",
+    "catalogue": "Apollo Tractors",
+    "total_parts": 24,
+    "parts": [
+        {
+            "item": "1",
+            "part_number": "M10130AA",
+            "description": "Wheel Hub Rear-Big Double Tire",
+            "required_quantity": 4,
+            "available_quantity": 1,
+            "minimum_threshold": 4,
+            "rack_location": "A-01",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "2",
+            "part_number": "A55150AA",
+            "description": "Tyre",
+            "required_quantity": 4,
+            "available_quantity": 0,
+            "minimum_threshold": 4,
+            "rack_location": "A-02",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "3",
+            "part_number": "A55550AA",
+            "description": "Wheel Plate",
+            "required_quantity": 4,
+            "available_quantity": 18,
+            "minimum_threshold": 4,
+            "rack_location": "A-03",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "4",
+            "part_number": "A55575AA",
+            "description": "Wheel Plate Lock Ring Set",
+            "required_quantity": 4,
+            "available_quantity": 5,
+            "minimum_threshold": 4,
+            "rack_location": "A-04",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "5",
+            "part_number": "B10320AA",
+            "description": "Taper Roller Bearing",
+            "required_quantity": 4,
+            "available_quantity": 1,
+            "minimum_threshold": 4,
+            "rack_location": "A-05",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "6",
+            "part_number": "B10300AA",
+            "description": "Taper Roller Bearing",
+            "required_quantity": 4,
+            "available_quantity": 0,
+            "minimum_threshold": 4,
+            "rack_location": "A-06",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "7",
+            "part_number": "B30490AA",
+            "description": "Oil Seal",
+            "required_quantity": 4,
+            "available_quantity": 14,
+            "minimum_threshold": 4,
+            "rack_location": "A-07",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "8",
+            "part_number": "M10150AA",
+            "description": "Rear Wheel Bolt",
+            "required_quantity": 40,
+            "available_quantity": 43,
+            "minimum_threshold": 10,
+            "rack_location": "A-08",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "9",
+            "part_number": "D20500AA",
+            "description": "Chain Sprocket",
+            "required_quantity": 4,
+            "available_quantity": 1,
+            "minimum_threshold": 4,
+            "rack_location": "A-09",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "10",
+            "part_number": "M10120AA",
+            "description": "Sprocket Hub Drum",
+            "required_quantity": 4,
+            "available_quantity": 0,
+            "minimum_threshold": 4,
+            "rack_location": "A-10",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "11",
+            "part_number": "N12055AA",
+            "description": "Hex Bolt - M12 x 55",
+            "required_quantity": 40,
+            "available_quantity": 58,
+            "minimum_threshold": 10,
+            "rack_location": "B-01",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "12",
+            "part_number": "A75415AA",
+            "description": "Fly Wheel Lock Patti",
+            "required_quantity": 24,
+            "available_quantity": 25,
+            "minimum_threshold": 10,
+            "rack_location": "B-02",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "13",
+            "part_number": "D10160AA",
+            "description": "Chain",
+            "required_quantity": 4,
+            "available_quantity": 2,
+            "minimum_threshold": 4,
+            "rack_location": "B-03",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "14",
+            "part_number": "A75805AA",
+            "description": "Rear Axle Check Nut",
+            "required_quantity": 4,
+            "available_quantity": 0,
+            "minimum_threshold": 4,
+            "rack_location": "B-04",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "15",
+            "part_number": "A75570AA",
+            "description": "Rear Axle Check Lock Bolt M8",
+            "required_quantity": 4,
+            "available_quantity": 20,
+            "minimum_threshold": 4,
+            "rack_location": "B-05",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "16",
+            "part_number": "N55150AA",
+            "description": "M8 Hex Nut",
+            "required_quantity": 4,
+            "available_quantity": 5,
+            "minimum_threshold": 4,
+            "rack_location": "B-06",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "17",
+            "part_number": "M10145AA",
+            "description": "Cover Double Axle, Rear Hub",
+            "required_quantity": 4,
+            "available_quantity": 0,
+            "minimum_threshold": 4,
+            "rack_location": "B-07",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "18",
+            "part_number": "N08030AA",
+            "description": "Hex Bolt M8 X 30 mm",
+            "required_quantity": 16,
+            "available_quantity": 0,
+            "minimum_threshold": 10,
+            "rack_location": "B-08",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "19",
+            "part_number": "N55230AA",
+            "description": "Spring Washer 8 mm",
+            "required_quantity": 16,
+            "available_quantity": 34,
+            "minimum_threshold": 10,
+            "rack_location": "B-09",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "20",
+            "part_number": "J30100AA",
+            "description": "Grease Nipple Straight",
+            "required_quantity": 4,
+            "available_quantity": 4,
+            "minimum_threshold": 4,
+            "rack_location": "B-10",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "21",
+            "part_number": "M10160AA",
+            "description": "Nut For Stud Outer",
+            "required_quantity": 40,
+            "available_quantity": 28,
+            "minimum_threshold": 10,
+            "rack_location": "C-01",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "22",
+            "part_number": "A75840AA",
+            "description": "Taper Washer For Hub Bolt",
+            "required_quantity": 40,
+            "available_quantity": 0,
+            "minimum_threshold": 10,
+            "rack_location": "C-02",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "23",
+            "part_number": "N12055AA",
+            "description": "Hex Bolt M12 X 55",
+            "required_quantity": 48,
+            "available_quantity": 58,
+            "minimum_threshold": 10,
+            "rack_location": "B-01",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "24",
+            "part_number": "N55235AA",
+            "description": "Spring Washer 12 mm",
+            "required_quantity": 48,
+            "available_quantity": 57,
+            "minimum_threshold": 10,
+            "rack_location": "C-03",
+            "supplier": "Apollo",
+            "remarks": ""
+        }
+    ]
+}

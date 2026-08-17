@@ -1,0 +1,175 @@
+{
+    "assembly": "WHEEL DRIVE",
+    "catalogue": "Parts Manual",
+    "total_parts": 24,
+    "parts": [
+        {
+            "item": "1",
+            "part_number": "M10130AA",
+            "description": "Wheel Hub Rear-Big Double Tire",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "2",
+            "part_number": "A55150AA",
+            "description": "Tyre",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "3",
+            "part_number": "A55550AA",
+            "description": "Wheel Plate",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "4",
+            "part_number": "A55575AA",
+            "description": "Wheel Plate Lock Ring Set",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "5",
+            "part_number": "B10320AA",
+            "description": "Taper Roller Bearing",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "6",
+            "part_number": "B10300AA",
+            "description": "Taper Roller Bearing",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "7",
+            "part_number": "B30490AA",
+            "description": "Oil Seal",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "8",
+            "part_number": "M10150AA",
+            "description": "Rear Wheel Bolt",
+            "quantity": 40,
+            "remarks": ""
+        },
+        {
+            "item": "9",
+            "part_number": "D20500AA",
+            "description": "Chain Sprocket",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "10",
+            "part_number": "M10120AA",
+            "description": "Sprocket Hub Drum",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "11",
+            "part_number": "N12055AA",
+            "description": "Hex Bolt - M12 x 55",
+            "quantity": 40,
+            "remarks": ""
+        },
+        {
+            "item": "12",
+            "part_number": "A75415AA",
+            "description": "Fly Wheel Lock Patti",
+            "quantity": 24,
+            "remarks": ""
+        },
+        {
+            "item": "13",
+            "part_number": "D10160AA",
+            "description": "Chain",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "14",
+            "part_number": "A75805AA",
+            "description": "Rear Axle Check Nut",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "15",
+            "part_number": "A75570AA",
+            "description": "Rear Axle Check Lock Bolt M8",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "16",
+            "part_number": "N55150AA",
+            "description": "M8 Hex Nut",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "17",
+            "part_number": "M10145AA",
+            "description": "Cover Double Axle, Rear Hub",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "18",
+            "part_number": "N08030AA",
+            "description": "Hex Bolt M8 X 30 mm",
+            "quantity": 16,
+            "remarks": ""
+        },
+        {
+            "item": "19",
+            "part_number": "N55230AA",
+            "description": "Spring Washer 8 mm",
+            "quantity": 16,
+            "remarks": ""
+        },
+        {
+            "item": "20",
+            "part_number": "J30100AA",
+            "description": "Grease Nipple Straight",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "21",
+            "part_number": "M10160AA",
+            "description": "Nut For Stud Outer",
+            "quantity": 40,
+            "remarks": ""
+        },
+        {
+            "item": "22",
+            "part_number": "A75840AA",
+            "description": "Taper Washer For Hub Bolt",
+            "quantity": 40,
+            "remarks": ""
+        },
+        {
+            "item": "23",
+            "part_number": "N12055AA",
+            "description": "Hex Bolt M12 X 55",
+            "quantity": 48,
+            "remarks": ""
+        },
+        {
+            "item": "24",
+            "part_number": "N55235AA",
+            "description": "Spring Washer 12 mm",
+            "quantity": 48,
+            "remarks": ""
+        }
+    ]
+}

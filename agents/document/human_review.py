@@ -221,8 +221,6 @@ def validate_reviewed_bom(bom):
         # Additional human-review checks
         for index, part in enumerate(validated.parts, start=1):
 
-            if not part.part_number.strip():
-                return False, f"Row {index}: Part number cannot be empty."
 
             if not part.description.strip():
                 return False, f"Row {index}: Description cannot be empty."

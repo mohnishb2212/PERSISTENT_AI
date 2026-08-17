@@ -1,7 +1,7 @@
 {
     "assembly": "intake and exhaust valve",
-    "catalogue": "TATA_INDICA",
-    "total_parts": 13,
+    "catalogue": "Tata Indica",
+    "total_parts": 12,
     "parts": [
         {
             "item": "1",
@@ -72,12 +72,12 @@
             "item": "4",
             "part_number": "570305159908",
             "description": "SEAL",
-            "required_quantity": 16,
+            "required_quantity": 21,
             "available_quantity": 0,
             "remaining_quantity": 0,
             "minimum_threshold": 10,
             "status": "OUT_OF_STOCK",
-            "procurement_required": 16,
+            "procurement_required": 21,
             "rack_location": "E-10",
             "supplier": "Tata"
         },
@@ -124,12 +124,12 @@
             "item": "8",
             "part_number": "570305129906",
             "description": "PROT.SEMI CONE VALVE",
-            "required_quantity": 32,
+            "required_quantity": 27,
             "available_quantity": 0,
             "remaining_quantity": 0,
             "minimum_threshold": 10,
             "status": "OUT_OF_STOCK",
-            "procurement_required": 32,
+            "procurement_required": 27,
             "rack_location": "F-04",
             "supplier": "Tata"
         },
@@ -158,25 +158,12 @@
             "procurement_required": 0,
             "rack_location": "F-06",
             "supplier": "Tata"
-        },
-        {
-            "item": "17",
-            "part_number": "N12055AA",
-            "description": "NEW ADDITION",
-            "required_quantity": 7,
-            "available_quantity": 58,
-            "remaining_quantity": 51,
-            "minimum_threshold": 10,
-            "status": "AVAILABLE",
-            "procurement_required": 0,
-            "rack_location": "B-01",
-            "supplier": "Apollo"
         }
     ],
     "assembly_status": "ASSEMBLY NOT READY",
     "summary": {
-        "total_parts": 13,
-        "available": 2,
+        "total_parts": 12,
+        "available": 1,
         "low_stock": 5,
         "shortage": 3,
         "out_of_stock": 3,

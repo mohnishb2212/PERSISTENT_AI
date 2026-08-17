@@ -9,8 +9,8 @@ from agents.document.human_review import human_review
 # Configuration
 # -------------------------------------------------
 
-pdf_path = "CATALOGUES/APOLLO_TRACTORS.pdf"
-query = "AUXILLIARY DRIVE (AP600) "
+pdf_path = "CATALOGUES/TATA_INDICA.pdf"
+query = "FUEL INJECTION SYSTEM"
 
 
 # -------------------------------------------------
