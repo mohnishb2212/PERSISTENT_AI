@@ -1,19 +1,19 @@
 {
     "assembly": "GROUP M11B16 - FLYWHEEL",
-    "catalogue": "GROUP M11B16 - FLYWHEEL",
+    "catalogue": "GROUP M11B16 - FLYWHEEL GROUP M11B19 - CAMSHAFT QUANTITY PER VEHICLE QUANTITY PER VEHICLE FIG. NO. PART NO. DESCRIPTION FIG. NO. PART NO. DESCRIPTION ALL TCE1 TCE3 TCE4 ALL TCE1 TCE3 TCE4 1 0302EC0030N FLYWHEEL ASSEMBLY 1 1 0310AC0020N CAMSHAFT TC CD 1 2 9350115680 RING GEAR 2.1167 MODULE.LH.ST 1 2 0310AC0210N SPROCKET CAMSHAFT 1 3 0023135 BOLT HEX M14 x 1.5 - 30 6 3 0023159 CAMSHAFT THRUST PLATE 1 4 0022817 WASHER M14 6 4 7903070001 KEY WOODRUFF 4 x 5 DIN 6888 1 5 9420000528 PIN DOWEL 3 5 0310AC0121N HEX BOLT M12 x 1.75 - 50 1 6 0023162 WASHER FOR CAMSHAFT BOLT 1 7 7903201032 SCREW M8 x 1.25 - 20 2 M11B16.1 PCT-00041-NEW THAR CRDE RHD REFRESH BS4 4WD VER 6 - JULY 2015 M11B19.1",
     "total_parts": 5,
     "parts": [
         {
             "item": "1",
             "part_number": "0302EC0030N",
-            "description": "FLYWHEEL ASSEMBLY",
+            "description": "FLYWHEEL ASSY",
             "quantity": 1,
             "remarks": ""
         },
         {
             "item": "2",
             "part_number": "9350115680",
-            "description": "RING GEAR 2.1167 MODULE (LEFT HAND.ST",
+            "description": "RING GEAR 2.1167 MODULE LEFT HAND.ST",
             "quantity": 1,
             "remarks": ""
         },

@@ -98,11 +98,11 @@
             "item": "8",
             "part_number": "M10150AA",
             "description": "Rear Wheel Bolt",
-            "required_quantity": 40,
+            "required_quantity": 31,
             "available_quantity": 43,
-            "remaining_quantity": 3,
+            "remaining_quantity": 12,
             "minimum_threshold": 10,
-            "status": "LOW_STOCK_AFTER_ASSEMBLY",
+            "status": "AVAILABLE",
             "procurement_required": 0,
             "rack_location": "A-08",
             "supplier": "Apollo"
@@ -150,12 +150,12 @@
             "item": "12",
             "part_number": "A75415AA",
             "description": "Fly Wheel Lock Patti",
-            "required_quantity": 24,
+            "required_quantity": 27,
             "available_quantity": 25,
-            "remaining_quantity": 1,
+            "remaining_quantity": 0,
             "minimum_threshold": 10,
-            "status": "LOW_STOCK_AFTER_ASSEMBLY",
-            "procurement_required": 0,
+            "status": "SHORTAGE",
+            "procurement_required": 2,
             "rack_location": "B-02",
             "supplier": "Apollo"
         },
@@ -215,12 +215,12 @@
             "item": "17",
             "part_number": "M10145AA",
             "description": "Cover Double Axle, Rear Hub",
-            "required_quantity": 4,
+            "required_quantity": 7,
             "available_quantity": 0,
             "remaining_quantity": 0,
             "minimum_threshold": 4,
             "status": "OUT_OF_STOCK",
-            "procurement_required": 4,
+            "procurement_required": 7,
             "rack_location": "B-07",
             "supplier": "Apollo"
         },
@@ -319,10 +319,10 @@
     "assembly_status": "ASSEMBLY NOT READY",
     "summary": {
         "total_parts": 24,
-        "available": 6,
-        "low_stock": 6,
-        "shortage": 5,
+        "available": 7,
+        "low_stock": 4,
+        "shortage": 6,
         "out_of_stock": 7,
-        "total_procurement_required": 99
+        "total_procurement_required": 104
     }
 }

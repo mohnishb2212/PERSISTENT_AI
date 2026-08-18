@@ -52,26 +52,30 @@ INVENTORY_DB = BASE_DIR / "inventory" / "inventory.db"
 
 ASSETS_DIR = BASE_DIR / "assets"
 LOGO_ICON_PATH = ASSETS_DIR / "persistent_icon.png"
+ROBOT_ICON_PATH = ASSETS_DIR / "robot_image.jpeg"
 
 
 # ============================================================
 # BRAND ASSETS
 # ============================================================
 
-def _load_logo_base64():
-    """Load the Persistent icon as a base64 data-URI for inline HTML use."""
+def _load_image_base64(path):
+    """Load an image file as a base64 data-URI for inline HTML/CSS use."""
 
-    if not LOGO_ICON_PATH.exists():
+    if not path.exists():
         return None
 
+    mime = "image/png" if path.suffix.lower() == ".png" else "image/jpeg"
+
     encoded = base64.b64encode(
-        LOGO_ICON_PATH.read_bytes()
+        path.read_bytes()
     ).decode("utf-8")
 
-    return f"data:image/png;base64,{encoded}"
+    return f"data:{mime};base64,{encoded}"
 
 
-LOGO_DATA_URI = _load_logo_base64()
+LOGO_DATA_URI = _load_image_base64(LOGO_ICON_PATH)
+ROBOT_DATA_URI = _load_image_base64(ROBOT_ICON_PATH)
 
 _page_icon = "⚙️"
 
@@ -141,6 +145,15 @@ st.markdown(
     [data-testid="stHeader"] {
         background-color: rgba(248, 250, 252, 0.7);
         backdrop-filter: blur(10px);
+    }
+
+    /* ---------------------------------------------------- */
+    /* Main content "page surface"                          */
+    /* ---------------------------------------------------- */
+    [data-testid="stMain"] .block-container {
+        padding-top: 2.5rem;
+        padding-bottom: 3rem;
+        max-width: 1200px;
     }
 
     /* ---------------------------------------------------- */
@@ -432,6 +445,416 @@ st.markdown(
         margin-bottom: 1rem;
     }
 
+    /* ---------------------------------------------------- */
+    /* AI Workflow Hub (welcome screen)                     */
+    /* ---------------------------------------------------- */
+    .hub-card {
+        background: var(--persistent-surface);
+        border: 1px solid var(--persistent-border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+        padding: 2rem 2.25rem 2.5rem 2.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .hub-eyebrow {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 0.78rem;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        color: var(--persistent-orange);
+        margin-bottom: 0.4rem;
+    }
+
+    .hub-title {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--persistent-navy);
+        margin-bottom: 0.35rem;
+    }
+
+    .hub-subtitle {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+    }
+
+    .workflow-stepper {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        gap: 0.75rem;
+    }
+
+    .workflow-track {
+        position: absolute;
+        top: 15px;
+        left: 5%;
+        right: 5%;
+        height: 3px;
+        background: linear-gradient(
+            90deg,
+            var(--persistent-orange) 0%,
+            #FFD9BE 100%
+        );
+        border-radius: 3px;
+        z-index: 0;
+    }
+
+    .workflow-step {
+        position: relative;
+        z-index: 1;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.6rem;
+    }
+
+    .workflow-step-badge {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--persistent-orange);
+        color: #FFFFFF;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 8px rgba(236, 99, 43, 0.35);
+        border: 3px solid var(--persistent-surface);
+    }
+
+    .workflow-step-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: var(--radius-md);
+        background: var(--persistent-navy);
+        color: #FFFFFF;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--shadow-md);
+    }
+
+    .workflow-step-label {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 0.82rem;
+        color: var(--persistent-navy);
+        line-height: 1.25;
+        max-width: 110px;
+    }
+
+    @media (max-width: 900px) {
+        .workflow-stepper {
+            flex-wrap: wrap;
+        }
+        .workflow-track {
+            display: none;
+        }
+        .workflow-step {
+            flex: 1 1 30%;
+        }
+    }
+
+    /* ---------------------------------------------------- */
+    /* Pipeline status stepper                               */
+    /* ---------------------------------------------------- */
+    .pipeline-card {
+        background: var(--persistent-surface);
+        border: 1px solid var(--persistent-border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
+        padding: 1.5rem 1.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .pipeline-heading {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 1.05rem;
+        color: var(--persistent-navy);
+        margin-bottom: 1.4rem;
+    }
+
+    .pipeline-stepper {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .pipeline-track {
+        position: absolute;
+        top: 17px;
+        left: 6%;
+        right: 6%;
+        height: 3px;
+        background: var(--persistent-border);
+        border-radius: 3px;
+        z-index: 0;
+    }
+
+    .pipeline-track-fill {
+        position: absolute;
+        top: 17px;
+        left: 6%;
+        height: 3px;
+        background: var(--persistent-orange);
+        border-radius: 3px;
+        z-index: 0;
+        transition: width 0.3s ease;
+    }
+
+    .pipeline-step {
+        position: relative;
+        z-index: 1;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.5rem;
+    }
+
+    .pipeline-step-dot {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        font-weight: 700;
+        border: 3px solid var(--persistent-surface);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .pipeline-step.done .pipeline-step-dot {
+        background: var(--persistent-orange);
+        color: #FFFFFF;
+    }
+
+    .pipeline-step.pending .pipeline-step-dot {
+        background: #E2E8F0;
+        color: var(--text-muted);
+    }
+
+    .pipeline-step-label {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 0.8rem;
+        color: var(--persistent-navy);
+    }
+
+    .pipeline-step.pending .pipeline-step-label {
+        color: var(--text-muted);
+    }
+
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+
+# ============================================================
+# CSS - FLOATING DIAGNOSTIC ASSISTANT + INVENTORY MODAL
+# ============================================================
+# Kept as a separate injection (rather than folded into the main
+# CSS block above) purely so the embedded base64 image data below
+# never has to sit inside an f-string alongside the large amount of
+# literal `{ }` CSS syntax in the main stylesheet.
+# ============================================================
+
+_robot_bg_rule = (
+    f"background-image: url('{ROBOT_DATA_URI}');"
+    if ROBOT_DATA_URI
+    else "background: linear-gradient(135deg, var(--persistent-orange), var(--persistent-orange-dark));"
+)
+
+st.markdown(
+    f"""
+    <style>
+
+    /* ---------------------------------------------------- */
+    /* Floating robot launcher (bottom-right)                */
+    /* ---------------------------------------------------- */
+
+    .st-key-robot_fab_container {{
+        position: fixed;
+        bottom: 26px;
+        right: 26px;
+        z-index: 10001;
+        width: 76px !important;
+    }}
+
+    .st-key-robot_fab_container [data-testid="stElementContainer"] {{
+        width: 76px !important;
+    }}
+
+    .st-key-robot_fab_container button {{
+        width: 76px;
+        height: 76px;
+        min-width: 76px;
+        border-radius: 50%;
+        padding: 0;
+        font-size: 0;
+        color: transparent;
+        {_robot_bg_rule}
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        border: 3px solid #FFFFFF;
+        box-shadow: 0 10px 24px rgba(20, 33, 61, 0.35);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        animation: robot-float 3.2s ease-in-out infinite;
+    }}
+
+    .st-key-robot_fab_container button:hover {{
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 14px 30px rgba(236, 99, 43, 0.45);
+    }}
+
+    @keyframes robot-float {{
+        0%, 100% {{ transform: translateY(0px); }}
+        50% {{ transform: translateY(-6px); }}
+    }}
+
+    /* ---------------------------------------------------- */
+    /* Floating diagnostic assistant panel                   */
+    /* ---------------------------------------------------- */
+
+    .st-key-diagnostic_panel_container {{
+        position: fixed;
+        bottom: 116px;
+        right: 26px;
+        width: 400px;
+        max-width: 92vw;
+        max-height: 68vh;
+        overflow-y: auto;
+        background: var(--persistent-surface);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-hover);
+        border: 1px solid var(--persistent-border);
+        padding: 1.1rem 1.25rem 1.4rem 1.25rem;
+        z-index: 10000;
+        animation: panel-pop 0.18s ease-out;
+    }}
+
+    @keyframes panel-pop {{
+        0% {{ opacity: 0; transform: translateY(12px) scale(0.98); }}
+        100% {{ opacity: 1; transform: translateY(0) scale(1); }}
+    }}
+
+    .diagnostic-panel-header {{
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 0.15rem;
+    }}
+
+    .diagnostic-panel-header img {{
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--persistent-orange-light);
+    }}
+
+    .diagnostic-panel-header span {{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 1.05rem;
+        color: var(--persistent-navy);
+    }}
+
+    .st-key-diagnostic_panel_close button {{
+        border: none;
+        box-shadow: none;
+        background: transparent;
+        color: var(--text-muted);
+        font-weight: 700;
+        padding: 0.2rem 0.5rem;
+    }}
+
+    .st-key-diagnostic_panel_close button:hover {{
+        color: var(--persistent-orange);
+        background: var(--persistent-orange-light);
+        transform: none;
+    }}
+
+    /* ---------------------------------------------------- */
+    /* Inventory modal (overlay)                             */
+    /* ---------------------------------------------------- */
+
+    .st-key-inventory_modal_backdrop {{
+        position: fixed;
+        inset: 0;
+        z-index: 10050;
+        background: rgba(15, 23, 42, 0.55);
+        backdrop-filter: blur(6px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2.5rem 1.5rem;
+    }}
+
+    .st-key-inventory_modal_card {{
+        background: var(--persistent-surface);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-hover);
+        padding: 1.5rem 2rem 2rem 2rem;
+        width: min(880px, 94vw);
+        max-height: 85vh;
+        overflow-y: auto;
+    }}
+
+    .st-key-inventory_close_btn button {{
+        background: var(--persistent-orange-light);
+        color: var(--persistent-orange-dark);
+        border: 1px solid var(--persistent-orange-light);
+        font-weight: 700;
+    }}
+
+    .st-key-inventory_close_btn button:hover {{
+        background: var(--persistent-orange);
+        color: #FFFFFF;
+    }}
+
+    /* ---------------------------------------------------- */
+    /* View Inventory sidebar button                         */
+    /* ---------------------------------------------------- */
+
+    .st-key-view_inventory_btn button {{
+        background: linear-gradient(135deg, #FFF4EE 0%, #FFE8DB 100%);
+        color: var(--persistent-navy);
+        border: 1px solid #FBD8C4;
+        font-weight: 700;
+    }}
+
+    .st-key-view_inventory_btn button:hover {{
+        border-color: var(--persistent-orange);
+        color: var(--persistent-orange-dark);
+    }}
+
+    @media (max-width: 640px) {{
+        .st-key-diagnostic_panel_container {{
+            right: 4vw;
+            width: 92vw;
+            bottom: 108px;
+        }}
+        .st-key-robot_fab_container {{
+            right: 18px;
+            bottom: 18px;
+        }}
+    }}
+
     </style>
     """,
     unsafe_allow_html=True,
@@ -458,6 +881,7 @@ defaults = {
     "diagnostic_result": None,
     "diagnostic_symptom": None,
     "assembly_query": "",
+    "show_diagnostic_panel": False,
 }
 
 for key, value in defaults.items():
@@ -1319,73 +1743,57 @@ def run_remaining_pipeline(bom):
 
 def show_pipeline_status():
 
-    st.subheader(
-        "Pipeline Status"
+    _stages = [
+        ("Document Agent", st.session_state.bom is not None),
+        ("Human Review", st.session_state.approved),
+        (
+            "Inventory Agent",
+            st.session_state.inventory_result is not None,
+        ),
+        (
+            "Report Agent",
+            st.session_state.report_result is not None,
+        ),
+    ]
+
+    _completed_count = sum(
+        1 for _, done in _stages if done
     )
 
-    cols = st.columns(4)
+    _fill_pct = (
+        0
+        if len(_stages) <= 1
+        else round(
+            (_completed_count - 1) / (len(_stages) - 1) * 88,
+            1,
+        )
+    )
 
-    with cols[0]:
+    _fill_pct = max(_fill_pct, 0)
 
-        if st.session_state.bom is not None:
+    _steps_html = "".join(
+        (
+            f'<div class="pipeline-step {"done" if done else "pending"}">'
+            f'<div class="pipeline-step-dot">{"✓" if done else index}</div>'
+            f'<div class="pipeline-step-label">{label}</div>'
+            f'</div>'
+        )
+        for index, (label, done) in enumerate(_stages, start=1)
+    )
 
-            st.success(
-                "✓ Document Agent"
-            )
-
-        else:
-
-            st.info(
-                "○ Document Agent"
-            )
-
-    with cols[1]:
-
-        if st.session_state.approved:
-
-            st.success(
-                "✓ Human Review"
-            )
-
-        else:
-
-            st.info(
-                "○ Human Review"
-            )
-
-    with cols[2]:
-
-        if (
-            st.session_state.inventory_result
-            is not None
-        ):
-
-            st.success(
-                "✓ Inventory Agent"
-            )
-
-        else:
-
-            st.info(
-                "○ Inventory Agent"
-            )
-
-    with cols[3]:
-
-        if (
-            st.session_state.report_result
-            is not None
-        ):
-
-            st.success(
-                "✓ Report Agent"
-            )
-
-        else:
-
-            st.info(
-                "○ Report Agent"
-            )
+    st.markdown(
+        f"""
+        <div class="pipeline-card">
+            <div class="pipeline-heading">Pipeline Status</div>
+            <div class="pipeline-stepper">
+                <div class="pipeline-track"></div>
+                <div class="pipeline-track-fill" style="width:{_fill_pct}%;"></div>
+                {_steps_html}
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 # ============================================================
@@ -1394,22 +1802,32 @@ def show_pipeline_status():
 
 def render_inventory_panel():
 
-    st.subheader(
-        "Inventory"
+    header_col, close_col = st.columns(
+        [5, 1],
+        vertical_alignment="center",
     )
 
-    st.caption(
-        "Current spare-parts inventory"
-    )
+    with header_col:
 
-    if st.button(
-        "Close Inventory",
-        use_container_width=True,
-    ):
+        st.subheader(
+            "📦 Inventory"
+        )
 
-        st.session_state.show_inventory = False
+        st.caption(
+            "Current spare-parts inventory"
+        )
 
-        st.rerun()
+    with close_col:
+
+        if st.button(
+            "✕ Close",
+            use_container_width=True,
+            key="inventory_close_btn",
+        ):
+
+            st.session_state.show_inventory = False
+
+            st.rerun()
 
     inventory_df = (
         inventory_database_dataframe()
@@ -1487,6 +1905,20 @@ def select_diagnostic_assembly(assembly):
 
 
 # ============================================================
+# FLOATING DIAGNOSTIC PANEL CALLBACKS
+# ============================================================
+
+def toggle_diagnostic_panel():
+    st.session_state.show_diagnostic_panel = (
+        not st.session_state.show_diagnostic_panel
+    )
+
+
+def close_diagnostic_panel():
+    st.session_state.show_diagnostic_panel = False
+
+
+# ============================================================
 # SIDEBAR
 # ============================================================
 
@@ -1516,7 +1948,7 @@ with st.sidebar:
         )
 
     st.header(
-        "Analysis"
+        "Analysis Studio"
     )
 
 
@@ -1628,8 +2060,9 @@ with st.sidebar:
     st.markdown("---")
 
     if st.button(
-        "View Inventory",
+        "📦 View Inventory",
         use_container_width=True,
+        key="view_inventory_btn",
     ):
 
         st.session_state.show_inventory = True
@@ -1653,23 +2086,15 @@ st.markdown(
 
 
 # ============================================================
-# MAIN / INVENTORY LAYOUT
+# MAIN LAYOUT
+# ============================================================
+# The inventory panel no longer occupies a side column. It is
+# rendered later as a full-screen overlay modal (see
+# "INVENTORY MODAL" section below), so the main content always
+# takes the full page width.
 # ============================================================
 
-if st.session_state.show_inventory:
-
-    main_col, inventory_col = (
-        st.columns(
-            [65, 35],
-            gap="large",
-        )
-    )
-
-else:
-
-    main_col = st.container()
-
-    inventory_col = None
+main_col = st.container()
 
 
 # ============================================================
@@ -2382,17 +2807,38 @@ with main_col:
 
 
 # ============================================================
-# RIGHT-SIDE INVENTORY PANEL
+# INVENTORY MODAL (OVERLAY)
+# ============================================================
+# Renders the same render_inventory_panel() defined above, only
+# now inside a centered, backdrop-blurred overlay instead of a
+# side column.
+#
+# While the modal is open, the sidebar is hidden entirely (via
+# CSS only - no widgets are removed or reset) so the overlay
+# reads as a clean, full-page modal instead of sitting beside a
+# visible sidebar. Closing the modal restores the sidebar exactly
+# as it was, since none of its state is touched.
 # ============================================================
 
-if (
-    st.session_state.show_inventory
-    and inventory_col is not None
-):
+if st.session_state.show_inventory:
 
-    with inventory_col:
+    st.markdown(
+        """
+        <style>
+        [data-testid="stSidebar"],
+        [data-testid="stSidebarCollapsedControl"] {
+            display: none !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 
-        render_inventory_panel()
+    with st.container(key="inventory_modal_backdrop"):
+
+        with st.container(key="inventory_modal_card"):
+
+            render_inventory_panel()
 
 
 # ============================================================
@@ -2407,213 +2853,298 @@ if (
 
     st.markdown("---")
 
+    _workflow_steps = [
+        ("📖", "Select a Catalogue"),
+        ("🔎", "Enter Query"),
+        ("🧾", "Choose Output"),
+        ("🤖", "Run Document Agent"),
+        ("👁️", "Review BOM"),
+        ("🚀", "Continue with Analysis"),
+    ]
+
+    _steps_html = "".join(
+        (
+            f'<div class="workflow-step">'
+            f'<div class="workflow-step-badge">{index}</div>'
+            f'<div class="workflow-step-icon">{icon}</div>'
+            f'<div class="workflow-step-label">{label}</div>'
+            f'</div>'
+        )
+        for index, (icon, label) in enumerate(
+            _workflow_steps,
+            start=1,
+        )
+    )
+
     st.markdown(
-        """
-        ## Welcome to PERSISTENT AI
-
-        Use the sidebar to:
-
-        1. Select a catalogue.
-        2. Enter the required assembly or query.
-        3. Choose **BOM Only** or **Full Analysis & Report**.
-        4. Run the Document Agent.
-        5. Review and approve the extracted BOM.
-        6. Continue with the selected analysis.
-        """
+        f"""
+        <div class="hub-card">
+            <div class="hub-eyebrow">AI Workflow Hub</div>
+            <div class="hub-title">Welcome to PERSISTENT AI</div>
+            <div class="hub-subtitle">
+                Start your analysis journey below - each step
+                below is handled by a dedicated agent.
+            </div>
+            <div class="workflow-stepper">
+                <div class="workflow-track"></div>
+                {_steps_html}
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
 
 # ============================================================
-# DIAGNOSTIC ASSISTANT
+# DIAGNOSTIC ASSISTANT (FLOATING PANEL)
 # ============================================================
-# This section is intentionally at the bottom of the page.
-# It does not alter the existing Document -> Human Review ->
-# Inventory -> Decision -> Report pipeline.
+# The robot launcher button (always visible, bottom-right) toggles
+# this panel open/closed. Everything inside this block is the exact
+# same Document -> Human Review -> Inventory -> Decision -> Report
+# -independent Diagnostic Assistant logic as before; only its
+# on-screen container has changed - it now renders inside a
+# fixed-position floating card instead of at the bottom of the page.
 # ============================================================
 
-st.markdown("---")
+if st.session_state.show_diagnostic_panel:
 
-st.subheader("🔧 Diagnostic Assistant")
+    with st.container(key="diagnostic_panel_container"):
 
-st.caption(
-    "Describe a vehicle symptom to identify other assemblies "
-    "that may need to be checked."
-)
-
-diagnostic_symptom = st.chat_input(
-    "Describe the vehicle symptom..."
-)
-
-if diagnostic_symptom:
-
-    # --------------------------------------------------------
-    # Determine the currently selected catalogue
-    # --------------------------------------------------------
-
-    diagnostic_catalogue_path = None
-    diagnostic_catalogue_name = None
-
-    if catalogue_name in CATALOGUES:
-
-        diagnostic_catalogue_path = (
-            CATALOGUES[catalogue_name]
+        panel_title_col, panel_close_col = st.columns(
+            [5, 1],
+            vertical_alignment="center",
         )
 
-        diagnostic_catalogue_name = catalogue_name
+        with panel_title_col:
 
-    elif (
-        catalogue_name == "Upload Catalogue"
-        and st.session_state.uploaded_catalogue
-    ):
+            if ROBOT_DATA_URI:
 
-        diagnostic_catalogue_path = Path(
-            st.session_state.uploaded_catalogue
-        )
-
-        diagnostic_catalogue_name = (
-            st.session_state.uploaded_catalogue_name
-            or diagnostic_catalogue_path.stem
-        )
-
-    if diagnostic_catalogue_path is None:
-
-        st.session_state.diagnostic_result = {
-            "status": "failed",
-            "error": (
-                "Please select a catalogue or upload "
-                "a catalogue before using the Diagnostic Assistant."
-            ),
-            "assemblies_to_check": [],
-        }
-
-        st.session_state.diagnostic_symptom = (
-            diagnostic_symptom
-        )
-
-    elif not diagnostic_catalogue_path.exists():
-
-        st.session_state.diagnostic_result = {
-            "status": "failed",
-            "error": (
-                f"Catalogue not found: "
-                f"{diagnostic_catalogue_path}"
-            ),
-            "assemblies_to_check": [],
-        }
-
-        st.session_state.diagnostic_symptom = (
-            diagnostic_symptom
-        )
-
-    else:
-
-        current_assembly = (
-            st.session_state.get(
-                "assembly_query",
-                "",
-            )
-            or ""
-        ).strip()
-
-        with st.spinner(
-            "Diagnostic Agent is checking the catalogue..."
-        ):
-
-            diagnostic_agent = DiagnosticAgent()
-
-            diagnostic_result = (
-                diagnostic_agent.invoke(
-                    symptom=diagnostic_symptom,
-                    catalogue_path=str(
-                        diagnostic_catalogue_path
-                    ),
-                    catalogue_name=(
-                        diagnostic_catalogue_name
-                    ),
-                    current_assembly=(
-                        current_assembly
-                    ),
+                st.markdown(
+                    f"""
+                    <div class="diagnostic-panel-header">
+                        <img src="{ROBOT_DATA_URI}" alt="Diagnostic Assistant" />
+                        <span>Diagnostic Assistant</span>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
                 )
-            )
-
-        st.session_state.diagnostic_result = (
-            diagnostic_result
-        )
-
-        st.session_state.diagnostic_symptom = (
-            diagnostic_symptom
-        )
-
-
-# ------------------------------------------------------------
-# Diagnostic conversation/result
-# ------------------------------------------------------------
-
-if st.session_state.diagnostic_symptom:
-
-    with st.chat_message("user"):
-
-        st.write(
-            st.session_state.diagnostic_symptom
-        )
-
-    result = st.session_state.diagnostic_result
-
-    if result is not None:
-
-        with st.chat_message("assistant"):
-
-            if result.get("status") == "completed":
-
-                assemblies = result.get(
-                    "assemblies_to_check",
-                    [],
-                )
-
-                if assemblies:
-
-                    st.markdown(
-                        "**Assemblies to check**"
-                    )
-
-                    # Assembly names are intentionally rendered
-                    # as buttons. Clicking one only fills the
-                    # existing Assembly / Query field.
-                    button_columns = st.columns(
-                        min(3, len(assemblies))
-                    )
-
-                    for index, assembly in enumerate(
-                        assemblies
-                    ):
-
-                        with button_columns[
-                            index % len(button_columns)
-                        ]:
-
-                            st.button(
-                                assembly,
-                                key=(
-                                    "diagnostic_assembly_"
-                                    f"{index}_"
-                                    f"{assembly}"
-                                ),
-                                use_container_width=True,
-                                on_click=select_diagnostic_assembly,
-                                args=(assembly,),
-                            )
-
-                else:
-
-                    st.info(
-                        "No additional catalogue assemblies "
-                        "were identified for this symptom."
-                    )
 
             else:
 
-                st.error(
-                    result.get(
-                        "error",
-                        "Diagnostic Agent failed.",
-                    )
+                st.markdown(
+                    """
+                    <div class="diagnostic-panel-header">
+                        <span>🔧 Diagnostic Assistant</span>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
                 )
+
+        with panel_close_col:
+
+            st.button(
+                "✕",
+                key="diagnostic_panel_close",
+                on_click=close_diagnostic_panel,
+            )
+
+        st.caption(
+            "Describe a vehicle symptom to identify other assemblies "
+            "that may need to be checked."
+        )
+
+        diagnostic_symptom = st.chat_input(
+            "Describe the vehicle symptom..."
+        )
+
+        if diagnostic_symptom:
+
+            # --------------------------------------------------------
+            # Determine the currently selected catalogue
+            # --------------------------------------------------------
+
+            diagnostic_catalogue_path = None
+            diagnostic_catalogue_name = None
+
+            if catalogue_name in CATALOGUES:
+
+                diagnostic_catalogue_path = (
+                    CATALOGUES[catalogue_name]
+                )
+
+                diagnostic_catalogue_name = catalogue_name
+
+            elif (
+                catalogue_name == "Upload Catalogue"
+                and st.session_state.uploaded_catalogue
+            ):
+
+                diagnostic_catalogue_path = Path(
+                    st.session_state.uploaded_catalogue
+                )
+
+                diagnostic_catalogue_name = (
+                    st.session_state.uploaded_catalogue_name
+                    or diagnostic_catalogue_path.stem
+                )
+
+            if diagnostic_catalogue_path is None:
+
+                st.session_state.diagnostic_result = {
+                    "status": "failed",
+                    "error": (
+                        "Please select a catalogue or upload "
+                        "a catalogue before using the Diagnostic Assistant."
+                    ),
+                    "assemblies_to_check": [],
+                }
+
+                st.session_state.diagnostic_symptom = (
+                    diagnostic_symptom
+                )
+
+            elif not diagnostic_catalogue_path.exists():
+
+                st.session_state.diagnostic_result = {
+                    "status": "failed",
+                    "error": (
+                        f"Catalogue not found: "
+                        f"{diagnostic_catalogue_path}"
+                    ),
+                    "assemblies_to_check": [],
+                }
+
+                st.session_state.diagnostic_symptom = (
+                    diagnostic_symptom
+                )
+
+            else:
+
+                current_assembly = (
+                    st.session_state.get(
+                        "assembly_query",
+                        "",
+                    )
+                    or ""
+                ).strip()
+
+                with st.spinner(
+                    "Diagnostic Agent is checking the catalogue..."
+                ):
+
+                    diagnostic_agent = DiagnosticAgent()
+
+                    diagnostic_result = (
+                        diagnostic_agent.invoke(
+                            symptom=diagnostic_symptom,
+                            catalogue_path=str(
+                                diagnostic_catalogue_path
+                            ),
+                            catalogue_name=(
+                                diagnostic_catalogue_name
+                            ),
+                            current_assembly=(
+                                current_assembly
+                            ),
+                        )
+                    )
+
+                st.session_state.diagnostic_result = (
+                    diagnostic_result
+                )
+
+                st.session_state.diagnostic_symptom = (
+                    diagnostic_symptom
+                )
+
+
+        # ------------------------------------------------------------
+        # Diagnostic conversation/result
+        # ------------------------------------------------------------
+
+        if st.session_state.diagnostic_symptom:
+
+            with st.chat_message("user"):
+
+                st.write(
+                    st.session_state.diagnostic_symptom
+                )
+
+            result = st.session_state.diagnostic_result
+
+            if result is not None:
+
+                with st.chat_message("assistant"):
+
+                    if result.get("status") == "completed":
+
+                        assemblies = result.get(
+                            "assemblies_to_check",
+                            [],
+                        )
+
+                        if assemblies:
+
+                            st.markdown(
+                                "**Assemblies to check**"
+                            )
+
+                            # Assembly names are intentionally rendered
+                            # as buttons. Clicking one only fills the
+                            # existing Assembly / Query field.
+                            button_columns = st.columns(
+                                min(3, len(assemblies))
+                            )
+
+                            for index, assembly in enumerate(
+                                assemblies
+                            ):
+
+                                with button_columns[
+                                    index % len(button_columns)
+                                ]:
+
+                                    st.button(
+                                        assembly,
+                                        key=(
+                                            "diagnostic_assembly_"
+                                            f"{index}_"
+                                            f"{assembly}"
+                                        ),
+                                        use_container_width=True,
+                                        on_click=select_diagnostic_assembly,
+                                        args=(assembly,),
+                                    )
+
+                        else:
+
+                            st.info(
+                                "No additional catalogue assemblies "
+                                "were identified for this symptom."
+                            )
+
+                    else:
+
+                        st.error(
+                            result.get(
+                                "error",
+                                "Diagnostic Agent failed.",
+                            )
+                        )
+
+
+# ============================================================
+# ROBOT LAUNCHER (ALWAYS VISIBLE, BOTTOM-RIGHT)
+# ============================================================
+# Clicking this toggles the floating Diagnostic Assistant panel
+# above (open <-> closed). Rendered last so it stays on top of
+# the rest of the page via fixed positioning.
+# ============================================================
+
+with st.container(key="robot_fab_container"):
+
+    st.button(
+        "🤖",
+        key="robot_fab_button",
+        help="Diagnostic Assistant",
+        on_click=toggle_diagnostic_panel,
+    )

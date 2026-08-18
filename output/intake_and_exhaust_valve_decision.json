@@ -72,12 +72,12 @@
             "item": "4",
             "part_number": "570305159908",
             "description": "SEAL",
-            "required_quantity": 21,
+            "required_quantity": 16,
             "available_quantity": 0,
             "remaining_quantity": 0,
             "minimum_threshold": 10,
             "status": "OUT_OF_STOCK",
-            "procurement_required": 21,
+            "procurement_required": 16,
             "rack_location": "E-10",
             "supplier": "Tata"
         },
@@ -85,9 +85,9 @@
             "item": "5",
             "part_number": "570305129909",
             "description": "CUP(LOWER)",
-            "required_quantity": 16,
+            "required_quantity": 18,
             "available_quantity": 33,
-            "remaining_quantity": 17,
+            "remaining_quantity": 15,
             "minimum_threshold": 10,
             "status": "AVAILABLE",
             "procurement_required": 0,
@@ -124,12 +124,12 @@
             "item": "8",
             "part_number": "570305129906",
             "description": "PROT.SEMI CONE VALVE",
-            "required_quantity": 27,
+            "required_quantity": 22,
             "available_quantity": 0,
             "remaining_quantity": 0,
             "minimum_threshold": 10,
             "status": "OUT_OF_STOCK",
-            "procurement_required": 27,
+            "procurement_required": 22,
             "rack_location": "F-04",
             "supplier": "Tata"
         },
@@ -167,6 +167,6 @@
         "low_stock": 5,
         "shortage": 3,
         "out_of_stock": 3,
-        "total_procurement_required": 72
+        "total_procurement_required": 62
     }
 }

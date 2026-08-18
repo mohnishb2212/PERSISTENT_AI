@@ -1,0 +1,217 @@
+{
+    "assembly": "GEARBOX",
+    "catalogue": "",
+    "total_parts": 30,
+    "parts": [
+        {
+            "item": "26.26.01A",
+            "part_number": "",
+            "description": "GEAR SHIFT LINKAGES",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "26.26.01B",
+            "part_number": "",
+            "description": "GEAR SHIFT LINKAGES",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.01A",
+            "part_number": "",
+            "description": "TRANSAXLE BRACKET FIAT C549-SDE,75ps",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.02A",
+            "part_number": "",
+            "description": "TRANSMISSION AND DIFFERENTIAL UNIT C549.5.17 MT SDE",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.03A",
+            "part_number": "",
+            "description": "TRANSAXLE HOUSING C549.5.17 MT SDE",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.04A",
+            "part_number": "",
+            "description": "MAIN SHAFT C549.5.17 MT SDE",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.05A",
+            "part_number": "",
+            "description": "SHIFTING FORK C549.5.17 MT SDE",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.06A",
+            "part_number": "",
+            "description": "CROWN CASE C549.5.17 MT SDE",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.07A",
+            "part_number": "",
+            "description": "GEARBOX COVER & SUPPORT C549.5.17 MT SDE",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.08A",
+            "part_number": "",
+            "description": "MAIN SHAFT GEARS-I C549.5.17 MT SDE",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.09A",
+            "part_number": "",
+            "description": "SHIFT MECHANISM C549.5.17 MT SDE",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.10A",
+            "part_number": "",
+            "description": "CROWN $ PINION C549.5.17 MT SDE",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.11A",
+            "part_number": "",
+            "description": "TRANSMISSION GASKET C549.5.17 MT SDE",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.12A",
+            "part_number": "",
+            "description": "MAIN SHAFT GEARS-II C549.5.17 MT SDE",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.13A",
+            "part_number": "",
+            "description": "CLUTCH RELEASE SHAFT C549.5.17 MT SDE",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.14A",
+            "part_number": "",
+            "description": "COUNTER SHAFT C549.5.17 MT SDE",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.01B",
+            "part_number": "",
+            "description": "TRANSAXLE BRACKET FIAT SDE 90PS C549.5.21 MT",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.02B",
+            "part_number": "",
+            "description": "TRANSMISSION AND DIFFERENTIAL UNIT SDE 90PS C549.5.21 MT",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.03B",
+            "part_number": "",
+            "description": "TRANSAXLE HOUSING SDE 90PS C549.5.21 MT",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.04B",
+            "part_number": "",
+            "description": "GEARBOX COVER & SUPPROT SDE 90PS C549.5.21 MT",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.05B",
+            "part_number": "",
+            "description": "TRANSMISSION GASKET SDE 90PS C549.5.21 MT",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.06B",
+            "part_number": "",
+            "description": "MAIN SHAFT SDE 90PS C549.5.21 MT",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.07B",
+            "part_number": "",
+            "description": "MAIN SHAFT GEARS-I SDE 90PS C549.5.21 MT",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.08B",
+            "part_number": "",
+            "description": "MAIN SHAFT GEARS-II SDE 90PS C549.5.21 MT",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.09B",
+            "part_number": "",
+            "description": "COUNTER SHAFT SDE 90PS C549.5.21 MT",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.10B",
+            "part_number": "",
+            "description": "SHIFTING FORKS SDE 90PS C549.5.21 MT",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.11B",
+            "part_number": "",
+            "description": "SHIFT MECHANISM SDE 90PS C549.5.21 MT",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.12B",
+            "part_number": "",
+            "description": "CLUTCH RELEASE SHAFT SDE 90PS C549.5.21 MT",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.13B",
+            "part_number": "",
+            "description": "CROWN CASE SDE 90PS C549.5.21 MT",
+            "quantity": null,
+            "remarks": "Y"
+        },
+        {
+            "item": "00.02.14B",
+            "part_number": "",
+            "description": "CROWN $ PINION SDE 90PS C549.5.21 MT",
+            "quantity": null,
+            "remarks": "Y"
+        }
+    ]
+}

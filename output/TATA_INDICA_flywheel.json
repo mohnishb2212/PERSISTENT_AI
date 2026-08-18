@@ -1,0 +1,56 @@
+{
+    "assembly": "0000..0000..0088 FFLLYYWWHHEEEELL GGRROOUUPP 0000",
+    "catalogue": "0000..0000..0088 FFLLYYWWHHEEEELL GGRROOUUPP 0000 CCHHAASSSSIISS TTYYPPEE:: 661111448822 FFIIGG.. PPAARRTT NNUUMMBBEERR DDEESSCCRRIIPPTTIIOONN QQTTYY RREEMMAARRKKSS NNOO.. 1 570303119908 FLYWEEL 2 570303119902 SCREW SPECIAL M6X16 4 3 570303119903 TOOTHED WHEEL 1 4 570303119904 RING GEAR 1 5 570303119905 PIN 3 6 570303119910 SEAL GASKET 1 7 570303119911 SCREW SP M8X1.25 8 1155 0000..0011..000055 FFLLYYWWHHEEEELL GGRROOUUPP 0011 CCHHAASSSSIISS TTYYPPEE:: 661111445588 FFIIGG.. PPAARRTT NNUUMMBBEERR DDEESSCCRRIIPPTTIIOONN QQTTYY RREEMMAARRKKSS NNOO.. 1 570303119908 FLYWEEL 1 2 570303119902 SCREW SPECIAL M6X16 4 3 570303119903 TOOTHED WHEEL 1 5 570303119909 FLYWEEL 1 6 570303119905 PIN 3 7 570303119910 SEAL GASKET 1 8 570303119911 SCREW 8 7733",
+    "total_parts": 7,
+    "parts": [
+        {
+            "item": "1",
+            "part_number": "570303119908",
+            "description": "FLYWEEL",
+            "quantity": 2,
+            "remarks": ""
+        },
+        {
+            "item": "2",
+            "part_number": "570303119902",
+            "description": "SCREW SPECIAL M6X16",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "3",
+            "part_number": "570303119903",
+            "description": "TOOTHED WHEEL",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "4",
+            "part_number": "570303119904",
+            "description": "RING GEAR",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "5",
+            "part_number": "570303119905",
+            "description": "PIN",
+            "quantity": 3,
+            "remarks": ""
+        },
+        {
+            "item": "6",
+            "part_number": "570303119910",
+            "description": "SEAL GASKET",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "7",
+            "part_number": "570303119911",
+            "description": "SCREW SP M8X1.25",
+            "quantity": 8,
+            "remarks": ""
+        }
+    ]
+}

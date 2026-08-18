@@ -4,7 +4,7 @@
 
 ## Assembly Information
 
-**Assembly:** flywheel
+**Assembly:** Flywheel
 
 **Catalogue:** Mahindra Thar
 
@@ -43,10 +43,10 @@
 
 ## Procurement List
 
-|   Part Number | Description                           |   Quantity |
-|---------------|---------------------------------------|------------|
-|    9350115680 | RING GEAR 2.1167 MODULE (LEFT HAND.ST |          1 |
-|       0023135 | BOLT HEX M14 x 1.5 - 30               |          6 |
+|   Part Number | Description                          |   Quantity |
+|---------------|--------------------------------------|------------|
+|    9350115680 | RING GEAR 2.1167 MODULE LEFT HAND.ST |          1 |
+|       0023135 | BOLT HEX M14 x 1.5 - 30              |          6 |
 
 ---
 

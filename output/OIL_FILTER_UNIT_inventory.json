@@ -1,0 +1,117 @@
+{
+    "assembly": "OIL FILTER UNIT",
+    "catalogue": "Tata Indica",
+    "total_parts": 10,
+    "parts": [
+        {
+            "item": "1",
+            "part_number": "570318139919",
+            "description": "OIL FILTER UNIT",
+            "required_quantity": 1,
+            "available_quantity": 0,
+            "minimum_threshold": 0,
+            "rack_location": "UNKNOWN",
+            "supplier": "UNKNOWN",
+            "remarks": ""
+        },
+        {
+            "item": "2",
+            "part_number": "570318139920",
+            "description": "GASKET",
+            "required_quantity": 1,
+            "available_quantity": 0,
+            "minimum_threshold": 0,
+            "rack_location": "UNKNOWN",
+            "supplier": "UNKNOWN",
+            "remarks": ""
+        },
+        {
+            "item": "3",
+            "part_number": "570318139921",
+            "description": "PROTECTION",
+            "required_quantity": 1,
+            "available_quantity": 0,
+            "minimum_threshold": 0,
+            "rack_location": "UNKNOWN",
+            "supplier": "UNKNOWN",
+            "remarks": ""
+        },
+        {
+            "item": "4",
+            "part_number": "570318139922",
+            "description": "GASKET",
+            "required_quantity": 1,
+            "available_quantity": 0,
+            "minimum_threshold": 0,
+            "rack_location": "UNKNOWN",
+            "supplier": "UNKNOWN",
+            "remarks": ""
+        },
+        {
+            "item": "5",
+            "part_number": "570318139905",
+            "description": "OIL FILTER",
+            "required_quantity": 1,
+            "available_quantity": 0,
+            "minimum_threshold": 0,
+            "rack_location": "UNKNOWN",
+            "supplier": "UNKNOWN",
+            "remarks": ""
+        },
+        {
+            "item": "6",
+            "part_number": "570318109931",
+            "description": "PLUG",
+            "required_quantity": 1,
+            "available_quantity": 0,
+            "minimum_threshold": 0,
+            "rack_location": "UNKNOWN",
+            "supplier": "UNKNOWN",
+            "remarks": ""
+        },
+        {
+            "item": "7",
+            "part_number": "570318139924",
+            "description": "GASKET",
+            "required_quantity": 1,
+            "available_quantity": 0,
+            "minimum_threshold": 0,
+            "rack_location": "UNKNOWN",
+            "supplier": "UNKNOWN",
+            "remarks": ""
+        },
+        {
+            "item": "8",
+            "part_number": "570318109932",
+            "description": "SCREW & WASHER",
+            "required_quantity": 4,
+            "available_quantity": 0,
+            "minimum_threshold": 0,
+            "rack_location": "UNKNOWN",
+            "supplier": "UNKNOWN",
+            "remarks": ""
+        },
+        {
+            "item": "9",
+            "part_number": "570318139925",
+            "description": "PROTECTION SUPERIOR",
+            "required_quantity": 1,
+            "available_quantity": 0,
+            "minimum_threshold": 0,
+            "rack_location": "UNKNOWN",
+            "supplier": "UNKNOWN",
+            "remarks": ""
+        },
+        {
+            "item": "10",
+            "part_number": "570318139926",
+            "description": "PROTECTION INFERIOR",
+            "required_quantity": 1,
+            "available_quantity": 0,
+            "minimum_threshold": 0,
+            "rack_location": "UNKNOWN",
+            "supplier": "UNKNOWN",
+            "remarks": ""
+        }
+    ]
+}

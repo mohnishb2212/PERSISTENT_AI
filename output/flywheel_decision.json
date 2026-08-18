@@ -1,12 +1,12 @@
 {
-    "assembly": "flywheel",
+    "assembly": "Flywheel",
     "catalogue": "Mahindra Thar",
     "total_parts": 5,
     "parts": [
         {
             "item": "1",
             "part_number": "0302EC0030N",
-            "description": "FLYWHEEL ASSEMBLY",
+            "description": "FLYWHEEL ASSY",
             "required_quantity": 1,
             "available_quantity": 4,
             "remaining_quantity": 3,
@@ -19,7 +19,7 @@
         {
             "item": "2",
             "part_number": "9350115680",
-            "description": "RING GEAR 2.1167 MODULE (LEFT HAND.ST",
+            "description": "RING GEAR 2.1167 MODULE LEFT HAND.ST",
             "required_quantity": 1,
             "available_quantity": 0,
             "remaining_quantity": 0,
