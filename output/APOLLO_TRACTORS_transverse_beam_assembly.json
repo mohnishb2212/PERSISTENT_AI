@@ -1,0 +1,140 @@
+{
+    "assembly": "TRANSVERSE BEAM ASSEMBLY",
+    "catalogue": "Parts Manual TRANSVERSE BEAM ASSEMBLY",
+    "total_parts": 19,
+    "parts": [
+        {
+            "item": "1",
+            "part_number": "M0010743",
+            "description": "Leveling Arm",
+            "quantity": 1,
+            "remarks": "LH"
+        },
+        {
+            "item": "2",
+            "part_number": "M0010742",
+            "description": "Leveling Arm",
+            "quantity": 1,
+            "remarks": "RH"
+        },
+        {
+            "item": "3",
+            "part_number": "M0010760",
+            "description": "Connector",
+            "quantity": 2,
+            "remarks": ""
+        },
+        {
+            "item": "4",
+            "part_number": "A75115AA",
+            "description": "U. J. Cross",
+            "quantity": 2,
+            "remarks": ""
+        },
+        {
+            "item": "5",
+            "part_number": "M0010762",
+            "description": "Transverse Beam",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "6",
+            "part_number": "A75120AA",
+            "description": "Pro Shaft Sleeve Yoke",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "7",
+            "part_number": "N10025AA",
+            "description": "Hex Bolt M10 x 25",
+            "quantity": 8,
+            "remarks": ""
+        },
+        {
+            "item": "8",
+            "part_number": "N55230AA",
+            "description": "Spring Washer 10mm",
+            "quantity": 16,
+            "remarks": ""
+        },
+        {
+            "item": "9",
+            "part_number": "A75995AA",
+            "description": "Rubber Foundation Pad",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "10",
+            "part_number": "M0010765",
+            "description": "Slope Sensor Plate",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "11",
+            "part_number": "N20050AA",
+            "description": "Hex Bolt M20 x 50",
+            "quantity": 8,
+            "remarks": ""
+        },
+        {
+            "item": "12",
+            "part_number": "N55245AA",
+            "description": "Spring Washer 20mm",
+            "quantity": 8,
+            "remarks": ""
+        },
+        {
+            "item": "13",
+            "part_number": "N55150AA",
+            "description": "Hex Nut M8",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "14",
+            "part_number": "N55230AA",
+            "description": "Spring Washer 8mm",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "15",
+            "part_number": "M08025AA",
+            "description": "Hex Bolt M8 x 25",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "16",
+            "part_number": "N55155AA",
+            "description": "Hex Nut M10",
+            "quantity": 8,
+            "remarks": ""
+        },
+        {
+            "item": "17",
+            "part_number": "H60301AC",
+            "description": "Slope Control MOBA",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "18",
+            "part_number": "H60301AD",
+            "description": "Remote Control MOBA",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "19",
+            "part_number": "H60381AA",
+            "description": "Cable",
+            "quantity": 1,
+            "remarks": "For Grade control Refer Screed"
+        }
+    ]
+}

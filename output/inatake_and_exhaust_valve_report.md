@@ -4,9 +4,9 @@
 
 ## Assembly Information
 
-**Assembly:** intake and exhaust valve
+**Assembly:** inatake and exhaust valve
 
-**Catalogue:** Tata Indica
+**Catalogue:** TATA INDICA
 
 ---
 
@@ -25,7 +25,7 @@
 | Low Stock            |       5 |
 | Shortage             |       3 |
 | Out Of Stock         |       3 |
-| Procurement Required |      82 |
+| Procurement Required |      72 |
 
 ---
 
@@ -42,7 +42,7 @@
 |      5 |  570305129909 |         16 |          33 |          17 | AVAILABLE                |             0 |
 |      6 |  570305129910 |         16 |          17 |           1 | LOW_STOCK_AFTER_ASSEMBLY |             0 |
 |      7 |  570305129911 |         16 |          11 |           0 | SHORTAGE                 |             5 |
-|      8 |  570305129906 |         42 |           0 |           0 | OUT_OF_STOCK             |            42 |
+|      8 |  570305129906 |         32 |           0 |           0 | OUT_OF_STOCK             |            32 |
 |      9 |  570305149903 |         16 |          25 |           9 | LOW_STOCK_AFTER_ASSEMBLY |             0 |
 |     10 |  570305149904 |         16 |          18 |           2 | LOW_STOCK_AFTER_ASSEMBLY |             0 |
 
@@ -57,7 +57,13 @@
 |  570305159907 | VALVE GUIDE +0.20    |          4 |
 |  570305159908 | SEAL                 |         16 |
 |  570305129911 | CUP UPPER            |          5 |
-|  570305129906 | PROT.SEMI CONE VALVE |         42 |
+|  570305129906 | PROT.SEMI CONE VALVE |         32 |
+
+---
+
+## Co-Engineer Recommendations
+
+No additional assemblies were recommended for inspection based on the available catalogue index.
 
 ---
 

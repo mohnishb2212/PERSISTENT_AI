@@ -1,0 +1,140 @@
+{
+    "assembly": "FUEL INJECTION SYSTEM",
+    "catalogue": "0000..0000..1177 FFUUEELL IINNJJEECCTTIIOONN SSYYSSTTEEMM GGRROOUUPP 0000\nCCHHAASSSSIISS TTYYPPEE:: 661111448822\nFFIIGG.. NNOO..\n1\n570307149929\n570307149930\n570307149903\n570307149931\n570307149921\n570307149906\n570307149922\n570301169906\n570307149908\n570301169907\n570301169908\n570307149932\n570307149933\n570307149934\n570307149912\n570307149925\n570307149914\n570307149935\n570301169904\nHYD ACCUM. CPC\nFLEX SLEEVE\nPRESSURE SENSOR\nKIT TUBE HIGH PRESUURE\nNUT\nWASHER 8X16X1.10\nPLANE WASHER\nBRACKET\nTUBE\nSEAL GASKET\nINJECTOR\nTUBE HIGH PRESUURE\nGASOLINE REYCY RUB.PPE\nINJECTOR BRACKET\nSCREW M8X30\nSCREW & WASHER\nCOLLER\nSCREW\nGASKET\n1\n1\n1\n1\n2\n2\n2\n2\n1\n4\n4\n1\n1\n1\n2\n3\n2\n1\n4\n3311 0000..0011..001111 FFUUEELL IINNJJEECCTTIIOONN SSYYSSTTEEMM GGRROOUUPP 0011\nCCHHAASSSSIISS TTYYPPEE:: 661111445588\nFFIIGG.. NNOO..\n1\n570307149919\n570307149902\n570307149903\n570307149920\n570307149921\n570307149906\n570307149922\n570301169906\n570307149908\n570301169907\n570301169908\n570307149923\n570307149924\n570301169909\n570307149912\n570307149925\n570307149914\n570307149926\n570301169904\n570307149927\n570307149928\nHYD ACCUMULATORE CPL\nPRESSURE REGULATOR\nPRESSURE SENSOR\nPIPE\nNUT\nWASHER 8X16X1.10\nPLANE WASHER\nBRACKET\nTUBE\nSEAL GASKET\nINJECTOR\nPIPE\nCONNECTION\nBRACKET\nSCREW M8X30\nSCREW&WASHER\nCOLLER\nSLEEVE\nGASKET\nSLEEVE\nSCREW\n1\n1\n1\n1\n2\n2\n2\n2\n1\n4\n4\n1\n1\n1\n2\n3\n4\n1\n4\n1\n1\n8855",
+    "total_parts": 19,
+    "parts": [
+        {
+            "item": "1",
+            "part_number": "570307149929",
+            "description": "HYD ACCUM. CPC",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "2",
+            "part_number": "570307149930",
+            "description": "FLEX SLEEVE",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "3",
+            "part_number": "570307149903",
+            "description": "PRESSURE SENSOR",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "4",
+            "part_number": "570307149931",
+            "description": "KIT TUBE HIGH PRESUURE",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "5",
+            "part_number": "570307149921",
+            "description": "NUT",
+            "quantity": 2,
+            "remarks": ""
+        },
+        {
+            "item": "6",
+            "part_number": "570307149906",
+            "description": "WASHER 8X16X1.10",
+            "quantity": 2,
+            "remarks": ""
+        },
+        {
+            "item": "7",
+            "part_number": "570307149922",
+            "description": "PLANE WASHER",
+            "quantity": 2,
+            "remarks": ""
+        },
+        {
+            "item": "8",
+            "part_number": "570301169906",
+            "description": "BRACKET",
+            "quantity": 2,
+            "remarks": ""
+        },
+        {
+            "item": "9",
+            "part_number": "570307149908",
+            "description": "TUBE",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "10",
+            "part_number": "570301169907",
+            "description": "SEAL GASKET",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "11",
+            "part_number": "570301169908",
+            "description": "INJECTOR",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "12",
+            "part_number": "570307149932",
+            "description": "TUBE HIGH PRESUURE",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "13",
+            "part_number": "570307149933",
+            "description": "GASOLINE REYCY RUB.PPE",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "14",
+            "part_number": "570307149934",
+            "description": "INJECTOR BRACKET",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "15",
+            "part_number": "570307149912",
+            "description": "SCREW M8X30",
+            "quantity": 2,
+            "remarks": ""
+        },
+        {
+            "item": "16",
+            "part_number": "570307149925",
+            "description": "SCREW & WASHER",
+            "quantity": 3,
+            "remarks": ""
+        },
+        {
+            "item": "17",
+            "part_number": "570307149914",
+            "description": "COLLER",
+            "quantity": 2,
+            "remarks": ""
+        },
+        {
+            "item": "18",
+            "part_number": "570307149935",
+            "description": "SCREW",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "19",
+            "part_number": "570301169904",
+            "description": "GASKET",
+            "quantity": 4,
+            "remarks": ""
+        }
+    ]
+}

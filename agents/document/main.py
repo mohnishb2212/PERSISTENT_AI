@@ -1,6 +1,6 @@
 from pathlib import Path
 from tabulate import tabulate
-
+import time
 from agents.document import DocumentAgent
 from agents.document.human_review import human_review
 
@@ -10,7 +10,7 @@ from agents.document.human_review import human_review
 # -------------------------------------------------
 
 pdf_path = "CATALOGUES/TATA_INDICA.pdf"
-query = "FUEL INJECTION SYSTEM"
+query = "intake and exhaust valve"
 
 
 # -------------------------------------------------
@@ -36,10 +36,35 @@ print("Workflow graph saved as document_graph.png")
 # Run Document Agent
 # -------------------------------------------------
 
+# -------------------------------------------------
+# PERFORMANCE TEST
+# -------------------------------------------------
+
+print("\n" + "=" * 100)
+print("DOCUMENT AGENT PERFORMANCE TEST")
+print("=" * 100)
+
+document_start = time.perf_counter()
+
 result = agent.invoke(
     pdf_path=pdf_path,
     query=query
 )
+
+document_end = time.perf_counter()
+
+document_time = document_end - document_start
+
+print("\n" + "=" * 100)
+print("DOCUMENT AGENT COMPLETED")
+print("=" * 100)
+
+print(
+    f"\nTotal Document Agent time: "
+    f"{document_time:.2f} seconds"
+)
+
+print("=" * 100)
 
 
 # -------------------------------------------------

@@ -1,6 +1,6 @@
 {
     "assembly": "hand brake",
-    "catalogue": "MAHINDRA_SCORPIO",
+    "catalogue": "Mahindra Scorpio",
     "total_parts": 16,
     "parts": [
         {
@@ -124,12 +124,12 @@
             "item": "10",
             "part_number": "0068266",
             "description": "ROLLER",
-            "required_quantity": 7,
+            "required_quantity": 1,
             "available_quantity": 0,
             "remaining_quantity": 0,
             "minimum_threshold": 2,
             "status": "OUT_OF_STOCK",
-            "procurement_required": 7,
+            "procurement_required": 1,
             "rack_location": "D-03",
             "supplier": "Mahindra"
         },
@@ -219,6 +219,6 @@
         "low_stock": 1,
         "shortage": 3,
         "out_of_stock": 5,
-        "total_procurement_required": 20
+        "total_procurement_required": 14
     }
 }

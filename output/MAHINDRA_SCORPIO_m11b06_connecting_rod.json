@@ -1,0 +1,49 @@
+{
+    "assembly": "GROUP M11B06 - CONNECTING ROD",
+    "catalogue": "M11B04 - CRANKSHAFT BEARING GROUP M11B06 - CONNECTING ROD QUANTITY PER VEHICLE QUANTITY PER VEHICLE FIG. NO. PART NO. DESCRIPTION FIG. NO. PART NO. DESCRIPTION ALL 2.6 TURBO 2.6 DLX 2.6 GLX ALL 2.6 TURBO 2.6 DLX 2.6 GLX 1 0022656 MAIN BEARING UPPER KOEL TC 5 1 0023124 ASSEMBLY CONNECTING ROD TC 4 1 0022655 MAIN BEARING LOWER KOEL TC 5 2 0022734 BUSH SMALL END CONNECTING ROD 4 2 0022642 C/SHAFT THRUST WASHER LOWER KOEL 2 3 0023129 BOLT CONNECTING ROD 8 2 0022645 C/SHAFT THRUST WASHER UPPER KOEL 2 0022572 KIT CONNECTING ROD ASSEMBLY TC 1 0022561 KIT MAIN BEARING SET CONSISTS OF: CONSISTS OF: OPTIONAL 0023143 8 - BEARING SHELL CON ROD TC 0022642 2 - C/SFT THRUST WASHER LWR KOEL 0023124 4 - ASSEMBLY CONNECTING ROD 0022621 2 - C/SFT THRUST WASHER LOWER 0022645 3 - C/SFT THRUST WASHER UPR KOEL 0022630 2 - C/SFT THRUST WASHER UPPER 0022656 5 - MAIN BRG SHELL LOWER TC KOEL 0022638 5 - MAIN BEARING SHELL LOWER TC 0022655 5 - MAIN BRG SHELL UPPER TC KOEL 0022639 5 - MAIN BEARING SHELL UPPER TC 0022562 KIT THRUST WASHER SET STD CONSISTS OF: 0022621 2 - C/SHAFT THRUST WASHER LOWER 0022630 2 - C/SHAFT THRUST WASHER UPPER M11B04.1 M11B06.1",
+    "total_parts": 6,
+    "parts": [
+        {
+            "item": "",
+            "part_number": "0023124",
+            "description": "ASSEMBLY CONNECTING ROD (TC)",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "",
+            "part_number": "0022734",
+            "description": "BUSH SMALL END CONNECTING ROD",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "",
+            "part_number": "0023129",
+            "description": "BOLT CONNECTING ROD",
+            "quantity": 8,
+            "remarks": ""
+        },
+        {
+            "item": "",
+            "part_number": "0022572",
+            "description": "KIT CONNECTING ROD ASSEMBLY (TC) CONSISTS OF: 8 - BEARING SHELL CON ROD (TC) 4 - ASSEMBLY CONNECTING ROD",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "",
+            "part_number": "0023143",
+            "description": "8 - BEARING SHELL CON ROD (TC)",
+            "quantity": null,
+            "remarks": ""
+        },
+        {
+            "item": "",
+            "part_number": "0023124",
+            "description": "4 - ASSEMBLY CONNECTING ROD",
+            "quantity": null,
+            "remarks": ""
+        }
+    ]
+}

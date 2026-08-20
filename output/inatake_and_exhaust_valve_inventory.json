@@ -1,6 +1,6 @@
 {
-    "assembly": "intake and exhaust valve",
-    "catalogue": "Tata Indica",
+    "assembly": "inatake and exhaust valve",
+    "catalogue": "TATA_INDICA",
     "total_parts": 12,
     "parts": [
         {
@@ -106,7 +106,7 @@
             "item": "8",
             "part_number": "570305129906",
             "description": "PROT.SEMI CONE VALVE",
-            "required_quantity": 42,
+            "required_quantity": 32,
             "available_quantity": 0,
             "minimum_threshold": 10,
             "rack_location": "F-04",

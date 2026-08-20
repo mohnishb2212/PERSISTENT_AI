@@ -1,6 +1,6 @@
 {
-    "assembly": "intake and exhaust valve",
-    "catalogue": "Tata Indica",
+    "assembly": "inatake and exhaust valve",
+    "catalogue": "TATA_INDICA",
     "total_parts": 12,
     "parts": [
         {
@@ -9,10 +9,12 @@
             "description": "VALVE INLET",
             "required_quantity": 8,
             "available_quantity": 1,
+            "remaining_quantity": 0,
             "minimum_threshold": 8,
+            "status": "SHORTAGE",
+            "procurement_required": 7,
             "rack_location": "E-05",
-            "supplier": "Tata",
-            "remarks": ""
+            "supplier": "Tata"
         },
         {
             "item": "2",
@@ -20,10 +22,12 @@
             "description": "VALVE EXHAUST",
             "required_quantity": 8,
             "available_quantity": 0,
+            "remaining_quantity": 0,
             "minimum_threshold": 8,
+            "status": "OUT_OF_STOCK",
+            "procurement_required": 8,
             "rack_location": "E-06",
-            "supplier": "Tata",
-            "remarks": ""
+            "supplier": "Tata"
         },
         {
             "item": "3",
@@ -31,10 +35,12 @@
             "description": "VALVE GUIDE +0.05",
             "required_quantity": 16,
             "available_quantity": 24,
+            "remaining_quantity": 8,
             "minimum_threshold": 10,
+            "status": "LOW_STOCK_AFTER_ASSEMBLY",
+            "procurement_required": 0,
             "rack_location": "E-07",
-            "supplier": "Tata",
-            "remarks": ""
+            "supplier": "Tata"
         },
         {
             "item": "3",
@@ -42,10 +48,12 @@
             "description": "VALVE GUIDE +0.10",
             "required_quantity": 16,
             "available_quantity": 16,
+            "remaining_quantity": 0,
             "minimum_threshold": 10,
+            "status": "LOW_STOCK_AFTER_ASSEMBLY",
+            "procurement_required": 0,
             "rack_location": "E-08",
-            "supplier": "Tata",
-            "remarks": ""
+            "supplier": "Tata"
         },
         {
             "item": "3",
@@ -53,10 +61,12 @@
             "description": "VALVE GUIDE +0.20",
             "required_quantity": 16,
             "available_quantity": 12,
+            "remaining_quantity": 0,
             "minimum_threshold": 10,
+            "status": "SHORTAGE",
+            "procurement_required": 4,
             "rack_location": "E-09",
-            "supplier": "Tata",
-            "remarks": ""
+            "supplier": "Tata"
         },
         {
             "item": "4",
@@ -64,10 +74,12 @@
             "description": "SEAL",
             "required_quantity": 16,
             "available_quantity": 0,
+            "remaining_quantity": 0,
             "minimum_threshold": 10,
+            "status": "OUT_OF_STOCK",
+            "procurement_required": 16,
             "rack_location": "E-10",
-            "supplier": "Tata",
-            "remarks": ""
+            "supplier": "Tata"
         },
         {
             "item": "5",
@@ -75,10 +87,12 @@
             "description": "CUP LOWER",
             "required_quantity": 16,
             "available_quantity": 33,
+            "remaining_quantity": 17,
             "minimum_threshold": 10,
+            "status": "AVAILABLE",
+            "procurement_required": 0,
             "rack_location": "F-01",
-            "supplier": "Tata",
-            "remarks": ""
+            "supplier": "Tata"
         },
         {
             "item": "6",
@@ -86,10 +100,12 @@
             "description": "SPRING",
             "required_quantity": 16,
             "available_quantity": 17,
+            "remaining_quantity": 1,
             "minimum_threshold": 10,
+            "status": "LOW_STOCK_AFTER_ASSEMBLY",
+            "procurement_required": 0,
             "rack_location": "F-02",
-            "supplier": "Tata",
-            "remarks": ""
+            "supplier": "Tata"
         },
         {
             "item": "7",
@@ -97,21 +113,25 @@
             "description": "CUP UPPER",
             "required_quantity": 16,
             "available_quantity": 11,
+            "remaining_quantity": 0,
             "minimum_threshold": 10,
+            "status": "SHORTAGE",
+            "procurement_required": 5,
             "rack_location": "F-03",
-            "supplier": "Tata",
-            "remarks": ""
+            "supplier": "Tata"
         },
         {
             "item": "8",
             "part_number": "570305129906",
             "description": "PROT.SEMI CONE VALVE",
-            "required_quantity": 42,
+            "required_quantity": 32,
             "available_quantity": 0,
+            "remaining_quantity": 0,
             "minimum_threshold": 10,
+            "status": "OUT_OF_STOCK",
+            "procurement_required": 32,
             "rack_location": "F-04",
-            "supplier": "Tata",
-            "remarks": ""
+            "supplier": "Tata"
         },
         {
             "item": "9",
@@ -119,10 +139,12 @@
             "description": "ROCKER",
             "required_quantity": 16,
             "available_quantity": 25,
+            "remaining_quantity": 9,
             "minimum_threshold": 10,
+            "status": "LOW_STOCK_AFTER_ASSEMBLY",
+            "procurement_required": 0,
             "rack_location": "F-05",
-            "supplier": "Tata",
-            "remarks": ""
+            "supplier": "Tata"
         },
         {
             "item": "10",
@@ -130,10 +152,21 @@
             "description": "TAPPET HYD. PUSH ROD",
             "required_quantity": 16,
             "available_quantity": 18,
+            "remaining_quantity": 2,
             "minimum_threshold": 10,
+            "status": "LOW_STOCK_AFTER_ASSEMBLY",
+            "procurement_required": 0,
             "rack_location": "F-06",
-            "supplier": "Tata",
-            "remarks": ""
+            "supplier": "Tata"
         }
-    ]
+    ],
+    "assembly_status": "ASSEMBLY NOT READY",
+    "summary": {
+        "total_parts": 12,
+        "available": 1,
+        "low_stock": 5,
+        "shortage": 3,
+        "out_of_stock": 3,
+        "total_procurement_required": 72
+    }
 }

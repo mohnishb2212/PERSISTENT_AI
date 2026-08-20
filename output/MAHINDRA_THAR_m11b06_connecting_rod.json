@@ -1,0 +1,28 @@
+{
+    "assembly": "GROUP M11B06 - CONNECTING ROD",
+    "catalogue": "GROUP M11B06 - CONNECTING ROD GROUP M11B07 - CONNECTING ROD BEARING QUANTITY PER VEHICLE QUANTITY PER VEHICLE FIG. NO. PART NO. DESCRIPTION FIG. NO. PART NO. DESCRIPTION ALL TCE1 TCE3 TCE4 ALL TCE1 TCE3 TCE4 1 0312BC0040N ASSEMBLY CONNECTING ROD TC 4 1 0312BC0150N KIT CONNECTING ROD BEARING STD 1 2 0022734 BUSH SMALL END CONNECTING ROD 4 CONSISTS OF: 3 0023129 BOLT CONNECTING ROD 8 0022834 8 - BEARING CONNECTING ROD KOEL NS 1 0024410 KIT CONNECTING ROD BEARING 0.25 U/S 1 CONSISTS OF: 0022742 8 - BEARING CONNECTING ROD NS 1 0024411 KIT CONNECTING ROD BEARING 0.50 U/S 1 CONSISTS OF: 0022743 8 - BEARING CONNECTING ROD NS 1 0024412 KIT CONNECTING ROD BEARING 0.75 U/S 1 CONSISTS OF: 0022744 8 - BEARING CONNECTING ROD NS M11B06.1 PCT-00041-NEW THAR CRDE RHD REFRESH BS4 4WD VER 6 - JULY 2015 M11B07.1",
+    "total_parts": 3,
+    "parts": [
+        {
+            "item": "1",
+            "part_number": "0312BC0040N",
+            "description": "ASSEMBLY CONNECTING ROD (TC)",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "2",
+            "part_number": "0022734",
+            "description": "BUSH SMALL END CONNECTING ROD",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "3",
+            "part_number": "0023129",
+            "description": "BOLT CONNECTING ROD",
+            "quantity": 8,
+            "remarks": ""
+        }
+    ]
+}

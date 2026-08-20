@@ -6,7 +6,7 @@
 
 **Assembly:** hand brake
 
-**Catalogue:** MAHINDRA_SCORPIO
+**Catalogue:** Mahindra Scorpio
 
 ---
 
@@ -25,7 +25,7 @@
 | Low Stock            |       1 |
 | Shortage             |       3 |
 | Out Of Stock         |       5 |
-| Procurement Required |      20 |
+| Procurement Required |      14 |
 
 ---
 
@@ -42,7 +42,7 @@
 |      7 | 0605BA0120N   |          1 |           0 |           0 | OUT_OF_STOCK             |             1 |
 |      8 | 57060A0010N   |          2 |          12 |          10 | AVAILABLE                |             0 |
 |      9 | 0605AA0090N   |          1 |           1 |           0 | LOW_STOCK_AFTER_ASSEMBLY |             0 |
-|     10 | 0068266       |          7 |           0 |           0 | OUT_OF_STOCK             |             7 |
+|     10 | 0068266       |          1 |           0 |           0 | OUT_OF_STOCK             |             1 |
 |     11 | 6110214       |          1 |           0 |           0 | OUT_OF_STOCK             |             1 |
 |     12 | 0605BA0140N   |          1 |          14 |          13 | AVAILABLE                |             0 |
 |     13 | 0605BA0170N   |          2 |           5 |           3 | AVAILABLE                |             0 |
@@ -60,7 +60,7 @@
 | 0605AA0020N   | SQUARE GASKET                       |          1 |
 | 0068362       | CIRCLIP                             |          1 |
 | 0605BA0120N   | ASSEMBLY FRT CABLE & CONDUIT HS     |          1 |
-| 0068266       | ROLLER                              |          7 |
+| 0068266       | ROLLER                              |          1 |
 | 6110214       | WASHER PLAIN M10                    |          1 |
 | 56060A0010N   | CBI SCR WITH SPL WASHER M6 x 1 - 12 |          2 |
 | 0605BA0180N   | REAR CABLE GUIDE CLIP               |          4 |

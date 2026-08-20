@@ -153,7 +153,7 @@ st.markdown(
     [data-testid="stMain"] .block-container {
         padding-top: 2.5rem;
         padding-bottom: 3rem;
-        max-width: 1200px;
+        max-width: 1320px;
     }
 
     /* ---------------------------------------------------- */
@@ -414,9 +414,20 @@ st.markdown(
     [data-testid="stDataFrame"] {
         border: 1px solid var(--persistent-border);
         border-radius: var(--radius-md);
-        overflow: hidden;
+        overflow-x: auto;
+        overflow-y: hidden;
         box-shadow: var(--shadow-sm);
         background: var(--persistent-surface);
+        max-width: 100%;
+    }
+
+    [data-testid="stDataFrame"] > div {
+        max-width: 100%;
+    }
+
+    [data-testid="stExpanderDetails"],
+    details {
+        overflow-x: auto;
     }
 
     /* ---------------------------------------------------- */
@@ -882,6 +893,7 @@ defaults = {
     "diagnostic_symptom": None,
     "assembly_query": "",
     "show_diagnostic_panel": False,
+    "catalogue_pdf_path": None,
 }
 
 for key, value in defaults.items():
@@ -1372,6 +1384,8 @@ def reset_results():
     st.session_state.diagnostic_result = None
     st.session_state.diagnostic_symptom = None
 
+    st.session_state.catalogue_pdf_path = None
+
 
 # ============================================================
 # BOM → DATAFRAME
@@ -1649,13 +1663,17 @@ def inventory_display_dataframe(
 def run_remaining_pipeline(bom):
 
     with st.status(
-        "Running analysis...",
+        "🚀 Running analysis pipeline...",
         expanded=True,
     ) as status:
 
         # ----------------------------------------------------
         # INVENTORY AGENT
         # ----------------------------------------------------
+
+        status.update(
+            label="📦 Inventory Agent: checking stock levels..."
+        )
 
         st.write(
             "Checking inventory..."
@@ -1675,10 +1693,18 @@ def run_remaining_pipeline(bom):
             "inventory"
         ]
 
+        st.write(
+            "✅ Inventory check complete."
+        )
+
 
         # ----------------------------------------------------
         # DECISION AGENT
         # ----------------------------------------------------
+
+        status.update(
+            label="🧮 Decision Agent: analysing shortages..."
+        )
 
         st.write(
             "Analysing inventory..."
@@ -1710,10 +1736,18 @@ def run_remaining_pipeline(bom):
             decision_result
         )
 
+        st.write(
+            "✅ Decision analysis complete."
+        )
+
 
         # ----------------------------------------------------
         # REPORT AGENT
         # ----------------------------------------------------
+
+        status.update(
+            label="📝 Report Agent: composing final report..."
+        )
 
         st.write(
             "Generating final report..."
@@ -1731,8 +1765,12 @@ def run_remaining_pipeline(bom):
             report_result
         )
 
+        st.write(
+            "✅ Report generated."
+        )
+
         status.update(
-            label="Analysis completed successfully.",
+            label="✅ Analysis completed successfully.",
             state="complete",
         )
 
@@ -2192,7 +2230,7 @@ with main_col:
             else:
 
                 with st.status(
-                    "Running Document Agent...",
+                    "🔍 Document Agent: reading catalogue...",
                     expanded=True,
                 ) as status:
 
@@ -2205,8 +2243,12 @@ with main_col:
                         )
 
                         st.write(
-                            "Reading catalogue and "
+                            "📄 Reading catalogue and "
                             "locating the requested assembly..."
+                        )
+
+                        st.write(
+                            "🤖 Generating the Bill of Materials..."
                         )
 
                         result = (
@@ -2252,6 +2294,10 @@ with main_col:
                             bom
                         )
 
+                        st.session_state.catalogue_pdf_path = (
+                            str(pdf_path)
+                        )
+
                         st.session_state.analysis_mode = (
                             analysis_mode
                         )
@@ -2261,13 +2307,13 @@ with main_col:
                         )
 
                         st.write(
-                            f"BOM extracted in "
+                            f"✅ BOM extracted in "
                             f"{elapsed:.2f} seconds."
                         )
 
                         status.update(
                             label=(
-                                "Document Agent completed."
+                                "✅ Document Agent completed."
                             ),
                             state="complete",
                         )
@@ -2276,7 +2322,7 @@ with main_col:
 
                         status.update(
                             label=(
-                                "Document Agent failed."
+                                "❌ Document Agent failed."
                             ),
                             state="error",
                         )
@@ -3028,7 +3074,7 @@ if st.session_state.show_diagnostic_panel:
                 ).strip()
 
                 with st.spinner(
-                    "Diagnostic Agent is checking the catalogue..."
+                    "🩺 Diagnostic Agent is checking the catalogue..."
                 ):
 
                     diagnostic_agent = DiagnosticAgent()

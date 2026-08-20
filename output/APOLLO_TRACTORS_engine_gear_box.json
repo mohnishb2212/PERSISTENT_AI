@@ -1,7 +1,7 @@
 {
     "assembly": "ENGINE GEAR BOX ASSLY",
-    "catalogue": "Parts Manual",
-    "total_parts": 28,
+    "catalogue": "Parts Manual ENGINE GEAR BOX ASSLY",
+    "total_parts": 30,
     "parts": [
         {
             "item": "1",
@@ -102,6 +102,13 @@
             "remarks": ""
         },
         {
+            "item": "15",
+            "part_number": "J10193AA",
+            "description": "Circlip",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
             "item": "1",
             "part_number": "G30100AA",
             "description": "Gear Box Complete",
@@ -196,6 +203,13 @@
             "item": "14",
             "part_number": "G30400AA",
             "description": "Input Coupling Half",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "15",
+            "part_number": "J10193AA",
+            "description": "Circlip",
             "quantity": 1,
             "remarks": ""
         }

@@ -6,7 +6,7 @@
         {
             "item": "1",
             "part_number": "570305129907",
-            "description": "VALVE(INLET)",
+            "description": "VALVE INLET",
             "required_quantity": 8,
             "available_quantity": 1,
             "remaining_quantity": 0,
@@ -19,7 +19,7 @@
         {
             "item": "2",
             "part_number": "570305129908",
-            "description": "VALVE(EXHAUST)",
+            "description": "VALVE EXHAUST",
             "required_quantity": 8,
             "available_quantity": 0,
             "remaining_quantity": 0,
@@ -84,10 +84,10 @@
         {
             "item": "5",
             "part_number": "570305129909",
-            "description": "CUP(LOWER)",
-            "required_quantity": 18,
+            "description": "CUP LOWER",
+            "required_quantity": 16,
             "available_quantity": 33,
-            "remaining_quantity": 15,
+            "remaining_quantity": 17,
             "minimum_threshold": 10,
             "status": "AVAILABLE",
             "procurement_required": 0,
@@ -110,7 +110,7 @@
         {
             "item": "7",
             "part_number": "570305129911",
-            "description": "CUP(UPPER)",
+            "description": "CUP UPPER",
             "required_quantity": 16,
             "available_quantity": 11,
             "remaining_quantity": 0,
@@ -124,12 +124,12 @@
             "item": "8",
             "part_number": "570305129906",
             "description": "PROT.SEMI CONE VALVE",
-            "required_quantity": 22,
+            "required_quantity": 42,
             "available_quantity": 0,
             "remaining_quantity": 0,
             "minimum_threshold": 10,
             "status": "OUT_OF_STOCK",
-            "procurement_required": 22,
+            "procurement_required": 42,
             "rack_location": "F-04",
             "supplier": "Tata"
         },
@@ -149,7 +149,7 @@
         {
             "item": "10",
             "part_number": "570305149904",
-            "description": "TAPPET(HYD. PUSH ROD)",
+            "description": "TAPPET HYD. PUSH ROD",
             "required_quantity": 16,
             "available_quantity": 18,
             "remaining_quantity": 2,
@@ -167,6 +167,6 @@
         "low_stock": 5,
         "shortage": 3,
         "out_of_stock": 3,
-        "total_procurement_required": 62
+        "total_procurement_required": 82
     }
 }
