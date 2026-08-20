@@ -1,0 +1,205 @@
+{
+    "assembly": "PUSH ROLLER ASSEMBLY",
+    "catalogue": "APOLLO_TRACTORS",
+    "total_parts": 18,
+    "parts": [
+        {
+            "item": "1",
+            "part_number": "M20100AA",
+            "description": "Oscillating Beam",
+            "required_quantity": 1,
+            "available_quantity": 4,
+            "minimum_threshold": 2,
+            "rack_location": "V-01",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "2",
+            "part_number": "M20100AH",
+            "description": "Mounting Bracket",
+            "required_quantity": 1,
+            "available_quantity": 4,
+            "minimum_threshold": 2,
+            "rack_location": "V-02",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "3",
+            "part_number": "M20110AA",
+            "description": "Push Roller Pipe",
+            "required_quantity": 2,
+            "available_quantity": 0,
+            "minimum_threshold": 2,
+            "rack_location": "V-03",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "4",
+            "part_number": "M20140AA",
+            "description": "Pin",
+            "required_quantity": 1,
+            "available_quantity": 1,
+            "minimum_threshold": 2,
+            "rack_location": "V-04",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "5",
+            "part_number": "M20110AC",
+            "description": "Push Roller Mount Plate",
+            "required_quantity": 4,
+            "available_quantity": 2,
+            "minimum_threshold": 4,
+            "rack_location": "V-05",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "6",
+            "part_number": "M20110AD",
+            "description": "Scrapper",
+            "required_quantity": 2,
+            "available_quantity": 5,
+            "minimum_threshold": 2,
+            "rack_location": "V-06",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "7",
+            "part_number": "N20050AA",
+            "description": "Hex Bolt - M20 x 40",
+            "required_quantity": 8,
+            "available_quantity": 16,
+            "minimum_threshold": 8,
+            "rack_location": "V-07",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "8",
+            "part_number": "N55205AA",
+            "description": "Plain Washer - M20",
+            "required_quantity": 6,
+            "available_quantity": 12,
+            "minimum_threshold": 6,
+            "rack_location": "V-08",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "9",
+            "part_number": "M20110AE",
+            "description": "Washer",
+            "required_quantity": 1,
+            "available_quantity": 4,
+            "minimum_threshold": 2,
+            "rack_location": "V-09",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "10",
+            "part_number": "N55171AA",
+            "description": "Hex Nut - M30",
+            "required_quantity": 1,
+            "available_quantity": 4,
+            "minimum_threshold": 2,
+            "rack_location": "V-10",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "11",
+            "part_number": "N06050AA",
+            "description": "Hex Bolt - M6 x 60",
+            "required_quantity": 1,
+            "available_quantity": 3,
+            "minimum_threshold": 2,
+            "rack_location": "V-11",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "12",
+            "part_number": "N55145AA",
+            "description": "Hex Nut - M6",
+            "required_quantity": 1,
+            "available_quantity": 4,
+            "minimum_threshold": 2,
+            "rack_location": "V-12",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "13",
+            "part_number": "N08040AA",
+            "description": "Hex Bolt - M8 x 40",
+            "required_quantity": 3,
+            "available_quantity": 12,
+            "minimum_threshold": 6,
+            "rack_location": "V-13",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "14",
+            "part_number": "N20050AA",
+            "description": "Hex Bolt - M20 x 40",
+            "required_quantity": 1,
+            "available_quantity": 16,
+            "minimum_threshold": 8,
+            "rack_location": "V-07",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "15",
+            "part_number": "N55170AA",
+            "description": "Hex Nut - M20",
+            "required_quantity": 1,
+            "available_quantity": 4,
+            "minimum_threshold": 2,
+            "rack_location": "V-14",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "16",
+            "part_number": "N55205AA",
+            "description": "Plain Washer - M20",
+            "required_quantity": 1,
+            "available_quantity": 12,
+            "minimum_threshold": 6,
+            "rack_location": "V-08",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "17",
+            "part_number": "M20130AA",
+            "description": "Push Roller Shaft",
+            "required_quantity": 2,
+            "available_quantity": 4,
+            "minimum_threshold": 2,
+            "rack_location": "V-15",
+            "supplier": "Apollo",
+            "remarks": ""
+        },
+        {
+            "item": "18",
+            "part_number": "B10160AA",
+            "description": "Ball Bearing",
+            "required_quantity": 4,
+            "available_quantity": 8,
+            "minimum_threshold": 4,
+            "rack_location": "V-16",
+            "supplier": "Apollo",
+            "remarks": ""
+        }
+    ]
+}

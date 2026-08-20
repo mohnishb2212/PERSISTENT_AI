@@ -9,6 +9,10 @@ SEED_FILE = BASE_DIR / "assembly_parts_seed.json"
 DATABASE_FILE = BASE_DIR / "central_inventory.db"
 
 
+def normalize_catalogue_name(value):
+    return str(value).strip().upper().replace(" ", "_")
+
+
 def create_database():
     if DATABASE_FILE.exists():
         DATABASE_FILE.unlink()
@@ -91,12 +95,12 @@ def create_database():
             ) VALUES (?, ?, ?, ?, ?)
             """,
             (
-                row["catalogue_name"],
-                row["assembly_name"],
-                int(row["callout_number"]),
-                row["part_number"],
-                int(row["required_quantity"]),
-            ),
+    normalize_catalogue_name(row["catalogue_name"]),
+    row["assembly_name"].strip(),
+    int(row["callout_number"]),
+    row["part_number"].strip(),
+    int(row["required_quantity"]),
+),
         )
 
     connection.commit()

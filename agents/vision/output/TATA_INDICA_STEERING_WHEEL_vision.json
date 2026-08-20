@@ -1,0 +1,91 @@
+{
+    "assembly": "STEERING WHEEL",
+    "catalogue": "TATA_INDICA",
+    "total_parts": 12,
+    "parts": [
+        {
+            "item": "1",
+            "part_number": "287168900226ZY",
+            "description": "ASSY. STEERING WHEEL W/O SWITCHES (AIRBAG)(SUN)",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "2",
+            "part_number": "287168906343A3",
+            "description": "BOTTOM COVER STEERING WHEEL 4 SPOKE MG (SUN)",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "3",
+            "part_number": "287168900199A3",
+            "description": "ASSY. STEERING WHEEL STRUCTURE MG 4 SPOKE (SUN)",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "4",
+            "part_number": "287154500143AL",
+            "description": "KIT ASSY STEERING WHEEL SWITCH DUMMY CAP-SHUTAM",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "5",
+            "part_number": "287168900119A3",
+            "description": "ASSY HORN PAD WITH DAB MODULE (AUTOLIV)",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "6",
+            "part_number": "287168906348A3",
+            "description": "PLASTIC CAP BOTTOM COVER LH",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "7",
+            "part_number": "287168906349A3",
+            "description": "PLASTIC CAP BOTTOM COVER RH",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "8",
+            "part_number": "287168903201",
+            "description": "TORX BOLT M6X11",
+            "quantity": 2,
+            "remarks": ""
+        },
+        {
+            "item": "9",
+            "part_number": "287168900265A3",
+            "description": "ASSY NACELLE LOWER WITH FOAM",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "10",
+            "part_number": "287168406324",
+            "description": "NACELLE LOWER FOAM",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "11",
+            "part_number": "287168906365A3",
+            "description": "NACELLE LOWER ENCAP",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "12",
+            "part_number": "287168906330A3",
+            "description": "NACELLE UPPER",
+            "quantity": 1,
+            "remarks": ""
+        }
+    ]
+}

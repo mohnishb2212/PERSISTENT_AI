@@ -1,0 +1,68 @@
+{
+    "assembly": "CLUTCH",
+    "catalogue": "MAHINDRA_SCORPIO",
+    "total_parts": 4,
+    "parts": [
+        {
+            "item": "1",
+            "part_number": "0801BA0020N",
+            "description": "CLUTCH DRIVEN PLATE (NEF NA / TC)",
+            "required_quantity": 1,
+            "available_quantity": 0,
+            "remaining_quantity": 0,
+            "minimum_threshold": 2,
+            "status": "OUT_OF_STOCK",
+            "procurement_required": 1,
+            "rack_location": "V-17",
+            "supplier": "Mahindra"
+        },
+        {
+            "item": "2",
+            "part_number": "0801CA0030N",
+            "description": "CLUTCH COVER ASSEMBLY (NEF TC)",
+            "required_quantity": 1,
+            "available_quantity": 1,
+            "remaining_quantity": 0,
+            "minimum_threshold": 2,
+            "status": "LOW_STOCK_AFTER_ASSEMBLY",
+            "procurement_required": 0,
+            "rack_location": "V-18",
+            "supplier": "Mahindra"
+        },
+        {
+            "item": "3",
+            "part_number": "3108224",
+            "description": "SCREW HEX HD M8 x 1.25 - 20",
+            "required_quantity": 6,
+            "available_quantity": 6,
+            "remaining_quantity": 0,
+            "minimum_threshold": 6,
+            "status": "LOW_STOCK_AFTER_ASSEMBLY",
+            "procurement_required": 0,
+            "rack_location": "V-19",
+            "supplier": "Mahindra"
+        },
+        {
+            "item": "4",
+            "part_number": "7903055003",
+            "description": "SPRING LOCK WASHER M8",
+            "required_quantity": 6,
+            "available_quantity": 3,
+            "remaining_quantity": 0,
+            "minimum_threshold": 6,
+            "status": "SHORTAGE",
+            "procurement_required": 3,
+            "rack_location": "V-20",
+            "supplier": "Mahindra"
+        }
+    ],
+    "assembly_status": "ASSEMBLY NOT READY",
+    "summary": {
+        "total_parts": 4,
+        "available": 0,
+        "low_stock": 2,
+        "shortage": 1,
+        "out_of_stock": 1,
+        "total_procurement_required": 4
+    }
+}

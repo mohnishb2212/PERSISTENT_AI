@@ -1,0 +1,133 @@
+{
+    "assembly": "PUSH ROLLER ASSEMBLY",
+    "catalogue": "APOLLO_TRACTORS",
+    "total_parts": 18,
+    "parts": [
+        {
+            "item": "1",
+            "part_number": "M20100AA",
+            "description": "Oscillating Beam",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "2",
+            "part_number": "M20100AH",
+            "description": "Mounting Bracket",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "3",
+            "part_number": "M20110AA",
+            "description": "Push Roller Pipe",
+            "quantity": 2,
+            "remarks": ""
+        },
+        {
+            "item": "4",
+            "part_number": "M20140AA",
+            "description": "Pin",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "5",
+            "part_number": "M20110AC",
+            "description": "Push Roller Mount Plate",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "6",
+            "part_number": "M20110AD",
+            "description": "Scrapper",
+            "quantity": 2,
+            "remarks": ""
+        },
+        {
+            "item": "7",
+            "part_number": "N20050AA",
+            "description": "Hex Bolt - M20 x 40",
+            "quantity": 8,
+            "remarks": ""
+        },
+        {
+            "item": "8",
+            "part_number": "N55205AA",
+            "description": "Plain Washer - M20",
+            "quantity": 6,
+            "remarks": ""
+        },
+        {
+            "item": "9",
+            "part_number": "M20110AE",
+            "description": "Washer",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "10",
+            "part_number": "N55171AA",
+            "description": "Hex Nut - M30",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "11",
+            "part_number": "N06050AA",
+            "description": "Hex Bolt - M6 x 60",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "12",
+            "part_number": "N55145AA",
+            "description": "Hex Nut - M6",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "13",
+            "part_number": "N08040AA",
+            "description": "Hex Bolt - M8 x 40",
+            "quantity": 6,
+            "remarks": ""
+        },
+        {
+            "item": "14",
+            "part_number": "N20050AA",
+            "description": "Hex Bolt - M20 x 40",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "15",
+            "part_number": "N55170AA",
+            "description": "Hex Nut - M20",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "16",
+            "part_number": "N55205AA",
+            "description": "Plain Washer - M20",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "17",
+            "part_number": "M20130AA",
+            "description": "Push Roller Shaft",
+            "quantity": 2,
+            "remarks": ""
+        },
+        {
+            "item": "18",
+            "part_number": "B10160AA",
+            "description": "Ball Bearing",
+            "quantity": 4,
+            "remarks": ""
+        }
+    ]
+}

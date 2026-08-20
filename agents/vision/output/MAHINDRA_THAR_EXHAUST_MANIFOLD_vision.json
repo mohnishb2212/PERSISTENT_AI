@@ -1,0 +1,112 @@
+{
+    "assembly": "EXHAUST MANIFOLD",
+    "catalogue": "MAHINDRA_THAR",
+    "total_parts": 15,
+    "parts": [
+        {
+            "item": "1",
+            "part_number": "0302DC0050N",
+            "description": "EXHAUST MANIFOLD",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "2",
+            "part_number": "0023551",
+            "description": "STUD EXHAUST MANIFOLD - 110 x 8",
+            "quantity": 2,
+            "remarks": ""
+        },
+        {
+            "item": "3",
+            "part_number": "0023552",
+            "description": "EXHAUST MANIFOLD STUD 60 x 8",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "4",
+            "part_number": "0024034",
+            "description": "STUD PIPE TURBOCHARGER OUTLET",
+            "quantity": 3,
+            "remarks": ""
+        },
+        {
+            "item": "5",
+            "part_number": "0024040",
+            "description": "GASKET EXHAUST MANIFOLD (TC)",
+            "quantity": 4,
+            "remarks": ""
+        },
+        {
+            "item": "6",
+            "part_number": "57080A0050N",
+            "description": "CLINCH NUT M8 x 1.25",
+            "quantity": 16,
+            "remarks": ""
+        },
+        {
+            "item": "7",
+            "part_number": "0024014",
+            "description": "EXHAUST MANIFOLD STUD 31 x 8",
+            "quantity": 3,
+            "remarks": ""
+        },
+        {
+            "item": "8",
+            "part_number": "09040A0130N",
+            "description": "HEAT SHIELD ALTERNATOR",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "9",
+            "part_number": "0024522",
+            "description": "BOLT M6 x 1 - 8",
+            "quantity": 2,
+            "remarks": ""
+        },
+        {
+            "item": "10",
+            "part_number": "0024018",
+            "description": "GASKET EXHAUST FLANGE TC",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "11",
+            "part_number": "0305GC0021N",
+            "description": "TURBOCHARGER KKK-K04-5.88 GCAAD",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "12",
+            "part_number": "0024032",
+            "description": "STUD PIPE TURBOCHARGER OUTLET",
+            "quantity": 2,
+            "remarks": ""
+        },
+        {
+            "item": "13",
+            "part_number": "0024033",
+            "description": "STUD PIPE TURBOCHARGER OUTLET",
+            "quantity": 2,
+            "remarks": ""
+        },
+        {
+            "item": "14",
+            "part_number": "0024019",
+            "description": "GASKET TURBOCHARGER OUTLET",
+            "quantity": 1,
+            "remarks": ""
+        },
+        {
+            "item": "15",
+            "part_number": "0024017",
+            "description": "PIPE TURBOCHARGER OUTLET (TCI)",
+            "quantity": 1,
+            "remarks": ""
+        }
+    ]
+}

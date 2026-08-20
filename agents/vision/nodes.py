@@ -1,321 +1,292 @@
 import base64
 import io
 import json
+import re
 from pathlib import Path
+from typing import Any
 
 from PIL import Image
 from langchain_core.messages import HumanMessage
 
 from .llm import get_llm
-from .prompts import (
-    COMPONENT_PROMPT,
-    QUANTITY_PROMPT,
-    INTEGRATION_PROMPT,
-)
+from .prompts import VISION_PROMPT
+from .schemas import VisionBOM, VisionExtraction
 from .state import VisionState
-from .schemas import VisionOutputSchema
 
 
-# ==========================================================
-# Helper: Parse JSON
-# ==========================================================
+# The shared database created for the redesigned Inventory Agent.
+DB_MODULE_PATH = Path(__file__).resolve().parents[2] / "inventory" / "db.py"
 
-def parse_json_response(response):
+def normalize_catalogue_name(value: str) -> str:
+    return str(value).strip().upper().replace(" ", "_")
 
-    # LangChain AIMessage
-    if hasattr(response, "content"):
-        content = response.content
-    else:
-        content = response
 
-    # Already a dictionary
+def _load_database_module():
+    """Load the shared inventory DB helpers without changing the project package layout."""
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "persistent_shared_inventory_db",
+        DB_MODULE_PATH,
+    )
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Could not load database module: {DB_MODULE_PATH}")
+
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def parse_json_response(response: Any) -> dict:
+    """Parse the model's JSON response robustly."""
+    content = getattr(response, "content", response)
+
     if isinstance(content, dict):
         return content
 
-    # Sometimes content can be a list
     if isinstance(content, list):
-
-        text_parts = []
-
+        parts = []
         for item in content:
-
             if isinstance(item, dict) and "text" in item:
-                text_parts.append(item["text"])
-
+                parts.append(str(item["text"]))
             else:
-                text_parts.append(str(item))
+                parts.append(str(item))
+        content = "".join(parts)
 
-        content = "".join(text_parts)
+    text = str(content).strip()
 
-    content = str(content).strip()
+    if text.startswith("```"):
+        text = text.replace("```json", "", 1)
+        text = text.replace("```", "")
+        text = text.strip()
 
-    # Remove markdown code fences
-    if content.startswith("```"):
+    start = text.find("{")
+    end = text.rfind("}")
 
-        content = content.replace("```json", "")
-        content = content.replace("```", "")
-        content = content.strip()
+    if start == -1 or end == -1 or end < start:
+        raise ValueError(f"LLM did not return a JSON object. Response: {text[:500]}")
 
-    # Find JSON object if model adds extra text
-    start = content.find("{")
-    end = content.rfind("}")
+    return json.loads(text[start : end + 1])
 
-    if start != -1 and end != -1:
-
-        content = content[start:end + 1]
-
-    return json.loads(content)
-
-
-# ==========================================================
-# Node 1 : Validate Input
-# ==========================================================
 
 def validate_input(state: VisionState):
-
     image_path = Path(state["image_path"])
 
     if not image_path.exists():
+        raise FileNotFoundError(f"Image not found: {image_path}")
 
-        raise FileNotFoundError(
-            f"Image not found:\n{image_path}"
-        )
+    if image_path.suffix.lower() not in {".png", ".jpg", ".jpeg", ".webp"}:
+        raise ValueError("Vision Agent input must be a PNG, JPG, JPEG, or WEBP image.")
+
+    catalogue_name = normalize_catalogue_name(
+    state["catalogue_name"]
+)
+    if not catalogue_name:
+        raise ValueError("Catalogue name cannot be empty.")
 
     return {
-        "image_path": str(image_path)
+        "image_path": str(image_path),
+        "catalogue_name": catalogue_name,
+        "status": "validated",
+        "error": "",
     }
 
-
-# ==========================================================
-# Node 2 : Load Image
-# ==========================================================
 
 def load_image(state: VisionState):
+    image = Image.open(state["image_path"]).convert("RGB")
 
-    image_path = Path(state["image_path"])
-
-    image = Image.open(image_path)
-
+    # PNG conversion makes the multimodal payload consistent across inputs.
     buffer = io.BytesIO()
-
-    image.save(
-        buffer,
-        format="PNG"
-    )
-
-    image_base64 = base64.b64encode(
-        buffer.getvalue()
-    ).decode("utf-8")
+    image.save(buffer, format="PNG")
 
     return {
-        "image_base64": image_base64
+        "image_base64": base64.b64encode(buffer.getvalue()).decode("utf-8"),
+        "status": "image_loaded",
     }
 
 
-# ==========================================================
-# Helper : Send image + prompt to LLM
-# ==========================================================
-
-def call_vision_llm(prompt, image_base64):
+def extract_assembly_and_callouts(state: VisionState):
+    """Single multimodal LLM call: assembly name + visible callout numbers only."""
+    print("\n[LLM] Identifying assembly name and callout numbers...")
 
     llm = get_llm()
 
     message = HumanMessage(
         content=[
-            {
-                "type": "text",
-                "text": prompt
-            },
+            {"type": "text", "text": VISION_PROMPT},
             {
                 "type": "image_url",
                 "image_url": {
-                    "url": (
-                        f"data:image/png;base64,"
-                        f"{image_base64}"
-                    )
-                }
-            }
+                    "url": f"data:image/png;base64,{state['image_base64']}"
+                },
+            },
         ]
     )
 
-    return llm.invoke([message])
+    response = llm.invoke([message])
+    raw = parse_json_response(response)
+    extraction = VisionExtraction.model_validate(raw)
 
-
-# ==========================================================
-# Node 3A : Component + Callout Analysis
-# ==========================================================
-
-def analyze_components(state: VisionState):
-
-    print(
-        "\n[LLM 1] "
-        "Identifying components and callouts..."
+    # Deduplicate while preserving the model's order.
+    unique_callouts = list(dict.fromkeys(extraction.callouts))
+    extraction = VisionExtraction(
+        assembly_name=extraction.assembly_name.strip(),
+        callouts=unique_callouts,
     )
 
-    response = call_vision_llm(
-        COMPONENT_PROMPT,
-        state["image_base64"]
-    )
-
-    result = parse_json_response(response)
-
-    print(
-        "[LLM 1] Component analysis completed."
-    )
-
-    # IMPORTANT:
-    # Return ONLY the field produced by this node.
-    #
-    # Do NOT return the complete state here because
-    # this node runs in parallel with analyze_quantities().
+    print(f"[LLM] Assembly detected: {extraction.assembly_name}")
+    print(f"[LLM] Callouts detected : {extraction.callouts}")
 
     return {
-        "component_analysis": result
+        "vision_extraction": extraction,
+        "status": "vision_extracted",
     }
 
 
-# ==========================================================
-# Node 3B : Quantity + Symmetry Analysis
-# ==========================================================
-
-def analyze_quantities(state: VisionState):
-
-    print(
-        "\n[LLM 2] "
-        "Analyzing quantity and symmetry..."
-    )
-
-    response = call_vision_llm(
-        QUANTITY_PROMPT,
-        state["image_base64"]
-    )
-
-    result = parse_json_response(response)
-
-    print(
-        "[LLM 2] Quantity analysis completed."
-    )
-
-    # IMPORTANT:
-    # Return ONLY the field produced by this node.
-    #
-    # This prevents a concurrent update conflict
-    # with analyze_components().
-
-    return {
-        "quantity_analysis": result
-    }
+def _normalize_name(value: str) -> str:
+    value = value.upper().strip()
+    value = re.sub(r"GROUP\s+[A-Z0-9-]+\s*[-:]\s*", "", value)
+    value = re.sub(r"\s+", " ", value)
+    value = re.sub(r"[^A-Z0-9 ]", " ", value)
+    return re.sub(r"\s+", " ", value).strip()
 
 
-# ==========================================================
-# Node 4 : Final Integration
-# ==========================================================
+def _resolve_assembly(db, connection, catalogue_name: str, llm_name: str) -> str:
+    """Resolve minor LLM naming differences against known assembly names."""
+    requested = _normalize_name(llm_name)
 
-def integrate_results(state: VisionState):
+    rows = connection.execute(
+        """
+        SELECT DISTINCT assembly_name
+        FROM assembly_parts
+        WHERE catalogue_name = ?
+        ORDER BY assembly_name
+        """,
+        (catalogue_name,),
+    ).fetchall()
 
-    print(
-        "\n[LLM 3] Integrating analyses..."
-    )
-
-    component_analysis = json.dumps(
-        state["component_analysis"],
-        indent=2
-    )
-
-    quantity_analysis = json.dumps(
-        state["quantity_analysis"],
-        indent=2
-    )
-
-    prompt = INTEGRATION_PROMPT.format(
-        component_analysis=component_analysis,
-        quantity_analysis=quantity_analysis
-    )
-
-    response = call_vision_llm(
-        prompt,
-        state["image_base64"]
-    )
-
-    result = parse_json_response(response)
-
-    # ------------------------------------------------------
-    # Validate final output using Pydantic
-    # ------------------------------------------------------
-
-    validated = VisionOutputSchema.model_validate(
-        result
-    )
-
-    print(
-        "[LLM 3] Final integration completed."
-    )
-
-    # Return ONLY the field generated by this node.
-
-    return {
-        "vision_result": validated
-    }
-
-
-# ==========================================================
-# Node 5 : Validate Output
-# ==========================================================
-
-def validate_output(state: VisionState):
-
-    VisionOutputSchema.model_validate(
-        state["vision_result"]
-    )
-
-    print(
-        "\n✓ Final Vision output validated.\n"
-    )
-
-    return {}
-
-
-# ==========================================================
-# Node 6 : Save Output
-# ==========================================================
-
-def save_output(state: VisionState):
-
-    output_dir = Path(
-        "agents/vision/output"
-    )
-
-    output_dir.mkdir(
-        parents=True,
-        exist_ok=True
-    )
-
-    image_name = Path(
-        state["image_path"]
-    ).stem
-
-    output_file = (
-        output_dir /
-        f"{image_name}_vision.json"
-    )
-
-    with open(
-        output_file,
-        "w",
-        encoding="utf-8"
-    ) as f:
-
-        json.dump(
-            state["vision_result"].model_dump(),
-            f,
-            indent=4
+    known = [row[0] for row in rows]
+    if not known:
+        raise ValueError(
+            f"No Vision mappings exist for catalogue '{catalogue_name}'."
         )
 
-    print(
-        f"\n✓ Vision JSON saved to\n"
-        f"{output_file}"
+    for name in known:
+        normalized = _normalize_name(name)
+        if requested == normalized:
+            return name
+
+    # Useful for headers such as 'GROUP M11B23 - EXHAUST MANIFOLD'.
+    for name in known:
+        normalized = _normalize_name(name)
+        if normalized and normalized in requested:
+            return name
+
+    raise ValueError(
+        f"Could not map detected assembly '{llm_name}' to a known assembly "
+        f"in catalogue '{catalogue_name}'. Available assemblies: {known}"
     )
 
+
+def map_callouts_to_bom(state: VisionState):
+    """Resolve callouts deterministically through the central SQLite database."""
+    db = _load_database_module()
+    connection = db.connect_database()
+
+    try:
+        extraction: VisionExtraction = state["vision_extraction"]
+        catalogue_name = state["catalogue_name"]
+
+        resolved_assembly = _resolve_assembly(
+            db,
+            connection,
+            catalogue_name,
+            extraction.assembly_name,
+        )
+
+        mapping_rows = db.get_assembly_parts(
+            connection,
+            catalogue_name,
+            resolved_assembly,
+        )
+
+        by_callout = {
+            int(row["callout_number"]): row
+            for row in mapping_rows
+        }
+
+        missing = [
+            callout
+            for callout in extraction.callouts
+            if callout not in by_callout
+        ]
+
+        if missing:
+            raise ValueError(
+                f"The database has no mapping for callout(s) {missing} "
+                f"in {catalogue_name} / {resolved_assembly}."
+            )
+
+        parts = []
+        for callout in extraction.callouts:
+            mapping = by_callout[callout]
+            part_number = mapping["part_number"]
+            inventory_row = db.get_part(connection, part_number)
+
+            description = ""
+            if inventory_row:
+                description = inventory_row.get("description") or ""
+
+            parts.append(
+                {
+                    "item": str(callout),
+                    "part_number": str(part_number),
+                    "description": description,
+                    "quantity": int(mapping["required_quantity"]),
+                    "remarks": "",
+                }
+            )
+
+        bom = VisionBOM(
+            assembly=resolved_assembly,
+            catalogue=catalogue_name,
+            total_parts=len(parts),
+            parts=parts,
+        )
+
+        print(f"[DB] Assembly resolved: {resolved_assembly}")
+        print(f"[DB] Callouts mapped : {len(parts)}")
+
+        return {
+            "resolved_assembly": resolved_assembly,
+            "bom": bom,
+            "status": "bom_mapped",
+        }
+
+    finally:
+        db.close_database(connection)
+
+
+def validate_output(state: VisionState):
+    VisionBOM.model_validate(state["bom"])
+    print("\n✓ Vision BOM validated successfully.\n")
+    return {"status": "validated"}
+
+
+def save_output(state: VisionState):
+    project_root = Path(__file__).resolve().parents[2]
+    output_dir = project_root / "agents" / "vision" / "output"
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    image_name = Path(state["image_path"]).stem
+    output_file = output_dir / f"{image_name}_vision.json"
+
+    with output_file.open("w", encoding="utf-8") as f:
+        json.dump(state["bom"].model_dump(), f, indent=4, ensure_ascii=False)
+
+    print(f"✓ Vision BOM saved to: {output_file}")
+
     return {
-        "output_file": str(output_file)
+        "output_file": str(output_file),
+        "status": "completed",
     }

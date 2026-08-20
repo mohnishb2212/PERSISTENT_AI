@@ -1,40 +1,27 @@
-from typing import Optional, Any
-
+from typing import Any, Optional
 from typing_extensions import TypedDict
 
-from .schemas import VisionOutputSchema
+from .schemas import VisionBOM, VisionExtraction
 
 
 class VisionState(TypedDict):
-
-    # -------------------------------------------------
     # Input
-    # -------------------------------------------------
-
     image_path: str
+    catalogue_name: str
 
-    # -------------------------------------------------
     # Image
-    # -------------------------------------------------
-
     image_base64: Optional[str]
 
-    # -------------------------------------------------
-    # Parallel LLM outputs
-    # -------------------------------------------------
+    # LLM output
+    vision_extraction: Optional[VisionExtraction]
 
-    component_analysis: Optional[Any]
+    # Database resolution
+    resolved_assembly: Optional[str]
 
-    quantity_analysis: Optional[Any]
+    # Unified BOM
+    bom: Optional[VisionBOM]
 
-    # -------------------------------------------------
-    # Final integrated output
-    # -------------------------------------------------
-
-    vision_result: Optional[VisionOutputSchema]
-
-    # -------------------------------------------------
-    # Output file
-    # -------------------------------------------------
-
+    # Output / status
     output_file: Optional[str]
+    status: str
+    error: str

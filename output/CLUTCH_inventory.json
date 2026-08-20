@@ -1,0 +1,51 @@
+{
+    "assembly": "CLUTCH",
+    "catalogue": "MAHINDRA_SCORPIO",
+    "total_parts": 4,
+    "parts": [
+        {
+            "item": "1",
+            "part_number": "0801BA0020N",
+            "description": "CLUTCH DRIVEN PLATE (NEF NA / TC)",
+            "required_quantity": 1,
+            "available_quantity": 0,
+            "minimum_threshold": 2,
+            "rack_location": "V-17",
+            "supplier": "Mahindra",
+            "remarks": ""
+        },
+        {
+            "item": "2",
+            "part_number": "0801CA0030N",
+            "description": "CLUTCH COVER ASSEMBLY (NEF TC)",
+            "required_quantity": 1,
+            "available_quantity": 1,
+            "minimum_threshold": 2,
+            "rack_location": "V-18",
+            "supplier": "Mahindra",
+            "remarks": ""
+        },
+        {
+            "item": "3",
+            "part_number": "3108224",
+            "description": "SCREW HEX HD M8 x 1.25 - 20",
+            "required_quantity": 6,
+            "available_quantity": 6,
+            "minimum_threshold": 6,
+            "rack_location": "V-19",
+            "supplier": "Mahindra",
+            "remarks": ""
+        },
+        {
+            "item": "4",
+            "part_number": "7903055003",
+            "description": "SPRING LOCK WASHER M8",
+            "required_quantity": 6,
+            "available_quantity": 3,
+            "minimum_threshold": 6,
+            "rack_location": "V-20",
+            "supplier": "Mahindra",
+            "remarks": ""
+        }
+    ]
+}

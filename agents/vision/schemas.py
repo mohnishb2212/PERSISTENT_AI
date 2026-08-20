@@ -1,47 +1,23 @@
 from typing import List
+
 from pydantic import BaseModel, Field
 
 
-class VisionComponent(BaseModel):
-
-    callout: int = Field(
-        description="Callout number visible in the exploded-view drawing."
-    )
-
-    predicted_category: str = Field(
-        description="Predicted category of the component."
-    )
-
-    visual_description: str = Field(
-        description="Short visual description of the component."
-    )
-
-    quantity: int = Field(
-        ge=1,
-        description="Estimated number of physical instances of this component."
-    )
-
-    quantity_confidence: float = Field(
-        ge=0.0,
-        le=1.0,
-        description="Confidence in the estimated physical quantity."
-    )
-
-    quantity_reason: str = Field(
-        description="Brief explanation for the estimated quantity."
-    )
-
-    confidence: float = Field(
-        ge=0.0,
-        le=1.0,
-        description="Overall confidence in the component identification."
-    )
+class VisionExtraction(BaseModel):
+    assembly_name: str = Field(min_length=1)
+    callouts: List[int] = Field(min_length=1)
 
 
-class VisionOutputSchema(BaseModel):
+class VisionPart(BaseModel):
+    item: str
+    part_number: str
+    description: str
+    quantity: int = Field(ge=1)
+    remarks: str = ""
 
-    assembly_name: str = Field(
-        description="Detected assembly name."
-    )
 
-    components: List[VisionComponent]
+class VisionBOM(BaseModel):
+    assembly: str = Field(min_length=1)
+    catalogue: str = Field(min_length=1)
+    total_parts: int = Field(ge=1)
+    parts: List[VisionPart] = Field(min_length=1)

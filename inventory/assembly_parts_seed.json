@@ -1,6 +1,6 @@
 [
   {
-    "catalogue_name": "Apollo Tractors",
+    "catalogue_name": "APOLLO_TRACTORS",
     "assembly_name": "PUSH ROLLER ASSEMBLY",
     "callout_number": 1,
     "part_number": "M20100AA",
@@ -8,7 +8,7 @@
     "description_from_solution": "Oscillating Beam"
   },
   {
-    "catalogue_name": "Apollo Tractors",
+    "catalogue_name": "APOLLO_TRACTORS",
     "assembly_name": "PUSH ROLLER ASSEMBLY",
     "callout_number": 2,
     "part_number": "M20100AH",
@@ -16,7 +16,7 @@
     "description_from_solution": "Mounting Bracket"
   },
   {
-    "catalogue_name": "Apollo Tractors",
+    "catalogue_name": "APOLLO_TRACTORS",
     "assembly_name": "PUSH ROLLER ASSEMBLY",
     "callout_number": 3,
     "part_number": "M20110AA",
@@ -24,7 +24,7 @@
     "description_from_solution": "Push Roller Pipe"
   },
   {
-    "catalogue_name": "Apollo Tractors",
+    "catalogue_name": "APOLLO_TRACTORS",
     "assembly_name": "PUSH ROLLER ASSEMBLY",
     "callout_number": 4,
     "part_number": "M20140AA",
@@ -32,7 +32,7 @@
     "description_from_solution": "Pin"
   },
   {
-    "catalogue_name": "Apollo Tractors",
+    "catalogue_name": "APOLLO_TRACTORS",
     "assembly_name": "PUSH ROLLER ASSEMBLY",
     "callout_number": 5,
     "part_number": "M20110AC",
@@ -40,7 +40,7 @@
     "description_from_solution": "Push Roller Mount Plate"
   },
   {
-    "catalogue_name": "Apollo Tractors",
+    "catalogue_name": "APOLLO_TRACTORS",
     "assembly_name": "PUSH ROLLER ASSEMBLY",
     "callout_number": 6,
     "part_number": "M20110AD",
@@ -48,7 +48,7 @@
     "description_from_solution": "Scrapper"
   },
   {
-    "catalogue_name": "Apollo Tractors",
+    "catalogue_name": "APOLLO_TRACTORS",
     "assembly_name": "PUSH ROLLER ASSEMBLY",
     "callout_number": 7,
     "part_number": "N20050AA",
@@ -56,7 +56,7 @@
     "description_from_solution": "Hex Bolt - M20 x 40"
   },
   {
-    "catalogue_name": "Apollo Tractors",
+    "catalogue_name": "APOLLO_TRACTORS",
     "assembly_name": "PUSH ROLLER ASSEMBLY",
     "callout_number": 8,
     "part_number": "N55205AA",
@@ -64,7 +64,7 @@
     "description_from_solution": "Plain Washer - M20"
   },
   {
-    "catalogue_name": "Apollo Tractors",
+    "catalogue_name": "APOLLO_TRACTORS",
     "assembly_name": "PUSH ROLLER ASSEMBLY",
     "callout_number": 9,
     "part_number": "M20110AE",
@@ -72,7 +72,7 @@
     "description_from_solution": "Washer"
   },
   {
-    "catalogue_name": "Apollo Tractors",
+    "catalogue_name": "APOLLO_TRACTORS",
     "assembly_name": "PUSH ROLLER ASSEMBLY",
     "callout_number": 10,
     "part_number": "N55171AA",
@@ -80,7 +80,7 @@
     "description_from_solution": "Hex Nut - M30"
   },
   {
-    "catalogue_name": "Apollo Tractors",
+    "catalogue_name": "APOLLO_TRACTORS",
     "assembly_name": "PUSH ROLLER ASSEMBLY",
     "callout_number": 11,
     "part_number": "N06050AA",
@@ -88,7 +88,7 @@
     "description_from_solution": "Hex Bolt - M6 x 60"
   },
   {
-    "catalogue_name": "Apollo Tractors",
+    "catalogue_name": "APOLLO_TRACTORS",
     "assembly_name": "PUSH ROLLER ASSEMBLY",
     "callout_number": 12,
     "part_number": "N55145AA",
@@ -96,7 +96,7 @@
     "description_from_solution": "Hex Nut - M6"
   },
   {
-    "catalogue_name": "Apollo Tractors",
+    "catalogue_name": "APOLLO_TRACTORS",
     "assembly_name": "PUSH ROLLER ASSEMBLY",
     "callout_number": 13,
     "part_number": "N08040AA",
@@ -104,7 +104,7 @@
     "description_from_solution": "Hex Bolt - M8 x 40"
   },
   {
-    "catalogue_name": "Apollo Tractors",
+    "catalogue_name": "APOLLO_TRACTORS",
     "assembly_name": "PUSH ROLLER ASSEMBLY",
     "callout_number": 14,
     "part_number": "N20050AA",
@@ -112,7 +112,7 @@
     "description_from_solution": "Hex Bolt - M20 x 50"
   },
   {
-    "catalogue_name": "Apollo Tractors",
+    "catalogue_name": "APOLLO_TRACTORS",
     "assembly_name": "PUSH ROLLER ASSEMBLY",
     "callout_number": 15,
     "part_number": "N55170AA",
@@ -120,7 +120,7 @@
     "description_from_solution": "Hex Nut - M20"
   },
   {
-    "catalogue_name": "Apollo Tractors",
+    "catalogue_name": "APOLLO_TRACTORS",
     "assembly_name": "PUSH ROLLER ASSEMBLY",
     "callout_number": 16,
     "part_number": "N55205AA",
@@ -128,7 +128,7 @@
     "description_from_solution": "Washer - 20mm"
   },
   {
-    "catalogue_name": "Apollo Tractors",
+    "catalogue_name": "APOLLO_TRACTORS",
     "assembly_name": "PUSH ROLLER ASSEMBLY",
     "callout_number": 17,
     "part_number": "M20130AA",
@@ -136,7 +136,7 @@
     "description_from_solution": "Push Roller Shaft"
   },
   {
-    "catalogue_name": "Apollo Tractors",
+    "catalogue_name": "APOLLO_TRACTORS",
     "assembly_name": "PUSH ROLLER ASSEMBLY",
     "callout_number": 18,
     "part_number": "B10160AA",
@@ -144,7 +144,7 @@
     "description_from_solution": "Ball Bearing"
   },
   {
-    "catalogue_name": "Mahindra Scorpio",
+    "catalogue_name": "MAHINDRA_SCORPIO",
     "assembly_name": "CLUTCH",
     "callout_number": 1,
     "part_number": "0801BA0020N",
@@ -152,7 +152,7 @@
     "description_from_solution": "CLUTCH DRIVEN PLATE (NEF NA / TC)"
   },
   {
-    "catalogue_name": "Mahindra Scorpio",
+    "catalogue_name": "MAHINDRA_SCORPIO",
     "assembly_name": "CLUTCH",
     "callout_number": 2,
     "part_number": "0801CA0030N",
@@ -160,7 +160,7 @@
     "description_from_solution": "CLUTCH COVER ASSEMBLY (NEF TC)"
   },
   {
-    "catalogue_name": "Mahindra Scorpio",
+    "catalogue_name": "MAHINDRA_SCORPIO",
     "assembly_name": "CLUTCH",
     "callout_number": 3,
     "part_number": "3108224",
@@ -168,7 +168,7 @@
     "description_from_solution": "SCREW HEX HD M8 x 1.25 - 20"
   },
   {
-    "catalogue_name": "Mahindra Scorpio",
+    "catalogue_name": "MAHINDRA_SCORPIO",
     "assembly_name": "CLUTCH",
     "callout_number": 4,
     "part_number": "7903055003",
@@ -176,7 +176,7 @@
     "description_from_solution": "SPRING LOCK WASHER M8"
   },
   {
-    "catalogue_name": "Mahindra Thar",
+    "catalogue_name": "MAHINDRA_THAR",
     "assembly_name": "EXHAUST MANIFOLD",
     "callout_number": 1,
     "part_number": "0302DC0050N",
@@ -184,7 +184,7 @@
     "description_from_solution": "EXHAUST MANIFOLD"
   },
   {
-    "catalogue_name": "Mahindra Thar",
+    "catalogue_name": "MAHINDRA_THAR",
     "assembly_name": "EXHAUST MANIFOLD",
     "callout_number": 2,
     "part_number": "0023551",
@@ -192,7 +192,7 @@
     "description_from_solution": "STUD EXHAUST MANIFOLD - 110 x 8"
   },
   {
-    "catalogue_name": "Mahindra Thar",
+    "catalogue_name": "MAHINDRA_THAR",
     "assembly_name": "EXHAUST MANIFOLD",
     "callout_number": 3,
     "part_number": "0023552",
@@ -200,7 +200,7 @@
     "description_from_solution": "EXHAUST MANIFOLD STUD 60 x 8"
   },
   {
-    "catalogue_name": "Mahindra Thar",
+    "catalogue_name": "MAHINDRA_THAR",
     "assembly_name": "EXHAUST MANIFOLD",
     "callout_number": 4,
     "part_number": "0024034",
@@ -208,7 +208,7 @@
     "description_from_solution": "STUD PIPE TURBOCHARGER OUTLET"
   },
   {
-    "catalogue_name": "Mahindra Thar",
+    "catalogue_name": "MAHINDRA_THAR",
     "assembly_name": "EXHAUST MANIFOLD",
     "callout_number": 5,
     "part_number": "0024040",
@@ -216,7 +216,7 @@
     "description_from_solution": "GASKET EXHAUST MANIFOLD (TC)"
   },
   {
-    "catalogue_name": "Mahindra Thar",
+    "catalogue_name": "MAHINDRA_THAR",
     "assembly_name": "EXHAUST MANIFOLD",
     "callout_number": 6,
     "part_number": "57080A0050N",
@@ -224,7 +224,7 @@
     "description_from_solution": "CLINCH NUT M8 x 1.25"
   },
   {
-    "catalogue_name": "Mahindra Thar",
+    "catalogue_name": "MAHINDRA_THAR",
     "assembly_name": "EXHAUST MANIFOLD",
     "callout_number": 7,
     "part_number": "0024014",
@@ -232,7 +232,7 @@
     "description_from_solution": "EXHAUST MANIFOLD STUD 31 x 8"
   },
   {
-    "catalogue_name": "Mahindra Thar",
+    "catalogue_name": "MAHINDRA_THAR",
     "assembly_name": "EXHAUST MANIFOLD",
     "callout_number": 8,
     "part_number": "09040A0130N",
@@ -240,7 +240,7 @@
     "description_from_solution": "HEAT SHIELD ALTERNATOR"
   },
   {
-    "catalogue_name": "Mahindra Thar",
+    "catalogue_name": "MAHINDRA_THAR",
     "assembly_name": "EXHAUST MANIFOLD",
     "callout_number": 9,
     "part_number": "0024522",
@@ -248,7 +248,7 @@
     "description_from_solution": "BOLT M6 x 1 - 8"
   },
   {
-    "catalogue_name": "Mahindra Thar",
+    "catalogue_name": "MAHINDRA_THAR",
     "assembly_name": "EXHAUST MANIFOLD",
     "callout_number": 10,
     "part_number": "0024018",
@@ -256,7 +256,7 @@
     "description_from_solution": "GASKET EXHAUST FLANGE TC"
   },
   {
-    "catalogue_name": "Mahindra Thar",
+    "catalogue_name": "MAHINDRA_THAR",
     "assembly_name": "EXHAUST MANIFOLD",
     "callout_number": 11,
     "part_number": "0305GC0021N",
@@ -264,7 +264,7 @@
     "description_from_solution": "TURBOCHARGER KKK-K04-5.88 GCAAD"
   },
   {
-    "catalogue_name": "Mahindra Thar",
+    "catalogue_name": "MAHINDRA_THAR",
     "assembly_name": "EXHAUST MANIFOLD",
     "callout_number": 12,
     "part_number": "0024032",
@@ -272,7 +272,7 @@
     "description_from_solution": "STUD PIPE TURBOCHARGER OUTLET"
   },
   {
-    "catalogue_name": "Mahindra Thar",
+    "catalogue_name": "MAHINDRA_THAR",
     "assembly_name": "EXHAUST MANIFOLD",
     "callout_number": 13,
     "part_number": "0024033",
@@ -280,7 +280,7 @@
     "description_from_solution": "STUD PIPE TURBOCHARGER OUTLET"
   },
   {
-    "catalogue_name": "Mahindra Thar",
+    "catalogue_name": "MAHINDRA_THAR",
     "assembly_name": "EXHAUST MANIFOLD",
     "callout_number": 14,
     "part_number": "0024019",
@@ -288,7 +288,7 @@
     "description_from_solution": "GASKET TURBOCHARGER OUTLET"
   },
   {
-    "catalogue_name": "Mahindra Thar",
+    "catalogue_name": "MAHINDRA_THAR",
     "assembly_name": "EXHAUST MANIFOLD",
     "callout_number": 15,
     "part_number": "0024017",
@@ -296,7 +296,7 @@
     "description_from_solution": "PIPE TURBOCHARGER OUTLET (TCI)"
   },
   {
-    "catalogue_name": "Tata Indica",
+    "catalogue_name": "TATA_INDICA",
     "assembly_name": "STEERING WHEEL",
     "callout_number": 1,
     "part_number": "287168900226ZY",
@@ -304,7 +304,7 @@
     "description_from_solution": "ASSY. STEERING WHEEL W/O SWITCHES (AIRBAG)(SUN)"
   },
   {
-    "catalogue_name": "Tata Indica",
+    "catalogue_name": "TATA_INDICA",
     "assembly_name": "STEERING WHEEL",
     "callout_number": 2,
     "part_number": "287168906343A3",
@@ -312,7 +312,7 @@
     "description_from_solution": "BOTTOM COVER STEERING WHEEL 4 SPOKE MG (SUN)"
   },
   {
-    "catalogue_name": "Tata Indica",
+    "catalogue_name": "TATA_INDICA",
     "assembly_name": "STEERING WHEEL",
     "callout_number": 3,
     "part_number": "287168900199A3",
@@ -320,7 +320,7 @@
     "description_from_solution": "ASSY. STEERING WHEEL STRUCTURE MG 4 SPOKE (SUN)"
   },
   {
-    "catalogue_name": "Tata Indica",
+    "catalogue_name": "TATA_INDICA",
     "assembly_name": "STEERING WHEEL",
     "callout_number": 4,
     "part_number": "287154500143AL",
@@ -328,7 +328,7 @@
     "description_from_solution": "KIT ASSY STEERING WHEEL SWITCH DUMMY CAP-SHUTAM"
   },
   {
-    "catalogue_name": "Tata Indica",
+    "catalogue_name": "TATA_INDICA",
     "assembly_name": "STEERING WHEEL",
     "callout_number": 5,
     "part_number": "287168900119A3",
@@ -336,7 +336,7 @@
     "description_from_solution": "ASSY HORN PAD WITH DAB MODULE (AUTOLIV)"
   },
   {
-    "catalogue_name": "Tata Indica",
+    "catalogue_name": "TATA_INDICA",
     "assembly_name": "STEERING WHEEL",
     "callout_number": 6,
     "part_number": "287168906348A3",
@@ -344,7 +344,7 @@
     "description_from_solution": "PLASTIC CAP BOTTOM COVER LH"
   },
   {
-    "catalogue_name": "Tata Indica",
+    "catalogue_name": "TATA_INDICA",
     "assembly_name": "STEERING WHEEL",
     "callout_number": 7,
     "part_number": "287168906349A3",
@@ -352,7 +352,7 @@
     "description_from_solution": "PLASTIC CAP BOTTOM COVER RH"
   },
   {
-    "catalogue_name": "Tata Indica",
+    "catalogue_name": "TATA_INDICA",
     "assembly_name": "STEERING WHEEL",
     "callout_number": 8,
     "part_number": "287168903201",
@@ -360,7 +360,7 @@
     "description_from_solution": "TORX BOLT M6X11"
   },
   {
-    "catalogue_name": "Tata Indica",
+    "catalogue_name": "TATA_INDICA",
     "assembly_name": "STEERING WHEEL",
     "callout_number": 9,
     "part_number": "287168900265A3",
@@ -368,7 +368,7 @@
     "description_from_solution": "ASSY NACELLE LOWER WITH FOAM"
   },
   {
-    "catalogue_name": "Tata Indica",
+    "catalogue_name": "TATA_INDICA",
     "assembly_name": "STEERING WHEEL",
     "callout_number": 10,
     "part_number": "287168406324",
@@ -376,7 +376,7 @@
     "description_from_solution": "NACELLE LOWER FOAM"
   },
   {
-    "catalogue_name": "Tata Indica",
+    "catalogue_name": "TATA_INDICA",
     "assembly_name": "STEERING WHEEL",
     "callout_number": 11,
     "part_number": "287168906365A3",
@@ -384,7 +384,7 @@
     "description_from_solution": "NACELLE LOWER ENCAP"
   },
   {
-    "catalogue_name": "Tata Indica",
+    "catalogue_name": "TATA_INDICA",
     "assembly_name": "STEERING WHEEL",
     "callout_number": 12,
     "part_number": "287168906330A3",

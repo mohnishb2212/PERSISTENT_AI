@@ -13,6 +13,7 @@ from agents.inventory import InventoryAgent
 from agents.decision import DecisionAgent
 from agents.report import ReportAgent
 from agents.diagnostic import DiagnosticAgent
+from agents.vision import VisionAgent
 
 import re
 from io import BytesIO
@@ -48,7 +49,10 @@ CATALOGUES = {
 UPLOAD_DIR = BASE_DIR / "CATALOGUES" / "uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
-INVENTORY_DB = BASE_DIR / "inventory" / "inventory.db"
+VISION_UPLOAD_DIR = BASE_DIR / "assets" / "vision_uploads"
+VISION_UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+
+INVENTORY_DB = BASE_DIR / "inventory" / "central_inventory.db"
 
 ASSETS_DIR = BASE_DIR / "assets"
 LOGO_ICON_PATH = ASSETS_DIR / "persistent_icon.png"
@@ -894,6 +898,10 @@ defaults = {
     "assembly_query": "",
     "show_diagnostic_panel": False,
     "catalogue_pdf_path": None,
+    "input_type": "PDF Catalogue",
+    "uploaded_image": None,
+    "uploaded_image_name": None,
+    "vision_result": None,
 }
 
 for key, value in defaults.items():
@@ -1385,6 +1393,7 @@ def reset_results():
     st.session_state.diagnostic_symptom = None
 
     st.session_state.catalogue_pdf_path = None
+    st.session_state.vision_result = None
 
 
 # ============================================================
@@ -1781,9 +1790,21 @@ def run_remaining_pipeline(bom):
 
 def show_pipeline_status():
 
+    extraction_label = (
+        "Vision Agent"
+        if st.session_state.input_type == "Assembly Image"
+        else "Document Agent"
+    )
+
     _stages = [
-        ("Document Agent", st.session_state.bom is not None),
-        ("Human Review", st.session_state.approved),
+        (
+            extraction_label,
+            st.session_state.bom is not None,
+        ),
+        (
+            "Human Review",
+            st.session_state.approved,
+        ),
         (
             "Inventory Agent",
             st.session_state.inventory_result is not None,
@@ -1802,7 +1823,9 @@ def show_pipeline_status():
         0
         if len(_stages) <= 1
         else round(
-            (_completed_count - 1) / (len(_stages) - 1) * 88,
+            (_completed_count - 1)
+            / (len(_stages) - 1)
+            * 88,
             1,
         )
     )
@@ -1811,12 +1834,18 @@ def show_pipeline_status():
 
     _steps_html = "".join(
         (
-            f'<div class="pipeline-step {"done" if done else "pending"}">'
-            f'<div class="pipeline-step-dot">{"✓" if done else index}</div>'
-            f'<div class="pipeline-step-label">{label}</div>'
+            f'<div class="pipeline-step '
+            f'{"done" if done else "pending"}">'
+            f'<div class="pipeline-step-dot">'
+            f'{"✓" if done else index}'
+            f'</div>'
+            f'<div class="pipeline-step-label">'
+            f'{label}'
+            f'</div>'
             f'</div>'
         )
-        for index, (label, done) in enumerate(_stages, start=1)
+        for index, (label, done)
+        in enumerate(_stages, start=1)
     )
 
     st.markdown(
@@ -1825,7 +1854,10 @@ def show_pipeline_status():
             <div class="pipeline-heading">Pipeline Status</div>
             <div class="pipeline-stepper">
                 <div class="pipeline-track"></div>
-                <div class="pipeline-track-fill" style="width:{_fill_pct}%;"></div>
+                <div
+                    class="pipeline-track-fill"
+                    style="width:{_fill_pct}%;"
+                ></div>
                 {_steps_html}
             </div>
         </div>
@@ -1991,6 +2023,26 @@ with st.sidebar:
 
 
     # ========================================================
+    # INPUT TYPE
+    # ========================================================
+
+    input_type = st.radio(
+        "Input Type",
+        [
+            "PDF Catalogue",
+            "Assembly Image",
+        ],
+        key="input_type",
+        help=(
+            "Choose a PDF catalogue for the Document Agent "
+            "or an exploded-view image for the Vision Agent."
+        ),
+    )
+
+    st.markdown("---")
+
+
+    # ========================================================
     # CATALOGUE SELECTION
     # ========================================================
 
@@ -2000,8 +2052,13 @@ with st.sidebar:
         "Mahindra Scorpio",
         "Mahindra Thar",
         "Tata Indica",
-        "Upload Catalogue",
     ]
+
+    if input_type == "PDF Catalogue":
+
+        catalogue_options.append(
+            "Upload Catalogue"
+        )
 
     catalogue_name = st.selectbox(
         "Select Catalogue",
@@ -2011,17 +2068,22 @@ with st.sidebar:
 
 
     # ========================================================
-    # UPLOAD ONLY WHEN "UPLOAD CATALOGUE" IS SELECTED
+    # PDF CATALOGUE UPLOAD
     # ========================================================
 
     uploaded_file = None
 
-    if catalogue_name == "Upload Catalogue":
+    if (
+        input_type == "PDF Catalogue"
+        and catalogue_name == "Upload Catalogue"
+    ):
 
         uploaded_file = st.file_uploader(
             "Choose Catalogue PDF",
             type=["pdf"],
-            help="Upload a spare-parts catalogue in PDF format.",
+            help=(
+                "Upload a spare-parts catalogue in PDF format."
+            ),
         )
 
         if uploaded_file is not None:
@@ -2055,16 +2117,132 @@ with st.sidebar:
 
 
     # ========================================================
-    # ASSEMBLY QUERY
+    # VISION IMAGE UPLOAD
     # ========================================================
 
-    query = st.text_input(
-        "Assembly / Query",
-        placeholder=(
-            "e.g. AUTO LEVELING SKI"
-        ),
-        key="assembly_query",
-    )
+    uploaded_image = None
+
+    if input_type == "Assembly Image":
+
+        st.markdown(
+            """
+            <div style="
+                margin: 0.35rem 0 0.75rem 0;
+                padding: 0.8rem 0.9rem;
+                border: 1px solid #FBD8C4;
+                border-radius: 10px;
+                background: linear-gradient(
+                    135deg,
+                    #FFF7F2 0%,
+                    #FFFFFF 100%
+                );
+            ">
+                <div style="
+                    font-weight: 700;
+                    color: #14213D;
+                    margin-bottom: 0.25rem;
+                ">
+                    Vision Agent Input
+                </div>
+                <div style="
+                    font-size: 0.82rem;
+                    color: #64748B;
+                    line-height: 1.4;
+                ">
+                    Upload an exploded-view image or take a
+                    screenshot from the catalogue and drag it
+                    into the box below.
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        uploaded_image = st.file_uploader(
+            "Upload / Drag & Drop Assembly Image",
+            type=[
+                "png",
+                "jpg",
+                "jpeg",
+                "webp",
+            ],
+            accept_multiple_files=False,
+            key="vision_image_uploader",
+            help=(
+                "Take a screenshot of the assembly diagram "
+                "and drag the image here."
+            ),
+        )
+
+        if uploaded_image is not None:
+
+            image_path = (
+                VISION_UPLOAD_DIR
+                / uploaded_image.name
+            )
+
+            with open(
+                image_path,
+                "wb",
+            ) as file:
+
+                file.write(
+                    uploaded_image.getbuffer()
+                )
+
+            st.session_state.uploaded_image = (
+                str(image_path)
+            )
+
+            st.session_state.uploaded_image_name = (
+                uploaded_image.name
+            )
+
+            try:
+
+                preview_image = Image.open(
+                    image_path
+                )
+
+                st.image(
+                    preview_image,
+                    caption=(
+                        f"Selected image: "
+                        f"{uploaded_image.name}"
+                    ),
+                    use_container_width=True,
+                )
+
+            except Exception:
+
+                st.success(
+                    f"Image selected: "
+                    f"{uploaded_image.name}"
+                )
+
+
+    # ========================================================
+    # ASSEMBLY QUERY — PDF ONLY
+    # ========================================================
+
+    query = ""
+
+    if input_type == "PDF Catalogue":
+
+        query = st.text_input(
+            "Assembly / Query",
+            placeholder=(
+                "e.g. AUTO LEVELING SKI"
+            ),
+            key="assembly_query",
+        )
+
+    else:
+
+        st.caption(
+            "The Vision Agent identifies the assembly name "
+            "from the uploaded image."
+        )
 
 
     # ========================================================
@@ -2143,194 +2321,422 @@ with main_col:
 
 
     # ========================================================
-    # RUN DOCUMENT AGENT
+    # RUN SELECTED EXTRACTION AGENT
     # ========================================================
 
     if run_analysis:
 
-        # ----------------------------------------------------
-        # VALIDATE CATALOGUE
-        # ----------------------------------------------------
+        # ====================================================
+        # PDF / DOCUMENT AGENT
+        # ====================================================
 
-        if catalogue_name == "Select":
-
-            st.error(
-                "Please select a catalogue."
-            )
-
-        # ----------------------------------------------------
-        # VALIDATE UPLOAD
-        # ----------------------------------------------------
-
-        elif (
-            catalogue_name
-            == "Upload Catalogue"
-            and uploaded_file is None
-            and st.session_state.uploaded_catalogue
-            is None
-        ):
-
-            st.error(
-                "Please upload a catalogue PDF."
-            )
-
-        # ----------------------------------------------------
-        # VALIDATE QUERY
-        # ----------------------------------------------------
-
-        elif not query.strip():
-
-            st.error(
-                "Please enter an assembly name or query."
-            )
-
-        else:
-
-            reset_results()
+        if input_type == "PDF Catalogue":
 
             # ------------------------------------------------
-            # DETERMINE PDF PATH
+            # VALIDATE CATALOGUE
             # ------------------------------------------------
 
-            if (
-                catalogue_name
-                == "Upload Catalogue"
-            ):
-
-                pdf_path = Path(
-                    st.session_state.uploaded_catalogue
-                )
-
-                display_catalogue_name = (
-                    st.session_state.uploaded_catalogue_name
-                    or pdf_path.stem
-                )
-
-            else:
-
-                pdf_path = CATALOGUES[
-                    catalogue_name
-                ]
-
-                display_catalogue_name = (
-                    catalogue_name
-                )
-
-
-            # ------------------------------------------------
-            # CHECK FILE
-            # ------------------------------------------------
-
-            if not pdf_path.exists():
+            if catalogue_name == "Select":
 
                 st.error(
-                    f"Catalogue not found: {pdf_path}"
+                    "Please select a catalogue."
+                )
+
+            # ------------------------------------------------
+            # VALIDATE UPLOAD
+            # ------------------------------------------------
+
+            elif (
+                catalogue_name
+                == "Upload Catalogue"
+                and uploaded_file is None
+                and st.session_state.uploaded_catalogue
+                is None
+            ):
+
+                st.error(
+                    "Please upload a catalogue PDF."
+                )
+
+            # ------------------------------------------------
+            # VALIDATE QUERY
+            # ------------------------------------------------
+
+            elif not query.strip():
+
+                st.error(
+                    "Please enter an assembly name or query."
                 )
 
             else:
 
-                with st.status(
-                    "🔍 Document Agent: reading catalogue...",
-                    expanded=True,
-                ) as status:
+                reset_results()
 
-                    try:
+                # ------------------------------------------------
+                # DETERMINE PDF PATH
+                # ------------------------------------------------
 
-                        start = time.time()
+                if (
+                    catalogue_name
+                    == "Upload Catalogue"
+                ):
 
-                        document_agent = (
-                            DocumentAgent()
-                        )
+                    pdf_path = Path(
+                        st.session_state.uploaded_catalogue
+                    )
 
-                        st.write(
-                            "📄 Reading catalogue and "
-                            "locating the requested assembly..."
-                        )
+                    display_catalogue_name = (
+                        st.session_state.uploaded_catalogue_name
+                        or pdf_path.stem
+                    )
 
-                        st.write(
-                            "🤖 Generating the Bill of Materials..."
-                        )
+                else:
 
-                        result = (
-                            document_agent.invoke(
-                                str(pdf_path),
-                                query.strip(),
+                    pdf_path = CATALOGUES[
+                        catalogue_name
+                    ]
+
+                    display_catalogue_name = (
+                        catalogue_name
+                    )
+
+
+                # ------------------------------------------------
+                # CHECK FILE
+                # ------------------------------------------------
+
+                if not pdf_path.exists():
+
+                    st.error(
+                        f"Catalogue not found: {pdf_path}"
+                    )
+
+                else:
+
+                    with st.status(
+                        "🔍 Document Agent: reading catalogue...",
+                        expanded=True,
+                    ) as status:
+
+                        try:
+
+                            start = time.time()
+
+                            document_agent = (
+                                DocumentAgent()
                             )
-                        )
 
-                        if result.get(
-                            "status"
-                        ) == "failed":
+                            st.write(
+                                "📄 Reading catalogue and "
+                                "locating the requested assembly..."
+                            )
 
-                            raise RuntimeError(
-                                result.get(
-                                    "error",
-                                    "Document Agent failed.",
+                            st.write(
+                                "🤖 Generating the Bill of Materials..."
+                            )
+
+                            result = (
+                                document_agent.invoke(
+                                    str(pdf_path),
+                                    query.strip(),
                                 )
                             )
 
-                        bom = result["bom"]
+                            if result.get(
+                                "status"
+                            ) == "failed":
 
-                        bom["assembly"] = (
-                            query.strip()
-                        )
+                                raise RuntimeError(
+                                    result.get(
+                                        "error",
+                                        "Document Agent failed.",
+                                    )
+                                )
 
-                        bom["catalogue"] = (
-                            display_catalogue_name
-                        )
+                            bom = result["bom"]
 
-                        bom["total_parts"] = len(
-                            bom.get(
-                                "parts",
-                                [],
+                            bom["assembly"] = (
+                                query.strip()
                             )
-                        )
 
-                        st.session_state.document_result = (
-                            result
-                        )
+                            bom["catalogue"] = (
+                                display_catalogue_name
+                            )
 
-                        st.session_state.bom = (
-                            bom
-                        )
+                            bom["total_parts"] = len(
+                                bom.get(
+                                    "parts",
+                                    [],
+                                )
+                            )
 
-                        st.session_state.catalogue_pdf_path = (
-                            str(pdf_path)
-                        )
+                            st.session_state.document_result = (
+                                result
+                            )
 
-                        st.session_state.analysis_mode = (
-                            analysis_mode
-                        )
+                            st.session_state.bom = (
+                                bom
+                            )
 
-                        elapsed = (
-                            time.time() - start
-                        )
+                            st.session_state.catalogue_pdf_path = (
+                                str(pdf_path)
+                            )
 
-                        st.write(
-                            f"✅ BOM extracted in "
-                            f"{elapsed:.2f} seconds."
-                        )
+                            st.session_state.analysis_mode = (
+                                analysis_mode
+                            )
 
-                        status.update(
-                            label=(
-                                "✅ Document Agent completed."
-                            ),
-                            state="complete",
-                        )
+                            elapsed = (
+                                time.time() - start
+                            )
 
-                    except Exception as exc:
+                            st.write(
+                                f"✅ BOM extracted in "
+                                f"{elapsed:.2f} seconds."
+                            )
 
-                        status.update(
-                            label=(
-                                "❌ Document Agent failed."
-                            ),
-                            state="error",
-                        )
+                            status.update(
+                                label=(
+                                    "✅ Document Agent completed."
+                                ),
+                                state="complete",
+                            )
 
-                        st.error(
-                            f"Document Agent error: {exc}"
-                        )
+                        except Exception as exc:
 
+                            status.update(
+                                label=(
+                                    "❌ Document Agent failed."
+                                ),
+                                state="error",
+                            )
+
+                            st.error(
+                                f"Document Agent error: {exc}"
+                            )
+
+
+        # ====================================================
+        # IMAGE / VISION AGENT
+        # ====================================================
+
+        else:
+
+            # ------------------------------------------------
+            # VALIDATE CATALOGUE
+            # ------------------------------------------------
+
+            if catalogue_name == "Select":
+
+                st.error(
+                    "Please select a catalogue."
+                )
+
+            # ------------------------------------------------
+            # VALIDATE IMAGE
+            # ------------------------------------------------
+
+            elif (
+                uploaded_image is None
+                and st.session_state.uploaded_image
+                is None
+            ):
+
+                st.error(
+                    "Please upload or drag and drop an "
+                    "assembly image."
+                )
+
+            else:
+
+                reset_results()
+
+                # ------------------------------------------------
+                # DETERMINE IMAGE PATH
+                # ------------------------------------------------
+
+                if uploaded_image is not None:
+
+                    image_path = (
+                        VISION_UPLOAD_DIR
+                        / uploaded_image.name
+                    )
+
+                else:
+
+                    image_path = Path(
+                        st.session_state.uploaded_image
+                    )
+
+                # ------------------------------------------------
+                # CHECK IMAGE FILE
+                # ------------------------------------------------
+
+                if not image_path.exists():
+
+                    st.error(
+                        f"Assembly image not found: "
+                        f"{image_path}"
+                    )
+
+                else:
+
+                    with st.status(
+                        "👁️ Vision Agent: analysing assembly image...",
+                        expanded=True,
+                    ) as status:
+
+                        try:
+
+                            start = time.time()
+
+                            vision_agent = (
+                                VisionAgent()
+                            )
+
+                            st.write(
+                                "🖼️ Reading the exploded-view image..."
+                            )
+
+                            st.write(
+                                "🤖 Identifying the assembly "
+                                "and callout numbers..."
+                            )
+
+                            # The Vision Agent expects:
+                            #   1. Image path
+                            #   2. Canonical catalogue name
+                            #
+                            # The catalogue name is selected by the
+                            # user in the sidebar and already matches
+                            # the names stored in central_inventory.db.
+                            canonical_catalogue_name = (
+                                catalogue_name
+                                .strip()
+                                .upper()
+                                .replace(
+                                    " ",
+                                    "_",
+                                )
+                            )
+
+                            vision_result = (
+                                vision_agent.invoke(
+                                    str(image_path),
+                                    canonical_catalogue_name,
+                                )
+                            )
+
+                            if (
+                                isinstance(
+                                    vision_result,
+                                    dict,
+                                )
+                                and vision_result.get(
+                                    "status"
+                                ) == "failed"
+                            ):
+
+                                raise RuntimeError(
+                                    vision_result.get(
+                                        "error",
+                                        "Vision Agent failed.",
+                                    )
+                                )
+
+                            if not isinstance(
+                                vision_result,
+                                dict,
+                            ):
+
+                                raise RuntimeError(
+                                    "Vision Agent returned "
+                                    "an invalid result."
+                                )
+
+                            vision_bom = (
+                                vision_result.get(
+                                    "bom"
+                                )
+                            )
+
+                            if vision_bom is None:
+
+                                raise RuntimeError(
+                                    "Vision Agent did not "
+                                    "return a BOM."
+                                )
+
+                            # Pydantic models are converted to
+                            # dictionaries if necessary so the rest
+                            # of the existing frontend pipeline can
+                            # work exactly as before.
+                            if hasattr(
+                                vision_bom,
+                                "model_dump",
+                            ):
+
+                                bom = (
+                                    vision_bom.model_dump()
+                                )
+
+                            else:
+
+                                bom = dict(
+                                    vision_bom
+                                )
+
+                            bom["catalogue"] = (
+                                canonical_catalogue_name
+                            )
+
+                            bom["total_parts"] = len(
+                                bom.get(
+                                    "parts",
+                                    [],
+                                )
+                            )
+
+                            st.session_state.vision_result = (
+                                vision_result
+                            )
+
+                            st.session_state.bom = (
+                                bom
+                            )
+
+                            st.session_state.analysis_mode = (
+                                analysis_mode
+                            )
+
+                            elapsed = (
+                                time.time() - start
+                            )
+
+                            st.write(
+                                f"✅ Vision BOM extracted in "
+                                f"{elapsed:.2f} seconds."
+                            )
+
+                            status.update(
+                                label=(
+                                    "✅ Vision Agent completed."
+                                ),
+                                state="complete",
+                            )
+
+                        except Exception as exc:
+
+                            status.update(
+                                label=(
+                                    "❌ Vision Agent failed."
+                                ),
+                                state="error",
+                            )
+
+                            st.error(
+                                f"Vision Agent error: {exc}"
+                            )
 
     # ========================================================
     # HUMAN REVIEW
@@ -2900,12 +3306,12 @@ if (
     st.markdown("---")
 
     _workflow_steps = [
-        ("📖", "Select a Catalogue"),
-        ("🔎", "Enter Query"),
-        ("🧾", "Choose Output"),
-        ("🤖", "Run Document Agent"),
+        ("1️⃣", "Choose PDF or Image"),
+        ("📖", "Select Catalogue"),
+        ("🖼️", "Upload / Drag & Drop"),
+        ("🤖", "Generate BOM"),
         ("👁️", "Review BOM"),
-        ("🚀", "Continue with Analysis"),
+        ("🚀", "Continue Analysis"),
     ]
 
     _steps_html = "".join(
@@ -3066,9 +3472,16 @@ if st.session_state.show_diagnostic_panel:
             else:
 
                 current_assembly = (
-                    st.session_state.get(
-                        "assembly_query",
-                        "",
+                    (
+                        st.session_state.bom.get(
+                            "assembly",
+                            "",
+                        )
+                        if st.session_state.bom
+                        else st.session_state.get(
+                            "assembly_query",
+                            "",
+                        )
                     )
                     or ""
                 ).strip()
