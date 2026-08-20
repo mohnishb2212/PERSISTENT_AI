@@ -29,6 +29,7 @@ grpcio-status==1.71.2
 
 # Document / PDF processing
 pymupdf==1.28.0
+reportlab==5.0.0
 pdfplumber==0.11.10
 pypdfium2==5.11.0
 pdfminer.six==20260107
